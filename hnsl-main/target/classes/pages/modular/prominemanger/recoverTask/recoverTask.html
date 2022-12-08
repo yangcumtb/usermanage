@@ -1,0 +1,125 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/recoverTask/recoverTask.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html{
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">治理任务管理</span>
+</div>
+
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿权编号</label>
+                                <div class="layui-input-inline" style="margin-left: -10rem">
+                                    <input type="text" name="kqbh" class="layui-input" id="kqbh"
+                                           placeholder="请输入矿权编号">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">治理对象/区域</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="zldx" class="layui-input" id="zldx"
+                                           placeholder="请输入治理对象/区域">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+<!--                                展开更多搜索
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+<!--                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索</button>-->
+
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe654;</i>添加</button>
+
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出</button>
+
+                                <button id="btnExp2" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>批量导入</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="recoverTaskTable" lay-filter="recoverTaskTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete" style="color: #33549988">删除</a>
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

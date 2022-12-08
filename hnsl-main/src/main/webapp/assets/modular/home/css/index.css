@@ -1,0 +1,232 @@
+.hidden {
+    display: none;
+}
+
+.platform-head-title {
+    background-image: linear-gradient(
+            90deg, #007cff 0%, #00cdc2 100%);
+    display: inline-block;
+    color: #fff;
+    padding: 5px 20px;
+    box-shadow: 3px 3px 6px rgba(33, 150, 243, 0.4);
+    font-size: 15px;
+    font-weight: 500;
+    text-shadow: 0 0 2px black;
+}
+
+.home-header .layui-icon-more {
+    float: right;
+    line-height: 34px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    color: grey;
+}
+
+.news-element:first-child {
+    margin-top: 20px;
+}
+
+.news-element:last-child {
+    border-bottom: none;
+}
+
+.news-element {
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f2f2f2;
+    cursor: pointer;
+}
+
+.news-element > .pull-left {
+    margin-right: 10px
+}
+
+.news-element .media-body {
+    overflow: hidden;
+}
+
+.news-element .news-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-height: 1;
+    font-weight: 500;
+}
+
+
+strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-height: 1;
+}
+
+/**
+我的工作
+ */
+
+.layui-grid-view {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    position: relative;
+    list-style: none;
+    background-color: #f2f2f2;
+    display: block;
+    white-space: normal;
+}
+
+.layui-grid-view .layui-grid-view-cell {
+    margin: 0;
+    padding: 8px 0 5px 0;
+    vertical-align: top;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.layui-grid-view .layui-grid-view-cell .cell-body {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+    text-align: center;
+}
+
+.layui-grid-view-cell .cell-body .layui-icon {
+    color: rgb(250, 255, 255);
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.layui-grid-view-cell .layui-badge-dot {
+    position: absolute;
+    top: 0;
+}
+
+.layui-grid-view-cell .cell-text {
+    margin-top: 10px;
+}
+
+/**
+中间政区统计
+ */
+
+.list-widget {
+    background: #ffffff;
+    color: #3696f3;
+    display: flex
+}
+
+.list-widget.active {
+    background-image: linear-gradient(
+            90deg, #007cff 0%, #00cdc2 100%);
+    color: #ffffff;
+}
+
+.list-widget-item {
+    flex: 1;
+    padding-top: 15px;
+    text-align: center;
+    border-right: none;
+    cursor: pointer;
+}
+
+.list-widget-item:not(:first-child) {
+    border-right: 0;
+    padding-top: 15px;
+}
+
+.list-widget-item.patrol {
+    background-image: url(/assets/modular/home/images/heliumian.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.list-widget-item.event {
+    background-image: url(../../../img/platform/shijian.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.list-widget-item .shadow {
+
+}
+
+.list-widget-item .title {
+    font-size: 22px;
+    line-height: 62px;
+    font-weight: bold;
+}
+
+.list-widget-item.item p {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.list-widget-item:first-child .title {
+    border-right: 2px solid rgba(21, 141, 255, 0.44);
+}
+
+.list-widget.active list-widget-item:first-child .title {
+    border-right: 2px solid rgba(251, 248, 255, 0.44);
+}
+
+.list-widget-item span {
+    color: rgba(0, 0, 0, .45);
+    display: inline-block;
+    font-size: 14px;
+    line-height: 22px;
+}
+.comp-view li{
+    padding: 20px 30px !important;
+}
+
+.comp-body span {
+    display:block
+}
+
+.comp-body {
+    display: block;
+    text-align: center;
+}
+
+.comp-num {
+    font-size: 24px;
+    color: #1890ff;
+    font-weight: 500;
+}
+
+.comp-label {
+    font-size: 12px;
+    color: #9b9b9b;
+}
+
+.admin-carousel .layui-carousel-ind ul {
+    background: 0 0;
+}
+
+.admin-carousel .layui-carousel-ind {
+    position: absolute;
+    top: -33px;
+    text-align: right;
+}
+
+.admin-carousel .layui-carousel-ind li {
+    background-color: #e2e2e2;
+}
+
+.admin-carousel .layui-carousel-ind li.layui-this {
+    background-color: #999;
+}

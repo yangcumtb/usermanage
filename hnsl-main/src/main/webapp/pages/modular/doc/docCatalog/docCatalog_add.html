@@ -1,0 +1,46 @@
+@layout("/common/_form.html",{js:["/assets/modular/doc/docCatalog/docCatalog_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="docCatalogForm" lay-filter="docCatalogForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="catalogId" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">类型名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="catalogTitle" name="catalogTitle" placeholder="请输入类型名称" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">父级id<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="parentId" name="parentId" placeholder="请输入父级id" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">父级id集合<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="parentIds" name="parentIds" placeholder="请输入父级id集合" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

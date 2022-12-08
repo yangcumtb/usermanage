@@ -1,0 +1,71 @@
+@layout("/common/_tree_container.html",{plugins:["ztree"],js:["/assets/modular/system/dept/dept.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">部门管理</span>
+</div>
+
+<div id="myContiner" style="height: 100%">
+    <div class="ui-layout-west">
+        <div class="box box-main">
+            <div class="ui-layout-content">
+                <div id="deptTree"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-layout-center">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-form toolbar">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <input id="name" class="layui-input" type="text" placeholder="部门名称"/>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                                class="layui-icon" >&#xe615;</i>搜索
+                                        </button>
+                                        @if(shiro.hasPermission("system:dept:add")){
+                                        <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                                class="layui-icon" >&#xe654;</i>添加部门
+                                        </button>
+                                        @}
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="deptTable" lay-filter="deptTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("system:dept:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988"><i class="layui-icon layui-icon-edit" style="margin-right: 2px;font-size: 18px"></i>修改</a>
+    @}
+    @if(shiro.hasPermission("system:dept:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action " lay-event="delete" style="color: #ffa847"><i class="layui-icon layui-icon-delete" style="margin-right: 2px;"></i>删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

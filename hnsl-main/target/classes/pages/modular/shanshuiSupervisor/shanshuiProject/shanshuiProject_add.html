@@ -1,0 +1,45 @@
+@layout("/common/_form.html",{js:["/assets/modular/shanshuiSupervisor/shanshuiProject/shanshuiProject_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<form class="layui-form" id="shanshuiProjectForm" lay-filter="shanshuiProjectForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="xmmc" name="xmmc" placeholder="请输入项目名称" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目年份<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="year" name="year" placeholder="请输入项目年份" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目序号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="num" name="num" placeholder="请输入项目序号" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">监理人id<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jlrid" name="jlrid" placeholder="请输入监理人id" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

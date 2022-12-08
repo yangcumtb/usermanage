@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.sys.modular.message.mapper.SysMessageRelaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.hnsl.sys.modular.message.entity.SysMessageRela">
+        <id column="message_id" property="messageId" />
+        <result column="receive_user_id" property="receiveUserId" />
+        <result column="receive_dept_id" property="receiveDeptId" />
+        <result column="read_flag" property="readFlag" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        message_id AS "messageId", receive_user_id AS "receiveUserId", receive_dept_id AS "receiveDeptId", read_flag AS "readFlag", del_flag AS "delFlag", create_user AS "createUser", create_time AS "createTime", update_user AS "updateUser", update_time AS "updateTime"
+    </sql>
+
+    <sql id="Base_Column_List_T">
+        t.message_id AS "messageId", t.receive_user_id AS "receiveUserId", t.receive_dept_id AS "receiveDeptId", t.read_flag AS "readFlag", t.del_flag AS "delFlag", t.create_user AS "createUser", t.create_time AS "createTime", t.update_user AS "updateUser", t.update_time AS "updateTime"
+    </sql>
+
+
+    <select id="customList" resultType="cn.hnsl.sys.modular.message.model.result.SysMessageRelaResult" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageRelaParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message_rela where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageRelaParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message_rela where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.hnsl.sys.modular.message.model.result.SysMessageRelaResult" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageRelaParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message_rela where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageRelaParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message_rela where 1 = 1
+    </select>
+
+</mapper>

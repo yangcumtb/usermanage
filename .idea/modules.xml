@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-base/hnsl-base.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-base/hnsl-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-base-auth/hnsl-base-auth.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-base-auth/hnsl-base-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-core/hnsl-core.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-core/hnsl-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-dbctn/hnsl-dbctn.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-dbctn/hnsl-dbctn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-excel/hnsl-excel.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-excel/hnsl-excel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-generator/hnsl-generator.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-generator/hnsl-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-kernel.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-kernel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-main/hnsl-main.iml" filepath="$PROJECT_DIR$/hnsl-main/hnsl-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-model/hnsl-model.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-model/hnsl-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-oauth2/hnsl-oauth2.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-oauth2/hnsl-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-socket/hnsl-socket.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-socket/hnsl-socket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-system/hnsl-system.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-system/hnsl-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hnsl-kernel/hnsl-validator/hnsl-validator.iml" filepath="$PROJECT_DIR$/hnsl-kernel/hnsl-validator/hnsl-validator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/usermanage.iml" filepath="$PROJECT_DIR$/.idea/usermanage.iml" />
+    </modules>
+  </component>
+</project>

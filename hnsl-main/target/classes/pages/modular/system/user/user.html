@@ -1,0 +1,102 @@
+@layout("/common/_tree_container.html",{plugins:["ztree"],js:["/assets/modular/system/user/user.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">用户管理</span>
+</div>
+
+<div id="myContiner" style="height: 100%">
+    <div class="ui-layout-west">
+        <div class="box box-main">
+            <div class="ui-layout-content">
+                <div id="deptTree"></div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-layout-center">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-form toolbar">
+                                <input id="defaultPassword" class="layui-input" type="hidden"
+                                       value="${constants.getDefaultPassword()}"/>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <input id="name" class="layui-input" type="text" placeholder="账号/姓名/手机号"/>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <input id="timeLimit" class="layui-input" type="text" placeholder="注册时间"/>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                                class="layui-icon">&#xe615;</i>搜索
+                                        </button>
+
+                                        @if(shiro.hasPermission("system:user:add")){
+                                        <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                                class="layui-icon">&#xe654;</i>添加
+                                        </button>
+                                        @}
+                                        <button id="btnExp" class="layui-btn icon-btn more-check layui-btn-disabled" style="background-color: #33549988"
+                                                disabled><i class="layui-icon">&#xe67d;</i>导出
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="userTable" lay-filter="userTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("system:user:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">
+        <i class="layui-icon layui-icon-edit" style="margin-right: 2px;font-size: 18px"></i>
+        编辑</a>
+    @}
+    @if(shiro.hasPermission("system:user:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">
+        <i class="layui-icon layui-icon-delete" style="margin-right: 2px;"></i>删除
+    </a>
+    @}
+
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" data-dropdown="#tbDrop{{d.LAY_INDEX}}" no-shade="true" style="color: #33549988">
+        <i class="layui-icon layui-icon-next" style="margin-right: 2px;font-size: 13px"></i>
+        更多</a>
+    <ul class="dropdown-menu-nav table-more dropdown-bottom-right layui-hide" id="tbDrop{{d.LAY_INDEX}}">
+        <div class="dropdown-anchor"></div><!-- 多加一个这个即可 -->
+        @if(shiro.hasPermission("system:user:setRole")){
+        <li class="layui-action layui-action-primary" lay-event="roleAssign" style="color: #33549988">分配角色</li>
+        @}
+        @if(shiro.hasPermission("system:user:resetPwd")){
+        <li class="layui-action layui-action-primary" lay-event="reset" style="color: #33549988">重置密码</li>
+        @}
+    </ul>
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.userId}}" lay-skin="switch" lay-text="激活|作废"
+           {{d.status=='ENABLE'?'checked':''}}/>
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

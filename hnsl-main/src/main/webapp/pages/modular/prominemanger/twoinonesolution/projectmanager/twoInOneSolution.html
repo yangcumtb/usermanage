@@ -1,0 +1,261 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/twoinonesolution/projectmanager/twoInOneSolution.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    /*.layui-input {*/
+    /*    width: 190rem;*/
+    /*}*/
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">二合一方案基本情况表</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" style="margin-bottom: -20rem
+                        ;margin-top: 15rem
+">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿业权人</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="kyqr" class="layui-input" id="kyqr"
+                                           placeholder="请输入矿业权人">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">法人代表</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="frdb" class="layui-input" id="frdb"
+                                           placeholder="请输入法人代表">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">采矿证号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="ckzh" class="layui-input" id="ckzh"
+                                           placeholder="请输入采矿证号">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" id="area" style="margin-top: 35rem
+">
+                                <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                                <div class="layui-input-inline" style="display: none">
+                                    <select name="province" class="province-selector" data-value="辽宁省"
+                                            style="display: none">
+                                        <option value="">--选择省--</option>
+                                    </select>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">矿区所在市</label>
+                                    <div class="layui-input-inline">
+                                        <select id="xzs" name="xzs" class="city-selector">
+                                            <option value="">--选择市--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">矿区所在区/县</label>
+                                    <div class="layui-input-inline">
+                                        <select id="xzx" name="xzx" class="county-selector">
+                                            <option value="">--选择区--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">主矿种</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="zkz" name="zkz" placeholder="请输入开采主矿种"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+
+                                <!--                                <div class="layui-inline">-->
+                                <!--                                    <label class="layui-form-label">核查人员</label>-->
+                                <!--                                    <div class="layui-input-inline">-->
+                                <!--                                        <input type="text" name="hCRY" id="hCRY" placeholder="请输入核查人员姓名"-->
+                                <!--                                               autocomplete="off"-->
+                                <!--                                               class="layui-input">-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">编制单位</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="bzdw" class="layui-input" id="bzdw"
+                                               placeholder="请输入编制单位">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">开采方式</label>
+                                    <div class="layui-input-inline">
+                                        <select id="kcfs" name="kcfs" class="layui-select" lay-filter="select-kcfs">
+                                            <option value="">请选择开采方式</option>
+                                            <option value="1">井下开采</option>
+                                            <option value="2">露天开采</option>
+                                            <option value="3">露井联采</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">方案编制类型</label>
+                                    <div class="layui-input-inline">
+                                        <select id="bzlx" name="bzlx" class="layui-select" lay-filter="select-bzlx">
+                                            <option value="">请选择方案编制类型</option>
+                                            <option value="1">新申请矿业权编制</option>
+                                            <option value="2">扩大矿区范围修编</option>
+                                            <option value="3">变更开采方式修编</option>
+                                            <option value="4">采矿权到期延续修编</option>
+<!--                                            <option value="5">矿业权到期延续修编</option>-->
+                                            <option value="6">适用年限到期修编</option>
+                                            <option value="7">其他情况编制</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">验收结论</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ysjl" name="ysjl" class="layui-select" lay-filter="select-ysjl">
+                                            <option value="">请选择验收结论</option>
+                                            <option value="TG">通过</option>
+                                            <option value="YTJTG">有条件通过</option>
+                                            <option value="WTG">通过，整改</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">方案状态</label>
+                                    <div class="layui-input-inline">
+                                        <select id="fazt" name="fazt" class="layui-select" lay-filter="select-kcfs">
+                                            <option value="">请选择方案状态</option>
+                                            <option value="0">有效期内二合一方案</option>
+                                            <option value="1">二合一方案过期</option>
+                                            <option value="2">无二合一方案</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-inline">
+                                    @if(shiro.hasPermission("prominemanger:twoInOneSolution:add")){
+                                    <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988">
+                                        <i
+                                                class="layui-icon">&#xe654;</i>添加
+                                    </button>
+                                    @}
+                                    <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988">
+                                        <i
+                                                class="layui-icon">&#xe67d;</i>导出所选方案
+                                    </button>
+                                    <button id="btnExp1" class="layui-btn icon-btn" style="background-color: #33549988">
+                                        <i
+                                                class="layui-icon">&#xe67d;</i>导出全部方案
+                                    </button>
+                                    @if(shiro.hasPermission("prominemanger:twoInOneSolution:sql")){
+                                    <button id="btnSql" class="layui-btn icon-btn" style="background-color: #33549988">
+                                        <i
+                                                class="layui-icon">&#xe67d;</i>导出全省矿区边界数据
+                                    </button>
+                                    @}
+                                </div>
+                            </div>
+                        </div>
+                        <table class="layui-table" id="twoInOneSolutionTable"
+                               lay-filter="twoInOneSolutionTable"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>>
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("prominemanger:twoInOneSolution:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    @if(shiro.hasPermission("prominemanger:twoInOneSolution:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="location" style="color: #33549988">定位</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

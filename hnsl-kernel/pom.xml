@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.hnsl</groupId>
+        <artifactId>template</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>hnsl-kernel</artifactId>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>hnsl-base</module>
+        <module>hnsl-base-auth</module>
+        <module>hnsl-system</module>
+        <module>hnsl-excel</module>
+        <module>hnsl-generator</module>
+        <module>hnsl-dbctn</module>
+        <module>hnsl-oauth2</module>
+        <module>hnsl-model</module>
+        <module>hnsl-core</module>
+        <module>hnsl-validator</module>
+        <module>hnsl-socket</module>
+    </modules>
+
+</project>

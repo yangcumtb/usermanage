@@ -1,0 +1,220 @@
+@layout("/common/_container.html",{js:["/assets/modular/project/projectCheck/projectCheckOperation/projectCheckOperation.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    .layui-table-cell {
+        text-align: center;
+    }
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-pic" style="margin-bottom: -20px;margin-top: 15px">
+                            <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                            <div class="layui-input-inline" style="width: 200px; display: none">
+                                <select name="pro" class="pro-selector" data-value="辽宁省" lay-filter="pro-1"
+                                        style="display:none">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在市</label>
+                                <div class="layui-input-inline">
+                                    <select name="ZS" class="ZS-selector" data-value="" lay-filter="ZS-1">
+                                        <option value="">请选择市</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在县</label>
+                                <div class="layui-input-inline">
+                                    <select name="ZX" class="ZX-selector" data-value=" " lay-filter="ZX-1">
+                                        <option value="">请选择县/区</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn" lay-submit lay-filter="fsjl"><i
+                                        class="layui-icon layui-icon-search"></i>查询
+                                </button>
+                                <button type="reset" class="layui-btn layui-btn-primary"><i
+                                        class="layui-icon layui-icon-refresh"></i>重置
+                                </button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35px">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">核查单位</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="content" class="layui-input" id="content"
+                                               placeholder="请输入核查单位">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">核查人员</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="hCRY" placeholder="请输入核查人员姓名" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">单位名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="mobile" class="layui-input" id="mobile"
+                                               placeholder="请输入单位名称">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" >
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">损毁类型</label>
+                                    <div class="layui-input-inline">
+                                        <select id="key-sHLX" name="sHLX" class="layui-select" lay-filter="">
+                                            <option value="">请选择损毁类型</option>
+                                            <option value="01">挖损</option>
+                                            <option value="02">压占</option>
+                                            <option value="03">塌陷</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">图斑属性</label>
+                                    <div class="layui-input-inline">
+                                        <input type="tBSX" id="key-tBSX" name="key-tBSX" hidden/>
+                                        <select class="layui-form-select" lay-filter="">
+                                            <option value="">请选择图斑属性</option>
+                                            <option value="01">露天矿场</option>
+                                            <option value="02">堆煤场</option>
+                                            <option value="03">洗煤厂</option>
+                                            <option value="04">煤矸石堆</option>
+                                            <option value="05">其他矿石堆场</option>
+                                            <option value="06">选矿厂</option>
+                                            <option value="07">选矿池</option>
+                                            <option value="08">表土堆</option>
+                                            <option value="09">内排土场</option>
+                                            <option value="10">外排土场</option>
+                                            <option value="11">废石堆</option>
+                                            <option value="12">尾矿库</option>
+                                            <option value="13">山建筑</option>
+                                            <option value="14">塌陷坑</option>
+                                            <option value="15">地裂缝</option>
+                                            <option value="16">崩塌</option>
+                                            <option value="17">滑坡</option>
+                                            <option value="18">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">所有权权属</label>
+                                    <div class="layui-input-inline">
+                                        <input id="key-sHYQ" name="key-sHYQ" hidden/>
+                                        <select class="layui-select" lay-filter="select-sHYQ">
+                                            <option value="">请选择所有权权属</option>
+                                            <option value="A">国有土地所有权</option>
+                                            <option value="B">集体土地所有权</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">使用权权属</label>
+                                    <div class="layui-input-inline">
+                                        <input id="key-sYQ" name="key-sYQ" hidden/>
+                                        <select class="layui-select" lay-filter="select-sYQ">
+                                            <option value="">请选择使用权权属</option>
+                                            <option value="A">国有土地使用权</option>
+                                            <option value="B">集体土地使用权</option>
+                                            <option value="C">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">修复情况</label>
+                                    <div class="layui-input-inline">
+                                        <input id="key-zLQK" name="key-zLQK" hidden/>
+                                        <select class="layui-select" lay-filter="">
+                                            <option value="">请选择修复情况</option>
+                                            <option value="A">未修复</option>
+                                            <option value="B">正在修复</option>
+                                            <option value="C">已修复完成</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">责任主体</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="key-zRZT" name="key-zRZT" placeholder="请输入责任主体"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加
+                                </button>
+
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="projectCheckOperationTable"
+                           lay-filter="projectCheckOperationTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-action layui-action-primary" lay-event="edit">修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete">删除</a>
+</script>
+@}

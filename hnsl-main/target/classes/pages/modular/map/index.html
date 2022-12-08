@@ -1,0 +1,1019 @@
+@layout("/common/_container.html",{plugins:["leaflet"],js:["/assets/modular/map/js/mapConfig.js","/assets/modular/map/js/terraformer.js","/assets/modular/map/js/terraformer-wkt-parser.js","/assets/modular/map/js/map.js"],css:["/assets/modular/map/css/common.css","/assets/modular/map/css/map.css","/assets/modular/map/css/leaflet-search.css","/assets/modular/map/css/style.css","//47.98.228.1:20000/geoserver/openlayers3/ol.css","/assets/modular/map/css/stylea.css","/assets/modular/map/css/mui.min.css","/assets/modular/map/fonts/iconfont.css","/assets/modular/map/css/mui.loading.css","/assets/modular/map/css/common-new.css","/assets/modular/map/css/plus.css","/assets/modular/map/fonts/iconfont.css"]}){
+<style>
+    html {
+        font-size: 1px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    table td, table th {
+        border: 1px solid #cad9ea;
+        color: #666;
+        height: 20px;
+    }
+
+    table thead th {
+        background-color: #CCE8EB;
+
+    }
+
+    table tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    table tr:nth-child(even) {
+        background: #F5FAFA;
+    }
+
+    .ol-zoom {
+        top: 52px;
+    }
+
+    .ol-toggle-options {
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 4px;
+        padding: 2px;
+        position: absolute;
+        left: 8px;
+        top: 8px;
+    }
+
+    #updateFilterButton, #resetFilterButton {
+        height: 22px;
+        width: 22px;
+        text-align: center;
+        text-decoration: none !important;
+        line-height: 22px;
+        margin: 1px;
+        font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+        font-weight: bold !important;
+        background: rgba(0, 60, 136, 0.5);
+        color: white !important;
+        padding: 2px;
+    }
+
+    .ol-toggle-options a {
+        background: rgba(0, 60, 136, 0.5);
+        color: white;
+        display: block;
+        font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+        font-size: 19px;
+        font-weight: bold;
+        height: 22px;
+        line-height: 11px;
+        margin: 1px;
+        padding: 0;
+        text-align: center;
+        text-decoration: none;
+        width: 22px;
+        border-radius: 2px;
+    }
+
+    .ol-toggle-options a:hover {
+        color: #fff;
+        text-decoration: none;
+        background: rgba(0, 60, 136, 0.7);
+    }
+
+    body {
+        font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+
+    iframe {
+        width: 250px;
+        height: 250px;
+        border: none;
+    }
+
+    /* Toolbar styles */
+    #toolbar {
+        position: relative;
+        padding-bottom: 0.5em;
+    }
+
+    #toolbar ul {
+        list-style: none;
+        padding: 400px;
+        margin: 400px;
+    }
+
+    #toolbar ul li {
+        float: left;
+        padding-right: 1em;
+        padding-bottom: 0.5em;
+    }
+
+    #toolbar ul li a {
+        font-weight: bold;
+        font-size: smaller;
+        vertical-align: middle;
+        color: black;
+        text-decoration: none;
+    }
+
+    #toolbar ul li a:hover {
+        text-decoration: underline;
+    }
+
+    #toolbar ul li * {
+        vertical-align: middle;
+    }
+
+    #map {
+        clear: both;
+        position: relative;
+        width: 768px;
+        height: 713px;
+        border: 1px solid black;
+    }
+
+    #wrapper {
+        width: 768px;
+    }
+
+    #location {
+        float: right;
+    }
+
+    /* Styles used by the default GetFeatureInfo output, added to make IE happy */
+    table.featureInfo, table.featureInfo td, table.featureInfo th {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        margin: 400px;
+        padding: 400px;
+        font-size: 90%;
+        padding: .2em .1em;
+    }
+
+    table.featureInfo th {
+        padding: .2em .2em;
+        font-weight: bold;
+        background: #eee;
+    }
+
+    table.featureInfo td {
+        background: #fff;
+    }
+
+    table.featureInfo tr.odd td {
+        background: #eee;
+    }
+
+    table.featureInfo caption {
+        text-align: left;
+        font-size: 100%;
+        font-weight: bold;
+        padding: .2em .2em;
+    }
+
+    #resultexpand {
+        position: absolute;
+        z-index: 999;
+        padding: 2px 2px 2px 0;
+        top: 300px;
+        left: 0px;
+    }
+
+    #detailtag li {
+        width: 100px
+    }
+
+    #region div.layui-form-item {
+        margin-left: 20px;
+    }
+
+    /*#Layers {*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*    position: absolute;*/
+    /*    top: 70px;*/
+    /*    left: 70%;*/
+    /*}*/
+
+    /*#detailpanel {*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*    position: absolute;*/
+    /*    top: 225px;*/
+    /*    left: 70%;*/
+    /*}*/
+</style>
+<body>
+<div class="map-content">
+    <!--    <div id="toolbar" style="display: none;">-->
+    <!--        <ul>-->
+    <!--            <li>-->
+    <!--                <a>WMS version:</a>-->
+    <!--                <select id="wmsVersionSelector" onchange="setWMSVersion(value)">-->
+    <!--                    <option value="1.1.1">1.1.1</option>-->
+    <!--                    <option value="1.3.0">1.3.0</option>-->
+    <!--                </select>-->
+    <!--            </li>-->
+    <!--            <li>-->
+    <!--                <a>Tiling:</a>-->
+    <!--                <select id="tilingModeSelector" onchange="setTileMode(value)">-->
+    <!--                    <option value="untiled">Single tile</option>-->
+    <!--                    <option value="tiled">Tiled</option>-->
+    <!--                </select>-->
+    <!--            </li>-->
+    <!--            <li>-->
+    <!--                <a>Antialias:</a>-->
+    <!--                <select id="antialiasSelector" onchange="setAntialiasMode(value)">-->
+    <!--                    <option value="full">Full</option>-->
+    <!--                    <option value="text">Text only</option>-->
+    <!--                    <option value="none">Disabled</option>-->
+    <!--                </select>-->
+    <!--            </li>-->
+    <!--            <li>-->
+    <!--                <a>Format:</a>-->
+    <!--                <select id="imageFormatSelector" onchange="setImageFormat(value)">-->
+    <!--                    <option value="image/png">PNG 24bit</option>-->
+    <!--                    <option value="image/png8">PNG 8bit</option>-->
+    <!--                    <option value="image/gif">GIF</option>-->
+    <!--                    <option id="jpeg" value="image/jpeg">JPEG</option>-->
+    <!--                    <option id="jpeg-png" value="image/vnd.jpeg-png">JPEG-PNG</option>-->
+    <!--                    <option id="jpeg-png8" value="image/vnd.jpeg-png8">JPEG-PNG8</option>-->
+    <!--                </select>-->
+    <!--            </li>-->
+    <!--            <li>-->
+    <!--                <a>Width/Height:</a>-->
+    <!--                <select id="widthSelector" onchange="setWidth(value)">-->
+    <!--                    &lt;!&ndash;-->
+    <!--                    These values come from a statistics of the viewable area given a certain screen area-->
+    <!--                    (but have been adapted a litte, simplified numbers, added some resolutions for wide screen)-->
+    <!--                    You can find them here: http://www.evolt.org/article/Real_World_Browser_Size_Stats_Part_II/20/2297/-->
+    <!--                    &ndash;&gt;-->
+    <!--                    <option value="auto">Auto</option>-->
+    <!--                    <option value="600">600</option>-->
+    <!--                    <option value="750">750</option>-->
+    <!--                    <option value="950">950</option>-->
+    <!--                    <option value="1000">1000</option>-->
+    <!--                    <option value="1200">1200</option>-->
+    <!--                    <option value="1400">1400</option>-->
+    <!--                    <option value="1600">1600</option>-->
+    <!--                    <option value="1900">1900</option>-->
+    <!--                </select>-->
+    <!--                <select id="heigthSelector" onchange="setHeight(value)">-->
+    <!--                    <option value="auto">Auto</option>-->
+    <!--                    <option value="300">300</option>-->
+    <!--                    <option value="400">400</option>-->
+    <!--                    <option value="500">500</option>-->
+    <!--                    <option value="600">600</option>-->
+    <!--                    <option value="700">700</option>-->
+    <!--                    <option value="800">800</option>-->
+    <!--                    <option value="900">900</option>-->
+    <!--                    <option value="1000">1000</option>-->
+    <!--                </select>-->
+    <!--            </li>-->
+    <!--            <li>-->
+    <!--                <a>Filter:</a>-->
+    <!--                <select id="filterType">-->
+    <!--                    <option value="cql">CQL</option>-->
+    <!--                    <option value="ogc">OGC</option>-->
+    <!--                    <option value="fid">FeatureID</option>-->
+    <!--                </select>-->
+    <!--                <input type="text" size="80" id="filter"/>-->
+    <!--                <a id="updateFilterButton" href="#" onClick="updateFilter()" title="Apply filter">Apply</a>-->
+    <!--                <a id="resetFilterButton" href="#" onClick="resetFilter()" title="Reset filter">Reset</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+
+    <!--    <div id="map">-->
+    <!--        <div class="ol-toggle-options ol-unselectable"><a title="Toggle options toolbar" onClick="toggleControlPanel()"-->
+    <!--                                                          href="#toggle">...</a></div>-->
+    <!--    </div>-->
+    <div id="mapDiv" style="height: 800rem;width: 2000rem">
+
+    </div>
+    <div class="legendarea">
+        <dl class="maplegend" id="legendContent">
+        </dl>
+        <button class="trigger" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="图例"><i
+                class="icon iconfont icon-tuli"></i></button>
+    </div>
+    <div class="map-searchbar" id="cexpand" style="width: 350px;max-height: 780rem;overflow-y: auto;display: none">
+        <div class="layui-card" style="width: 100%">
+            <div class="layui-fluid" style="padding-bottom: 10px;">
+                <div class="layui-tab layui-tab-brief" lay-filter="demo">
+                    <ul class="layui-tab-title"
+                        style="background-color:white;position:fixed;margin-left: 48px;z-index: 99999">
+                        <li lay-id="1" class="layui-this">搜索结果</li>
+                        <li lay-id="2">图层列表</li>
+                    </ul>
+                    <div class="layui-tab-content" style="/*height:670px;*/padding-top: 40px">
+                        <div class="layui-tab-item layui-show" id="select-content">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    <span>共查询<b id="searchNum" style="color: #e00000;margin: 0 10px;"></b>条结果</span>
+                                </div>
+                                <div class="layui-card-body" id="resultlist">
+                                    <!--                                    <div style="max-height: 95px;font-size: 16px" class="layui-form">-->
+                                    <!--                                        <div class="layui-form-item">-->
+                                    <!--                                            <span style="display: inline-block;white-space: normal;word-break: break-all">测试数据</span>-->
+                                    <!--                                        </div>-->
+                                    <!--                                        <div class="layui-form-item">-->
+                                    <!--                                            <button type="button" class="layui-btn layui-btn-primary">定位</button>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="layui-card">
+                                <div class="layui-card-body" id="Layerlist">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="${ctxPath}/assets/expand/images/cexpand.png" id="resultexpand"
+         style="width: 40px;height: 40px;margin-bottom: 5px; transform: rotate(90deg) ; background-color: rgba(83,70,95,0.8);Border-radius:13px">
+    <div class="map-searchbar" id="search" style="width: 450px;max-height: 780rem;overflow-y: auto;margin-left: 40px">
+        <div class="layui-card" style="width: 100%">
+            <div class="layui-card-header" id="cardHeader">
+                <img src="${ctxPath}/assets/expand/images/expand.png" id="expand"
+                     style="width: 35px;height: 35px;margin-bottom: 5px; transform: rotate(270deg)">
+                业务选择
+            </div>
+            <form class="layui-card-body" id="content" style="display: none;">
+                <div style="margin-left: 15px;color: #0a1929" class="District">
+                    行政区
+                    <button type="button" class="layui-btn layui-btn-primary" id="Btnsearch"
+                            style="margin-left: 162px;background-color: #33549988;"><i class="layui-icon">&#xe615;</i>搜索
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-primary" id="reset"><i
+                            class="layui-icon">&#xe669;</i>重置
+                    </button>
+                </div>
+                <div id="region" style="margin-left: 10px"></div>
+                <div style="margin-left: 15px;color: #0a1929" class="choice">
+                    已选区域：<span id="all2"></span>
+                </div>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 95px">项目类型：</label>
+                        <div class="layui-input-block">
+                            @if(shiro.hasPermission("prominemanger:twoInOneSolution:view")){
+                            <input type="checkbox" id="SCKS" lay-filter="SCKS" lay-skin="primary" title="生产矿山">
+                            @}
+                            @if(shiro.hasPermission("lsyl:kParcel:view")){
+                            <input type="checkbox" id="LSYL" lay-filter="LSYL" lay-skin="primary" title="历史遗留">
+                            @}
+                            @if(shiro.hasPermission("mountWaterPoject:kParcel:list")){
+                            <input type="checkbox" id="SSLT" lay-filter="SSLT" lay-skin="primary" title="山水林田湖草项目">
+                            @}
+                            @if(shiro.hasPermission("map:landDesertification:search")){
+                            <input type="checkbox" id="TDSH" lay-filter="TDSH" lay-skin="primary" title="土地沙化治理项目">
+                            @}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card" id="SC" style="display: none">
+                    <div class="layui-card-header" style="background: #b3c5db" id="product">生产矿山</div>
+                    <div class="layui-card-body" style="display: none" id="productC">
+                        <div class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">统计年份</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Sbeginyear" placeholder="起始年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Sendyear" placeholder="截至年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: -120px">
+                                <div class="layui-input-block">
+                                    <input type="checkbox" id="SYXF" lay-skin="primary" title="已修复图斑">
+                                    <input type="checkbox" id="SSH" lay-skin="primary" title="损毁图斑">
+                                    <input type="checkbox" id="SKQBJ" lay-skin="primary" title="矿权边界">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card" id="LS" style="display: none">
+                    <div class="layui-card-header" style="background: #b3c5db" id="history">历史遗留</div>
+                    <div class="layui-card-body" style="display: none" id="historyC">
+                        <div class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">统计年份</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Lbeginyear" placeholder="起始年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Lendyear" placeholder="截至年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">图斑编号</label>
+                                    <div class="layui-input-inline" style="width: 225px;">
+                                        <input type="text" id="Tbbh" placeholder="请输入图斑编号" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: -120px">
+                                <div class="layui-input-block">
+                                    <!--                                    <input type="checkbox" id="XFZ" lay-skin="primary" title="治理中">-->
+                                    <input type="checkbox" id="WXF" value="A" lay-skin="primary" title="未治理">
+                                    <input type="checkbox" id="XF" value="B" lay-skin="primary" title="已治理">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card" id="SS" style="display: none">
+                    <div class="layui-card-header" style="background: #b3c5db" id="lake">山水林田湖草项目</div>
+                    <div class="layui-card-body" style="display: none" id="lakeC">
+                        <div class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">统计年份</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="SSbeginyear" placeholder="起始年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="SSendyear" placeholder="截至年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: 0px">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">完成状态</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="SSWC" lay-skin="primary" lay-filter="SSWC"
+                                               title="已完成">
+
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="SSWWC" lay-skin="primary" lay-filter="SSWWC"
+                                               title="未完成">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: 0px">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">资金类型</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="SSZY" lay-skin="primary" lay-filter="SSZY"
+                                               title="中央资金">
+
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="SSPT" lay-skin="primary" lay-filter="SSPT"
+                                               title="配套资金">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card" id="TD" style="display: none">
+                    <div class="layui-card-header" style="background: #b3c5db" id="land">土地沙化治理项目</div>
+                    <div class="layui-card-body" style="display: none" id="landC">
+                        <div class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">统计年份</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Tbeginyear" placeholder="起始年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" id="Tendyear" placeholder="截至年份" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: 0px">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">完成状态</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="TWC" lay-skin="primary" lay-filter="TWC" title="已完成">
+
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="TWWC" lay-skin="primary" lay-filter="TWC"
+                                               title="未完成">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left: 0px">
+                                <div class="layui-inline" style="margin-left: -30px">
+                                    <label class="layui-form-label">资金类型</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="TZY" lay-skin="primary" lay-filter="TZY"
+                                               title="中央资金">
+
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="checkbox" id="TPT" lay-skin="primary" lay-filter="TPT"
+                                               title="配套资金">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ul class="control" style="background: transparent">
+        <img id="detail" src="${ctxPath}/assets/expand/images/detailclose.png"
+             style="background: white;height: 50px;width: 50px"/>
+    </ul>
+    <ul style="position: absolute;top: 70px; right: 500px">
+        <div class="layui-card" id="Layers"
+             style="width: 450px;height: 150px;display: none;">
+            <div class="layui-card-body">
+                <div class="layui-form">
+                    <div class="layui-form-item" id="basemapToggle" style="margin-left: -45px">
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block">
+                                <img src="${ctxPath}/assets/modular/map/img/map/map2.png" alt="卫星图"/>
+                            </div>
+                            <div class="layui-input-block">
+                                <input type="checkbox" id="planet" lay-skin="primary" lay-filter="planet" title="卫星图"
+                                       checked>
+                            </div>
+                        </div>
+                        <div class="layui-input-inline">
+                            <div class="layui-input-block">
+                                <img src="${ctxPath}/assets/modular/map/img/map/map1.png" alt="政区图"/>
+                            </div>
+                            <div class="layui-input-block">
+                                <input type="checkbox" id="zone" lay-skin="primary" lay-filter="zone" title="政区图">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ul>
+    <ul style="position: absolute;top: 230px; right: 500px">
+        <div class="layui-card" id="detailpanel"
+             style="width: 450px;max-height: 400px;display: none">
+            <div class="layui-tab layui-tab-card">
+                <ul class="layui-tab-title" id="detailtag" style="background-color:white;z-index: 99999">
+                    <li id="tb" class="layui-this">图斑信息</li>
+                    <li id="xm" style="display: none">项目信息</li>
+                    <li>影像加载</li>
+                    <li>对比影像</li>
+                </ul>
+                <div class="layui-tab-content" style="width: 450px;max-height: 360px;overflow-y: auto;">
+                    <div class="layui-tab-item layui-show" id="tbnr">
+                        <div class="layui-card">
+                            <div class="layui-card-body">
+                                <form id="tuban" lay-filter="tuban" class="layui-form">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 95px">矿区所在市</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="xzs" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 95px">矿区所在县</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="xzx" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 95px">中心点维度</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="kfy" type="text" class="layui-input"
+                                                       disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 95px">中心点经度</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="kfx" type="text" class="layui-input"
+                                                       disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">图斑编号</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="id" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">主体编号</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="ztbh" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 110px">图斑面积(m²)</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="tbmj" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label" style="width: 110px">图斑面积(亩)</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input name="tbmjm" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">图斑大类</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <select id="tbdl" name="tbdl" class="layui-select"
+                                                        lay-filter="select-tbdl"
+                                                        disabled>
+                                                    <option value=" "></option>
+                                                    <option value="10">历史遗留矿山</option>
+                                                    <option value="20">有责任主体的废弃矿山</option>
+                                                    <option value="30">其他情形</option>
+                                                    <option value="40">功能未损毁采矿沉陷区</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">图斑小类</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <select id="tbxl" name="tbxl" class="layui-select"
+                                                        lay-filter="select-tbxl"
+                                                        disabled>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" id="lyslmassage">
+                                        <div class="layui-form-item" style="margin-top: -30px">
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label">关闭年度</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <input name="gbnd" type="text" class="layui-input" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label" style="width: 110px">恢复治理情况</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <select name="hfzlqk" class="layui-select" lay-filter="select-zlqk"
+                                                            disabled>
+                                                        <option value="">请选择</option>
+                                                        <option value="A">未治理</option>
+                                                        <option value="B">已恢复治理</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" style="margin-top: -30px">
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label">图斑属性</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <select name="tbsx" class="layui-form-select"
+                                                            lay-filter="select-tbsx" disabled>
+                                                        <option value="">请选择</option>
+                                                        <option value="1">采场</option>
+                                                        <option value="2">中转场(堆煤场、其他矿石堆、选矿场等)</option>
+                                                        <option value="3">固体废弃物堆场(煤矸石堆、废石堆、排土场等)</option>
+                                                        <option value="4">矿山建筑</option>
+                                                        <option value="5">塌陷坑</option>
+                                                        <option value="6">井口/硐口</option>
+                                                        <option value="7">其他</option>
+                                                        <option value="12">其他重大工程建设</option>
+                                                        <option value="13">独立选址的选矿厂等</option>
+                                                        <option value="14">功能未损毁的采矿塌陷</option>
+                                                        <option value="17">交通工程建设</option>
+                                                        <option value="18">伪变化</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label">治理年度</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <input name="zlnd" type="text" class="layui-input" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" style="margin-top: -30px">
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label" style="width: 100px">拟修复方式</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <select id="nxffs" name="nxffs" class="layui-select"
+                                                            lay-filter="select-shyq" diasbled>
+                                                        <option value="">请选择拟修复方式</option>
+                                                        <option value="1">自然恢复</option>
+                                                        <option value="2">辅助再生</option>
+                                                        <option value="3">生态重建</option>
+                                                        <option value="4">转型利用</option>
+                                                        <option value="5">/</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label" style="width: 100px">拟修复时段</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <select id="nxfsjd" name="nxfsjd" class="layui-select" disabled>
+                                                        <option value="">请选择拟修复方式</option>
+                                                        <option value="A">"十四五"期间</option>
+                                                        <option value="B">"十四五"之后</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label" style="width: 110px">遥感影像年份</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <input name="rsspotyear" type="text" class="layui-input" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" style="margin-top: -30px">
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label" style="width: 100px">拟修复方向</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <!--                                            <input name="xffx" type="text" class="layui-input" disabled/>-->
+                                                    <div id="nxffx" style="width: 165px"></div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: 0px">
+                                                    <label class="layui-form-label">三调地类</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <div id="sddl" style="width: 165px"></div>
+                                                    <!--                                            <input name="sddl" type="text" class="layui-input" disabled/>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" style="margin-top: -20px">
+                                            <div class="layui-inline ">
+                                                <div class="layui-input-block" style="margin-left: -20px">
+                                                    <label class="layui-form-label">矿种</label>
+                                                </div>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                    <!--                                            <input name="kz" type="text" class="layui-input" disabled/>-->
+                                                    <div id="kz" style="width: 165px"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" style="margin-top: -30px">
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label">项目备注</label>
+                                                <div class="layui-input-inline" style="margin-left: 3px;width: 300px">
+                                        <textarea name="bz" type="text" class="layui-textarea"
+                                                  disabled></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="layui-carousel" id="photo2" lay-filter="photo2">
+                                    <div carousel-item id="a2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item" id="xmnr">
+                        <div class="layui-card">
+                            <div class="layui-card-body">
+                                <form id="MC" lay-filter="MC">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">项目名称</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="xmmc" name="xmmc" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">项目地点</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="xmdd" name="xmdd" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: -13px">
+                                                <label class="layui-form-label" style="width: 150px">预算总资金(万元)</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="yszzj" name="yszzj" type="text" class="layui-input"
+                                                       disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: -26px">
+                                                <label class="layui-form-label" style="width: 150px">省补资金(万元)</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="sbzj" name="sbzj" type="text" class="layui-input"
+                                                       disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">修复类型</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="xflx" name="xflx" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 0px">
+                                                <label class="layui-form-label">治理年度</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="zlnd" name="znld" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <div class="layui-input-block" style="margin-left: 5px">
+                                                <label class="layui-form-label" style="width: 150px">图斑面积（平方米）</label>
+                                            </div>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 165px">
+                                                <input id="tbmj" name="tbmj" type="text" class="layui-input" disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: -30px">
+                                        <div class="layui-inline ">
+                                            <label class="layui-form-label">项目备注</label>
+                                            <div class="layui-input-inline" style="margin-left: 3px;width: 300px">
+                                        <textarea id="xmbz" name="xmbz" type="text" class="layui-textarea"
+                                                  disabled></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="layui-carousel" id="photo" lay-filter="photo">
+                                    <div carousel-item id="a">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-card">
+                            <div class="layui-card-body">
+                                选择地图加载影像
+                                <table class="layui-hide" id="test"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">内容3</div>
+                </div>
+            </div>
+        </div>
+    </ul>
+</div>
+
+
+<div id="latlng" style="width: 350px">
+    经度:[ <span style="font-size: 0.7em" id="lng">113.477396</span> ],
+    纬度:[ <span style="font-size: 0.7em" id="lat">34.587366</span> ]
+</div>
+<ul style="position: absolute;top: 10px;right: 500px;z-index: 999;display: none" id="progress">
+    <div style="width:950rem;background-color: #FFFFFF;border-radius:8px;text-align: center;height: 50px">
+        <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="progrestuban"
+             style="top:10px">
+            <div class="layui-progress-bar layui-bg-green" lay-percent="">
+            </div>
+        </div>
+        <div style="margin-top: 10px">
+            <span id="uploadfilemsg">正在加载</span>
+        </div>
+    </div>
+</ul>
+<script type="text/html" id="tableBar">
+
+    <a class="layui-action layui-action-primary" lay-event="edit">加载</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete">移除</a>
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+<!--<div style="display: none" id="layer-content">-->
+<!--    <div id="baseMapSel" style="height: 200px">-->
+<!--        <ul class="base_select_group" id="basemapToggle">-->
+<!--            <li class="basemap_item active" data-map="Images">-->
+<!--                <img src="${ctxPath}/assets/modular/map/img/map/map2.png" alt="卫星图"/>-->
+<!--                <span>卫星图</span>-->
+<!--            </li>-->
+<!--            <li class="basemap_item " data-map="Streets">-->
+<!--                <img src="${ctxPath}/assets/modular/map/img/map/map1.png" alt="政区图"/>-->
+<!--                <span>政区图</span>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <div class="group">-->
+<!--        <div id="layerGroup" class="layerShow"></div>-->
+<!--        <div id="filterGroup" class="filterShow">-->
+<!--            <div class="filter-content" style="margin-bottom: 60px">-->
+<!--                <div style="padding: 10px 5px;margin: 3px;background: #f1eded;"-->
+<!--                     id="filterLayerSelBtn">-->
+<!--                    <div class="filter-c">点击选择图层:-->
+<!--                        <div class="dropdown-menu" style="float: right;position: absolute;right: 18px;top: 132px;">-->
+<!--                            <button class="layui-btn icon-btn layui-btn-primary" style="width: 120px">-->
+<!--                                <span class="active-layer">实时雨情</span>-->
+<!--                                <i class="layui-icon layui-icon-drop"></i>-->
+<!--                            </button>-->
+<!--                            <ul class="dropdown-menu-nav" id="dropdown-menu-nav"></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="filterBtn filterShow">-->
+<!--            <button id="filterBtn" type="button" class="mui-btn mui-btn-primary mui-btn-block">查询-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+</body>
+@}

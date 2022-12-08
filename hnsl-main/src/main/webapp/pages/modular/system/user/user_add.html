@@ -1,0 +1,118 @@
+@layout("/common/_form.html",{js:["/assets/modular/system/user/user_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<form class="layui-form" id="userForm" lay-filter="userForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="userId" type="hidden"/>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">账号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input name="account" placeholder="请输入账号" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">姓名<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input name="name" placeholder="请输入姓名" type="text" class="layui-input" lay-verify="required"
+                                   lay-verType="tips"
+                                   required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">职务</label>
+                        <div class="layui-input-block">
+                            <input name="title" placeholder="请输入职务" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">电话<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input name="phone" placeholder="请输入电话" type="text" class="layui-input"
+                                   lay-verify="required|phone|number" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">邮箱</label>
+                        <div class="layui-input-block">
+                            <input name="email" placeholder="请输入邮箱" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">生日</label>
+                        <div class="layui-input-block">
+                            <input id="birthday" name="birthday" placeholder="请输入生日" type="text"
+                                   class="layui-input date-icon" autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="M" title="男" checked/>
+                            <input type="radio" name="sex" value="F" title="女"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">职务信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">部门<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="deptId" name="deptId" type="hidden">
+                            <input id="deptName" name="deptName" placeholder="请输入部门" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">角色<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <div id="selRole" class="xm-select"></div>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">岗位<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <div id="selPosition" name="positionId" class="xm-select"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit style="background-color: #33549988">&emsp;提交&emsp;
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

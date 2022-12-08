@@ -1,0 +1,416 @@
+@layout("/common/_form.html",{js:["/assets/modular/mountWaterPoject/mountWaterPoject_edit.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+
+    .layui-form-label {
+        width: 160rem;
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+</style>
+<form class="layui-form" id="mountWaterPojectForm" lay-filter="mountWaterPojectForm">
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row" style="margin-bottom: -20rem;margin-top: 15rem">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">子项目名称<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zXmmc" name="zXmmc" placeholder="请输入子项目名称" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">工程项目名称<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="gcXmmc" name="gcXmmc" placeholder="请输入工程项目名称" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目资金类型<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="xmzjlx" name="xmzjlx" placeholder="请输入项目资金类型" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目建设周期<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="xmjszq" name="xmjszq" placeholder="请输入项目建设周期" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">绩效目标<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jxmb" name="jxmb" placeholder="请输入绩效目标" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目时间<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <select id="xmsj" name="xmsj" class="layui-select" lay-filter="select-xmsj" lay-verify="required">
+                                    <option value="">请选择项目时间</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">主要工作内容<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline" style="width: 500rem">
+                            <textarea id="zygznr" name="zygznr" placeholder="请输入主要工作内容" type="text" class="layui-textarea"
+                                      lay-verify="required" lay-verType="tips" required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目地点<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="xmdd" name="xmdd" placeholder="请输入项目地点" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">经度<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jd" name="jd" placeholder="请输入经度" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">纬度<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="wd" name="wd" placeholder="请输入纬度" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目责任单位<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="xmzrdw" name="xmzrdw" placeholder="请输入项目责任单位" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">责任人姓名<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zrrxm" name="zrrxm" placeholder="请输入责任人姓名" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">部门职务<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="bmzw" name="bmzw" placeholder="请输入部门职务" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">联系电话<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="lxdh" name="lxdh" placeholder="请输入联系电话" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总金额（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zje" name="zje" placeholder="请输入总金额（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">配套资金（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="ptzj" name="ptzj" placeholder="请输入配套资金（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中央资金 （万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zyzj" name="zyzj" placeholder="请输入中央资金 （万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">配套资金来源<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="ptzjly" name="ptzjly" placeholder="请输入配套资金来源" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">提供资金单位<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="tgzjdw" name="tgzjdw" placeholder="请输入提供资金单位" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">已落实金额（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="ylsje" name="ylsje" placeholder="请输入已落实金额（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">挂网时间<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="gwsj" name="gwsj" placeholder="请输入挂网时间" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">进场时间<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jcsj" name="jcsj" placeholder="请输入进场时间" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中标单位设计<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zbdwsj" name="zbdwsj" placeholder="请输入中标单位设计" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中标单位设计联系人<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="sjlxr" name="sjlxr" placeholder="请输入中标单位设计联系人" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中标单位设计联系人电话<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 350rem">
+                                <input id="sjlxrdh" name="sjlxrdh" placeholder="请输入中标单位设计联系人电话" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中标单位施工<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zbdwsg" name="zbdwsg" placeholder="请输入中标单位施工" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">施工联系人<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="sglxr" name="sglxr" placeholder="请输入施工联系人" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">施工联系人电话<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="sglxrdh" name="sglxrdh" placeholder="请输入施工联系人电话" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中标单位监理<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="zbdwjl" name="zbdwjl" placeholder="请输入中标单位监理" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">监理联系人<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jllxr" name="jllxr" placeholder="请输入监理联系人" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">建立联系人电话<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jllxrdh" name="jllxrdh" placeholder="请输入建立联系人电话" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目进度百分比<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="xmjdbfb" name="xmjdbfb" placeholder="请输入项目进度百分比" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目总体进展情况<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jzqk" name="jzqk" placeholder="请输入项目总体进展情况" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目月度进展<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="jzqk1" name="jzqk1" placeholder="请输入项目月度进展" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">存在问题<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="czwt" name="czwt" placeholder="请输入存在问题" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">合同约定的拨付资金条件<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="htydbftj" name="htydbftj" placeholder="请输入合同约定的拨付资金条件" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">按合同应拨付资金（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="bfzj" name="bfzj" placeholder="请输入按合同应拨付资金（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">已完成拨付（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="ywcbf" name="ywcbf" placeholder="请输入已完成拨付（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">已完成配套拨付（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="ywcptbf" name="ywcptbf" placeholder="请输入已完成配套拨付（万元）" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">已完成中央拨付（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="ywczybf" name="ywczybf" placeholder="请输入已完成中央拨付（万元）" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">应拨未拨资金（万元）<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="ybwbzj" name="ybwbzj" placeholder="请输入应拨未拨资金（万元）" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 300rem">应拨未拨项目是否向财政递交书面申请<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="ybwbxmsq" name="ybwbxmsq" placeholder="请输入应拨未拨项目是否向财政递交书面申请" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 300rem">如未按照合同约定拨付请注明原因<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 450rem">
+                                <input id="wbfyy" name="wbfyy" placeholder="请输入如未按照合同约定拨付请注明原因" type="text"
+                                       class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">目前实施阶段<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline" style="width: 500rem">
+                            <textarea id="mqssjd" name="mqssjd" placeholder="请输入目前实施阶段" type="text" class="layui-textarea"
+                                      lay-verify="required" lay-verType="tips" required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">设计工程量<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline" style="width: 500rem">
+                            <textarea id="sjgcl" name="sjgcl" placeholder="请输入设计工程量" type="text" class="layui-textarea"
+                                      lay-verify="required" lay-verType="tips" required
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: 0rem;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">已完成工程量<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 500rem">
+                                <textarea id="ywcgcl" name="ywcgcl" placeholder="请输入已完成工程量" type="text" class="layui-textarea"
+                                          lay-verify="required" lay-verType="tips" required
+                                ></textarea>
+
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">未完成工程量<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline" style="width: 500rem">
+                                <textarea id="wwcgcl" name="wwcgcl" placeholder="请输入未完成工程量" type="text" class="layui-textarea"
+                                          lay-verify="required" lay-verType="tips" required
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">预计完工时间<span style="color: red;">*</span></label>
+                            <div class="layui-input-inline">
+                                <input id="yjwgsj" name="yjwgsj" placeholder="请输入预计完工时间" type="text" class="layui-input"
+                                       lay-verify="required" lay-verType="tips" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

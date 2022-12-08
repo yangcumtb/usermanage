@@ -1,0 +1,154 @@
+@layout("/common/_container.html",{js:["/assets/modular/project/projectCheck/finaljsxmCheck/finalCheckJsxm.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+
+
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-pic" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">建设项目名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="xmmc" name="xmmc" class="layui-input"
+                                               placeholder="请输入建设项目名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">填报类型<span style="color: red;">*</span></label>
+                                    <div class="layui-input-inline">
+                                        <select id="tjlx" name="tjlx" class="layui-select" data-value=" "
+                                                lay-filter="tjlx">
+                                            <option value="0">初审</option>
+                                            <option value="1">终审</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more" style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline" id="b" style="margin-top: 10rem;">
+                                    <label class="layui-form-label">建设单位名称<span style="color: red;">*</span></label>
+                                    <div class="layui-input-inline">
+                                        <input id="jsdw" name="jsdw" placeholder="请输入该建设单位名称" type="text" class="layui-input"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="layui-inline" id="m" style="margin-top: 10rem;">
+                                    <label class="layui-form-label">编制单位地址<span style="color: red;">*</span></label>
+                                    <div class="layui-input-inline">
+                                        <input id="bzdwdz" name="bzdwdz" placeholder="请输入编制单位地址" type="text" class="layui-input"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline" id="k" style="margin-top: 10rem;">
+                                    <label class="layui-form-label">复垦义务人<span style="color: red;">*</span></label>
+                                    <div class="layui-input-inline">
+                                        <input id="ywr" name="ywr" placeholder="请输入该项目复垦义务人" type="text" class="layui-input"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+<!--                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>-->
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="finalCheckJsxmCopy1Table" lay-filter="finalCheckJsxmCopy1Table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("jsxmCheck:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+
+    @}
+
+    @if(shiro.hasPermission("productivemineCheck:check")){
+    <a class="layui-action layui-action-primary" lay-event="check" style="color: #33549988">审批</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+
+    @}
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    @if(shiro.hasPermission("jsxmCheck:delete")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

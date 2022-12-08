@@ -1,0 +1,414 @@
+@layout("/common/_container.html",{plugins:["leaflet"],js:["/assets/modular/map/js/mapConfig.js","/assets/modular/map/js/terraformer.js","/assets/modular/map/js/terraformer-wkt-parser.js","/assets/modular/mountWaterPoject/mountWaterPoject_map.js"],css:["/assets/modular/map/css/common.css","/assets/modular/map/css/map.css","/assets/modular/map/css/leaflet-search.css","/assets/modular/map/css/style.css","//47.98.228.1:20000/geoserver/openlayers3/ol.css","/assets/modular/map/css/stylea.css","/assets/modular/map/css/mui.min.css","/assets/modular/map/fonts/iconfont.css","/assets/modular/map/css/mui.loading.css","/assets/modular/map/css/common-new.css","/assets/modular/map/css/plus.css","/assets/modular/map/fonts/iconfont.css"]}){
+<style>
+    html {
+        font-size: 1px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    table td, table th {
+        border: 1px solid #cad9ea;
+        color: #666;
+        height: 20px;
+    }
+
+    table thead th {
+        background-color: #CCE8EB;
+
+    }
+
+    table tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    table tr:nth-child(even) {
+        background: #F5FAFA;
+    }
+
+    .ol-zoom {
+        top: 52px;
+    }
+
+    .ol-toggle-options {
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 4px;
+        padding: 2px;
+        position: absolute;
+        left: 8px;
+        top: 8px;
+    }
+
+    #updateFilterButton, #resetFilterButton {
+        height: 22px;
+        width: 22px;
+        text-align: center;
+        text-decoration: none !important;
+        line-height: 22px;
+        margin: 1px;
+        font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+        font-weight: bold !important;
+        background: rgba(0, 60, 136, 0.5);
+        color: white !important;
+        padding: 2px;
+    }
+
+    .ol-toggle-options a {
+        background: rgba(0, 60, 136, 0.5);
+        color: white;
+        display: block;
+        font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+        font-size: 19px;
+        font-weight: bold;
+        height: 22px;
+        line-height: 11px;
+        margin: 1px;
+        padding: 0;
+        text-align: center;
+        text-decoration: none;
+        width: 22px;
+        border-radius: 2px;
+    }
+
+    .ol-toggle-options a:hover {
+        color: #fff;
+        text-decoration: none;
+        background: rgba(0, 60, 136, 0.7);
+    }
+
+    body {
+        font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+
+    iframe {
+        width: 250px;
+        height: 250px;
+        border: none;
+    }
+
+    /* Toolbar styles */
+    #toolbar {
+        position: relative;
+        padding-bottom: 0.5em;
+    }
+
+    #toolbar ul {
+        list-style: none;
+        padding: 400px;
+        margin: 400px;
+    }
+
+    #toolbar ul li {
+        float: left;
+        padding-right: 1em;
+        padding-bottom: 0.5em;
+    }
+
+    #toolbar ul li a {
+        font-weight: bold;
+        font-size: smaller;
+        vertical-align: middle;
+        color: black;
+        text-decoration: none;
+    }
+
+    #toolbar ul li a:hover {
+        text-decoration: underline;
+    }
+
+    #toolbar ul li * {
+        vertical-align: middle;
+    }
+
+    #map {
+        clear: both;
+        position: relative;
+        width: 768px;
+        height: 713px;
+        border: 1px solid black;
+    }
+
+    #wrapper {
+        width: 768px;
+    }
+
+    #location {
+        float: right;
+    }
+
+    /* Styles used by the default GetFeatureInfo output, added to make IE happy */
+    table.featureInfo, table.featureInfo td, table.featureInfo th {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        margin: 400px;
+        padding: 400px;
+        font-size: 90%;
+        padding: .2em .1em;
+    }
+
+    table.featureInfo th {
+        padding: .2em .2em;
+        font-weight: bold;
+        background: #eee;
+    }
+
+    table.featureInfo td {
+        background: #fff;
+    }
+
+    table.featureInfo tr.odd td {
+        background: #eee;
+    }
+
+    table.featureInfo caption {
+        text-align: left;
+        font-size: 100%;
+        font-weight: bold;
+        padding: .2em .2em;
+    }
+
+    #card {
+        position: absolute;
+        z-index: 999;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        top: 10px;
+        right: 10px;
+        overflow: hidden;
+        border-radius: 3px;
+    }
+
+    #massagecard {
+        position: absolute;
+        z-index: 999;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        top: 320rem;
+        right: 10px;
+        overflow: hidden;
+        border-radius: 3px;
+    }
+
+    .map-r {
+        display: -webkit-box;
+        /*-webkit-box-pack: center;*/
+        /*-webkit-box-align: center;*/
+        overflow: hidden;
+        position: relative;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        top: 0;
+        bottom: 0;
+        background-color: #fff;
+        color: #9e9e9e;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    #latlng1 {
+        position: absolute;
+        z-index: 999;
+        bottom: 3px;
+        right: 230px;
+        height: 48px;
+        width: 350px;
+        background: #0c0c0c4f;
+        text-align: center;
+        line-height: 44px;
+        border-radius: 3px;
+        font-size: 16px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+        padding: 3px 20px;
+        color: #fffcfc;
+        font-weight: 500;
+    }
+</style>
+<body>
+<div class="map-content">
+    <div id="mapDiv" style="height: 800px;width: 2000px">
+
+    </div>
+    <div class="legendarea">
+        <dl class="maplegend" id="legendContent">
+        </dl>
+        <button class="trigger" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="图例"><i
+                class="icon iconfont icon-tuli"></i></button>
+    </div>
+    <div class="map-searchbar" id="search" style="width: 250px;height:800px">
+        <div class="mui-card" style="margin: 3px;">
+            <form class="layui-form " disabled="disabled" id="" lay-filter=""
+                  style="width: 250px;">
+                <input name="id" hidden/>
+                <div class="layui-fluid" style="padding-bottom: 10px;">
+                    <div class="layui-tab layui-tab-brief" lay-filter="demo">
+                        <ul class="layui-tab-title" style="background-color:white;position:fixed;margin-left: 48px">
+                            <li lay-id="1" id="1" class="layui-this">数据筛选</li>
+                            <li lay-id="2" id="2">结果列表</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height:670px;padding-top: 40px">
+                            <div class="layui-tab-item layui-show" id="choice">
+                                <div class="mui-card-content"
+                                     style="position:fixed;height: calc(100% - 104px);width:200px;overflow:auto;">
+                                    <!--                                    <div id="test13" style="margin-left: 10px;margin-top: 10px;"></div>-->
+                                    <form class="layui-form" id="checkForm">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">查询区域</span></label>
+                                            <div class="layui-input-inline">
+                                                <div id="xmqy" style="width: 200px"></div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">项目名称</label>
+                                            <div class="layui-input-inline" style="width: 200px">
+                                                <input id="gcxmmc" name="gcxmmc" placeholder="请输入项目名称"
+                                                       class="layui-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">查询年份</label>
+                                            <div class="layui-input-inline" style="width: 200px">
+                                                <select id="xmsj" name="xmsj" lay-filter="xmsj"
+                                                        class="layui-select">
+                                                    <option value=""></option>
+                                                    <option value="2020">2020年</option>
+                                                    <option value="2021">2021年</option>
+                                                    <option value="2022">2022年</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">查询月份</label>
+                                            <div class="layui-input-inline" style="width: 200px">
+                                                <select id="xmsjMonth" name="xmsjMonth" lay-filter="xmsjMonth"
+                                                        class="layui-select">
+                                                    <option value=""></option>
+                                                    <option value="1">一月</option>
+                                                    <option value="2">二月</option>
+                                                    <option value="3">三月</option>
+                                                    <option value="4">四月</option>
+                                                    <option value="5">五月</option>
+                                                    <option value="6">六月</option>
+                                                    <option value="7">七月</option>
+                                                    <option value="8">八月</option>
+                                                    <option value="9">九月</option>
+                                                    <option value="10">十月</option>
+                                                    <option value="11">十一月</option>
+                                                    <option value="12">十二月</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group-bottom text-right">
+                                            <button class="layui-btn" lay-filter="searchBtn" lay-submit
+                                                    style="background-color: #33549988">&emsp;查询&emsp;
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item" id="select-content">
+                                <div class="mui-card-header" style="font-size: 10px">
+                                    <a>共查询<b id="searchNum" style="color: #e00000;margin: 0 10px;"></b>条结果</a>
+                                </div>
+                                <div class="mui-card-content"
+                                     style="position:fixed;height: calc(100% - 174px);overflow:auto;">
+                                    <div class="mui-card-content-inner"
+                                         style="height: 100%;padding: 5px;overflow:auto;">
+                                        <ul class="mui-table-view" id="search-list" style="font-size:30px;width:200px"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="latlng1" style="width: 350px">
+        经度:[ <span style="font-size: 0.7em" id="lng">113.47739621</span> ],
+        纬度:[ <span style="font-size: 0.7em" id="lat">34.58736698</span> ]
+    </div>
+    <div class="map-r" id="card" style="width: 400rem;height:300rem;">
+        <div class="mui-card" style="margin: 3px;width: 400rem;">
+            <div id="baseMapSel">
+                <ul class="base_select_group" id="basemapToggle">
+                    <li class="basemap_item active" data-map="Images">
+                        <img src="${ctxPath}/assets/modular/map/img/map/map2.png" alt="卫星图"/>
+                        <span>卫星图</span>
+                    </li>
+                    <li class="basemap_item " data-map="Streets">
+                        <img src="${ctxPath}/assets/modular/map/img/map/map1.png" alt="政区图"/>
+                        <span>政区图</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="map-r" id="massagecard" style="width: 600rem;height:600rem;display: none">
+        <i class="layui-icon layui-icon-close" style="font-size: 20rem" id="cancel"></i>
+        <div class="mui-card" style="width: 600rem">
+            <form id="MC">
+                <div class="layui-inline ">
+                    <label class="layui-form-label">项目id</label>
+                    <div class="layui-input-inline" style="margin-left: 3rem;width: 375rem">
+                        <input id="id" name="id" type="text" class="layui-input" disabled/>
+                    </div>
+                </div>
+                <div class="layui-inline ">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-inline" style="margin-left: 3rem;width: 375rem">
+                        <input id="xmmc" name="xmmc" type="text" class="layui-input" disabled/>
+                    </div>
+                </div>
+                <div class="layui-inline ">
+                    <label class="layui-form-label">经度</label>
+                    <div class="layui-input-inline" style="margin-left: 3rem;width: 157rem">
+                        <input id="jd" name="jd" type="text" class="layui-input" disabled/>
+                    </div>
+                </div>
+                <div class="layui-inline " style="margin-left: -50rem">
+                    <label class="layui-form-label">维度</label>
+                    <div class="layui-input-inline" style="margin-left: 3rem;width: 157rem">
+                        <input id="wd" name="wd" type="text" class="layui-input" disabled/>
+                    </div>
+                </div>
+                <div class="layui-inline ">
+                    <label class="layui-form-label">内容</label>
+                    <div class="layui-input-inline" style="margin-left: 3rem;width: 375rem">
+                        <textarea id="nr" name="nr" type="text" class="layui-textarea" disabled></textarea>
+                    </div>
+                </div>
+            </form>
+<!--                        <div class="layui-card" id="photo" style="margin-top: 10px;width: 550rem">-->
+<!--                            <div class="layui-card-header">图片查看</div>-->
+<!--                            <div class="layui-card-body" style="height: 550rem">-->
+<!--                                <div class="layui-carousel" id="lunbo">-->
+<!--                                    <div carousel-item id="a">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+        </div>
+    </div>
+</div>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+</body>
+@}

@@ -1,0 +1,60 @@
+@layout("/common/_container.html",{js:["/assets/modular/doc/docInfo/docInfo.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">文档信息管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="docTitle" class="layui-input" type="text" placeholder="文档名称或关键字"/>
+                            </div>
+                            <div class="layui-inline">
+                                <div id="catalogId" class="xm-select" style="width: 200px;"></div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("doc:docInfo:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="docInfoTable" lay-filter="docInfoTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    {{#  if(d.fileId !== ""){ }}
+    <a class="layui-action layui-action-primary" lay-event="preview">文件预览</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="upload">文件更换</a>
+    {{#  } }}
+    {{#  if(d.fileId === ""){ }}
+    <a class="layui-action layui-action-primary" lay-event="upload">文件上传</a>
+    {{#  } }}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" data-dropdown="#tbDrop{{d.LAY_INDEX}}" no-shade="true">
+        更多<i class="layui-icon layui-icon-drop" style="font-size: 12px;margin-right: 0;"></i></a>
+    <ul class="dropdown-menu-nav table-more dropdown-bottom-right layui-hide" id="tbDrop{{d.LAY_INDEX}}">
+        <div class="dropdown-anchor"></div><!-- 多加一个这个即可 -->
+        @if(shiro.hasPermission("doc:docInfo:edit")){
+        <li class="layui-action layui-action-primary" lay-event="edit">编辑信息</li>
+        @}
+        @if(shiro.hasPermission("doc:docInfo:remove")){
+        <li class="layui-action layui-action-danger" lay-event="delete">删除文档</li>
+        @}
+    </ul>
+</script>
+
+@}

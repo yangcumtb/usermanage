@@ -1,0 +1,45 @@
+@layout("/common/_form.html",{js:["/assets/modular/prominemanger/MoreImageUpload_dlg.js"]}){
+<div class="layui-body-header">
+    <span class="layui-body-header-title">图片批量量导入</span>
+</div>
+<!--图片批量导入功能-->
+<div class="layui-fluid layui-form" style="height: 600px;background-color: #fff">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <div class="layui-inline" style="width: 200px">
+                            <div class="layui-input-inline">
+                                <select id="repeat" name="repeat" class="layui-select" lay-filter="imageTypeSelect">
+                                    <option value="">请选择上传图片类型</option>
+                                    <option value="TB" selected>卫星影像图</option>
+                                    <option value="GH">规划图片</option>
+                                    <option value="HC">外业核查图片</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="layui-btn layui-btn-normal" id="picList">选择文件</button>
+                        <button type="button" class="layui-btn layui-btn-danger" id="uploadAction">开始上传</button>
+                        <div class="layui-upload-list">
+                            <table class="layui-table" id="fileTable">
+                                <thead>
+                                <tr>
+                                    <th>文件名称</th>
+                                    <th>缩略图</th>
+                                    <th>类型</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="fileList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@}

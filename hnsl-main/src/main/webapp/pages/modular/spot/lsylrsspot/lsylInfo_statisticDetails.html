@@ -1,0 +1,94 @@
+@layout("/common/_container.html",{js:["/assets/modular/spot/lsylrsspot/lsylInfo_statistic.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    .layui-table-cell {
+        text-align: center;
+    }
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150px;
+    }
+    .clear-input {
+        position:absolute;
+        left:143px;
+        bottom: 10px;
+        z-index: 99999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">历史遗留矿山信息统计详情</span>
+</div>
+<div class="table_div">
+    <div id="searchParam" >
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item" id="area" >
+                <div class="layui-fluid" >
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20px;margin-top: 15px">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="sj" name="sj" placeholder="时间"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon" >&#xe615;</i>搜索
+                                </button>
+                                <button class="layui-btn" lay-submit lay-filter="fsjl" style="background-color: #FFFFFF;color: #5E5E5E"><i
+                                        class="layui-icon layui-icon-refresh"></i>重置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    <table lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{checkbox:true}"></th>
+            <th lay-data="{field:'nshmj', sort:true}">拟损毁面积(㎡)</th>
+            <th lay-data="{field:'nshsl'}">拟损毁图斑数量</th>
+            <th lay-data="{field:'tblx'}">图斑类型</th>
+            <th lay-data="{field:'tbshmj', width:250}">图斑位置</th>
+            <th lay-data="{field:'tbshsl'}">损毁图斑数量</th>
+            <th lay-data="{field:'xfzt'}">修复状态</th>
+            <th lay-data="{field:'yxfmj'}">已修复面积(㎡)</th>
+            <th lay-data="{field:'yxfsl'}">已修复数量</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td lay-data="{checkbox:true}"></td>
+            <td>780</td>
+            <td>9945</td>
+            <td>生产矿山</td>
+            <td>朝阳区建平县李家村</td>
+            <td>6610</td>
+            <td>已修复</td>
+            <td>630</td>
+            <td>11570</td>
+        </tr>
+        </tbody>
+    </table>
+

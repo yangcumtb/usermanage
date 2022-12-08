@@ -1,0 +1,106 @@
+@layout("/common/_container.html",{js:["/assets/modular/shanshuiSupervisor/shanshuiProject/shanshuiProject.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+
+    .layui-nav {
+        background-color: white !important;
+        z-index: 999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info" οnsubmit="return false;">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input id="xmmc" name="xmmc" placeholder="请输入项目名称" type="text"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+
+<!--                    <div class="layui-form toolbar">-->
+<!--                        <div class="layui-form-item">-->
+<!--                            <div class="layui-inline">-->
+<!--                                <ul class="layui-nav  layui-bg-blue">-->
+<!--                                    <li class="layui-nav-item">-->
+<!--                                        <a style="color: #33549988"><i class="layui-icon" style="color: #33549988">&#xe67d;</i>图片批量导出</a>-->
+<!--                                        <dl class="layui-nav-child">-->
+<!--                                            <dd><a id="allOut">全部导出</a></dd>-->
+<!--                                            <dd><a id="someOut">选择导出</a></dd>-->
+<!--                                        </dl>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <button id="btnOutToday" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出今日提交文件</button>
+                    <table class="layui-table" id="shanshuiProjectTable" lay-filter="shanshuiProjectTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <!--<a class="layui-action layui-action-primary" lay-event="download" style="color: #33549988">图片下载</a>-->
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">&emsp;进展详情&emsp;</a>
+</script>
+@}

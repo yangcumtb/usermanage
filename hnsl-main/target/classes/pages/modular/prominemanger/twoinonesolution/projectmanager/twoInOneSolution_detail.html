@@ -1,0 +1,465 @@
+@layout("/common/_form.html",{js:["/assets/modular/prominemanger/twoinonesolution/projectmanager/twoInOneSolution_detail.js"]}){
+<style>
+    html {
+        font-size: 1px;
+    }
+
+    .layui-form-label {
+        width: 140rem;
+    }
+
+    .layui-inline {
+        font-size: 14rem;
+    }
+
+</style>
+<form class="layui-form" id="twoInOneSolutionForm" lay-filter="twoInOneSolutionForm">
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-tab">
+            <ul class="layui-tab-title"
+                style="position:fixed; top: 0rem; width: 100%;background-color: white;z-index: 9999">
+                <li class="layui-this">基本信息</li>
+                <li>其他信息</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-card">
+                        <!--                <div class="layui-card-header">方案信息</div>-->
+                        <div class="layui-card-body">
+                            <div class="layui-form-item layui-row" style="margin-left: 50rem">
+                                <input name="kyqr" type="hidden"/>
+                                <div class="layui-form-item" style="margin-top: 0rem;">
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">方案状态<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <select id="fazt" name="fazt" class="layui-select" data-value=" "
+                                                    lay-filter="fazt" required disabled>
+                                                <option value=" " selected="selected"
+                                                        style="width: 160rem;height:30rem"></option>
+                                                <option value="0">有效期内二合一方案</option>
+                                                <option value="1">二合一方案过期</option>
+                                                <option value="2">无二合一方案</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem; ">
+                                        <label class="layui-form-label">企业名称<span style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="kyqr" name="kyqr" type="text"
+                                                   class="layui-input"
+                                                   lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿权证号 </label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="ckzh" name="ckzh" type="text"
+                                                   class="layui-input"
+                                                   disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" id="a" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">法人代表<span style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="frdb" name="frdb" type="text"
+                                                   class="layui-input"
+                                                   lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-top: 0rem;">
+                                    <div class="layui-inline" id="f">
+                                        <label class="layui-form-label">矿区位置<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 585rem">
+                                <textarea class="layui-textarea" id="kqwz"
+                                          name="kqwz" lay-verify="required" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-top: 0rem;">
+                                    <div class="layui-inline" id="m" style="">
+                                        <label class="layui-form-label">编制单位联系方式<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 585rem">
+                               <textarea class="layui-textarea" id="badwdh" name="badwdh"
+                                         lay-verify="required" disabled
+                               ></textarea>
+                                            <!--                               <input id="bzdwdz" name="bzdwdz" placeholder="请输入编制单位地址" type="text"-->
+                                            <!--                                      class="layui-input"/>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" id="area-picker" style="margin-top: 0rem;">
+                                    <div class="layui-form-label" style="display: none">所在省/隐藏项<span
+                                            style="color: red;">*</span>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 200rem
+                       ; display: none">
+                                        <select name="province" class="province-selector" data-value="辽宁省"
+                                                style="display:none">
+                                            <option value="">请选择省</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-inline" id="ad">
+                                        <label class="layui-form-label">行政市<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+                           ;height:30rem">
+                                            <select name="xzs" id="xzs" class="city-selector" data-value=" "
+                                                    lay-verify="required" disabled>
+                                                <option value="">请选择市</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" id="ae">
+                                        <label class="layui-form-label">行政县<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+                           ;height:30rem">
+                                            <select name="xzx" id="xzx" class="county-selector" data-value=" "
+                                                    lay-verify="required" disabled>
+                                                <option value="">请选择县/区</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-top: 0rem;">
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿权面积（km²）</label>
+                                        <div class="layui-input-inline" style="width: 200rem;height:30rem">
+                                            <input id="kqmj" name="kqmj" type="text"
+                                                   class="layui-input" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" id="b" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">编制单位<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="bzdw" name="bzdw" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">方案编制类型 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <select id="bzlx" name="bzlx" class="layui-form-select"
+                                                    lay-filter="select-bZLX"
+                                                    lay-verify="required" disabled>
+                                                <option value=" " selected="selected"></option>
+                                                <option value="1">新申请矿业权编制</option>
+                                                <option value="2">扩大矿区范围修编</option>
+                                                <option value="3">变更开采方式修编</option>
+                                                <option value="4">采矿权到期延续修编</option>
+                                                <option value="5">矿业权到期延续修编</option>
+                                                <option value="6">适用年限到期修编</option>
+                                                <option value="7">其他情况修编</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">主开采矿种<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="zkz" name="zkz" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">其他开采矿种 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="qtkz" name="qtkz" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">开采方式 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <select id="kcfs" name="kcfs" class="layui-form-select"
+                                                    lay-filter="select-kCFS"
+                                                    lay-verify="required" disabled>
+                                                <option value=" " selected="selected"></option>
+                                                <option value="1">井下开采</option>
+                                                <option value="2">露天开采</option>
+                                                <option value="3">露井联采</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿权证剩余年限 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="synx" name="synx" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem
+                        ;">
+                                        <label class="layui-form-label">单位 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+">
+                                            <select id="scnldw" name="scnldw" class="layui-form-select"
+                                                    lay-filter="select-kCFS"
+                                                    lay-verify="required" disabled>
+                                                <option value=" " selected="selected"></option>
+                                                <option value="万吨/年">万吨/年</option>
+                                                <option value="万立方米/年">万立方米/年</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">设计生产能力 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="sjscnl" name="sjscnl" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">实际生产能力 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="scnl" name="scnl" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">总矿山矿石开采量 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="kscl" name="kscl" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem
+                        ;">
+                                        <label class="layui-form-label">挖损面积(m²) <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+">
+                                            <input id="wsmj" name="wsmj" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+
+                                      ;height:30rem
+" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem
+                        ;">
+                                        <label class="layui-form-label">压占面积(m²) <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+">
+                                            <input id="yzmj" name="yzmj" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+
+                                      ;height:30rem
+" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem
+                        ;">
+                                        <label class="layui-form-label">塌陷面积(m²) <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem
+">
+                                            <input id="txmj" name="txmj" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+
+                                      ;height:30rem
+" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">方案总投资（万元） <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="fatz" name="fatz" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">方案编制次数 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="bzcs" name="bzcs" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-top: 0rem;">
+                                    <div class="layui-inline" id="z" style="display: none">
+                                        <label class="layui-form-label">项目评审节点<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="psjd" name="psjd" class="layui-input" value="1"
+                                                   disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="display: none">
+                                        <label class="layui-form-label">验收时间<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="yssj" name="yssj" class="layui-input" value="1"
+                                                   disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="display: none">
+                                        <label class="layui-form-label">验收单位<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="ysdw" name="ysdw" class="layui-input" value="1"
+                                                   disabled="true">
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="layui-inline" style="display: none">-->
+                                    <!--                                        <label class="layui-form-label">验收结论<span-->
+                                    <!--                                                style="color: red;">*</span></label>-->
+                                    <!--                                        <div class="layui-input-inline" style="width: 200rem">-->
+                                    <!--                                            <select id="ysjl" name="ysjl" class="layui-form-select"-->
+                                    <!--                                                    lay-filter="select-ySJL"-->
+                                    <!--                                                    lay-verify="required">-->
+                                    <!--                                                <option value="TG">通过</option>-->
+                                    <!--                                                <option value="YTJTG">有条件通过</option>-->
+                                    <!--                                                <option value="WTG">未通过，整改</option>-->
+                                    <!--                                            </select>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-card" id="other">
+                        <div class="layui-card-body">
+                            <div class="layui-form-item layui-row" style="margin-left: 50rem">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿许可证有效期(年)<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem;height:30rem">
+                                            <input id="kqnx" name="kqnx" type="text"
+                                                   class="layui-input" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿许可证生效时间<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem;height:30rem">
+                                            <input id="kqq" name="kqq" type="text"
+                                                   class="layui-input" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">采矿许可证失效时间<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="kqz" name="kqz" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">二合一方案生效时间 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="sxsj" name="sxsj" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">二合一方案到期时间 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="dqsj" name="dqsj" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="margin-top: 10rem;">
+                                        <label class="layui-form-label">二合一方案服务年限 <span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-inline" style="width: 200rem">
+                                            <input id="fwnx" name="fwnx" type="text"
+                                                   class="layui-input"
+                                                   style="width: 200rem
+                                      ;height:30rem" lay-verify="required" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-fluid"
+                         style="padding-left:0rem;width:950rem;padding-bottom: 10rem;margin-top: 20px">
+                        <div class="layui-card">
+                            <div class="layui-card-header">项目资料</div>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item layui-row">
+                                    <div class="layui-inline layui-col-md12">
+                                        <label class="layui-form-label">资料查看<span
+                                                style="color: red;">*</span></label>
+                                        <div class="layui-input-block">
+                                            <button type="button" id="projectPDFBtn" class="layui-btn"
+                                                    lay-filter="projectPDFBtn"
+                                                    style="background-color: #33549988;">
+                                                方案pdf查看
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

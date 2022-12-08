@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.sys.modular.system.mapper.SysMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.hnsl.sys.modular.system.entity.SysMenu">
+        <id column="menu_id" property="menuId"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="app_code" property="appCode"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="url" property="url"/>
+        <result column="target" property="target"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="visible" property="visible"/>
+        <result column="is_refresh" property="isRefresh"/>
+        <result column="perms" property="perms"/>
+        <result column="icon" property="icon"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        menu_id
+        AS "menuId", menu_name AS "menuName", parent_id AS "parentId", order_num AS "orderNum", url AS "url",
+        target AS "target", menu_type AS "menuType", visible AS "visible", is_refresh AS "isRefresh", perms AS "perms",
+        icon AS "icon", remark AS "remark",create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser"
+    </sql>
+
+
+    <select id="selectMenusByUserId" parameterType="Long" resultType="cn.hnsl.sys.modular.system.entity.SysMenu">
+        select distinct m.menu_id,
+                        m.parent_id,
+                        m.app_code,
+                        m.menu_name,
+                        m.url,
+                        m.visible,
+                        m.is_refresh,
+                        COALESCE(M.perms, '') as perms,
+                        m.target,
+                        m.menu_type,
+                        m.icon,
+                        m.order_num,
+                        m.create_time
+        from sys_menu m
+                 left join sys_role_menu rm on m.menu_id = rm.menu_id
+                 left join sys_user_role ur on rm.role_id = ur.role_id
+                 LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+        where ur.user_id = #{userId}
+          and m.menu_type in ('M', 'C')
+          and m.visible = 0
+          AND ro.status = 0
+        order by m.parent_id, m.order_num
+    </select>
+
+    <select id="selectMenusByUserId" parameterType="Long" resultType="cn.hnsl.sys.modular.system.entity.SysMenu"
+            databaseId="pgsql">
+        select distinct m.menu_id,
+                        m.parent_id,
+                        m.app_code,
+                        m.menu_name,
+                        m.url,
+                        m.visible,
+                        m.is_refresh,
+                        COALESCE(M.perms, '') AS perms,
+                        m.target,
+                        m.menu_type,
+                        m.icon,
+                        m.order_num,
+                        m.create_time
+        from sys_menu m
+                 left join sys_role_menu rm on m.menu_id = rm.menu_id
+                 left join sys_user_role ur on rm.role_id = ur.role_id
+                 LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+        where ur.user_id = #{userId}
+          and m.menu_type in ('M', 'C')
+          and m.visible = '0'
+          AND ro.status = '0'
+        order by m.parent_id, m.order_num
+    </select>
+
+    <select id="selectMenuListByUserId" resultType="cn.hnsl.sys.modular.system.entity.SysMenu">
+        select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, m.is_refresh, COALESCE(M.perms,'') as
+        perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+        from sys_menu m
+        left join sys_role_menu rm on m.menu_id = rm.menu_id
+        left join sys_user_role ur on rm.role_id = ur.role_id
+        LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+        where ur.user_id = #{params.userId}
+        <if test="menuName != null and menuName != ''">
+            AND m.menu_name like '%'||#{menuName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="visible != null and visible != ''">
+            AND m.visible = #{visible}
+        </if>
+        order by m.parent_id, m.order_num
+    </select>
+
+    <select id="selectPermsByUserId" resultType="java.lang.String">
+        select distinct m.perms
+        from sys_menu m
+                 left join sys_role_menu rm on m.menu_id = rm.menu_id
+                 left join sys_user_role ur on rm.role_id = ur.role_id
+                 left join sys_role r on r.role_id = ur.role_id
+        where m.visible = '0'
+          and r.status = '0'
+          and ur.user_id = #{userId}
+    </select>
+
+    <select id="menuTreeListByRoleId" resultType="cn.hnsl.base.pojo.node.ZTreeNode">
+        SELECT m1.menu_id   AS "id",
+               (
+                   CASE
+
+                       WHEN (
+                                   m2.menu_id = 0
+                               OR m2.menu_id IS NULL
+                           ) THEN
+                           0
+                       ELSE m2.menu_id
+                       END
+                   )        AS "pId",
+               m1.menu_name AS "name",
+               (
+                   CASE
+
+                       WHEN (
+                                   m2.menu_id = 0
+                               OR m2.menu_id IS NULL
+                           ) THEN
+                           'true'
+                       ELSE 'false'
+                       END
+                   )        AS "isOpen",
+               (
+                   CASE
+
+                       WHEN (
+                                   m3.menu_id = 0
+                               OR m3.menu_id IS NULL
+                           ) THEN
+                           'false'
+                       ELSE 'true'
+                       END
+                   )           "checked"
+        FROM sys_menu m1
+                 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id
+                 LEFT JOIN (SELECT * FROM sys_role_menu WHERE role_id = #{roleId}) m3 ON m1.menu_id = m3.menu_id
+        ORDER BY m1.order_num ASC
+    </select>
+    <select id="selectAllMenuList" resultType="cn.hnsl.sys.modular.system.entity.SysMenu">
+        select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.visible, m.is_refresh, COALESCE(M.perms,'') as
+        perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+        from sys_menu m
+        left join sys_role_menu rm on m.menu_id = rm.menu_id
+        left join sys_user_role ur on rm.role_id = ur.role_id
+        LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+        where 1=1
+        <if test="menuName != null and menuName != ''">
+            AND m.menu_name like '%'||#{menuName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="visible != null and visible != ''">
+            AND m.visible = #{visible}
+        </if>
+        <if test="menuType != null and menuType != ''">
+            AND m.menu_type = #{menuType}
+        </if>
+        order by m.parent_id, m.order_num
+    </select>
+
+
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.modular.base.mapper.BaseAdminMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.hnsl.modular.base.entity.BaseAdmin">
+        <id column="ad_code" property="adCode"/>
+        <result column="ad_name" property="adName"/>
+        <result column="ad_abbr_name" property="adAbbrName"/>
+        <result column="ad_grad" property="adGrad"/>
+        <result column="ad_full_name" property="adFullName"/>
+        <result column="has_up" property="hasUp"/>
+        <result column="up_ad_code" property="upAdCode"/>
+        <result column="up_ad_name" property="upAdName"/>
+        <result column="note" property="note"/>
+        <result column="has_dept" property="hasDept"/>
+        <result column="create_ad_code" property="createAdCode"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ad_code
+        AS "adCode", ad_name AS "adName", ad_abbr_name AS "adAbbrName", ad_grad AS "adGrad", ad_full_name AS "adFullName", has_up AS "hasUp", up_ad_code AS "upAdCode", up_ad_name AS "upAdName", note AS "note", create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser", has_dept as "hasDept",create_ad_code as "createAdCode"
+    </sql>
+    <insert id="saveSeq">
+        INSERT INTO order_code (`code`, `ip`)
+        VALUES (#{code}, #{ip});
+    </insert>
+
+
+    <select id="customList" resultType="cn.hnsl.modular.base.model.result.BaseAdminResult"
+            parameterType="cn.hnsl.modular.base.model.params.BaseAdminParam">
+        select
+        <include refid="Base_Column_List"/>
+        from base_admin
+        <where>
+            <if test="paramCondition.adName != null and paramCondition.adName != ''">
+                ad_name like '%'||#{paramCondition.adName,jdbcType=VARCHAR}||'%'
+            </if>
+        </where>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.hnsl.modular.base.model.params.BaseAdminParam">
+        select
+        <include refid="Base_Column_List"/>
+        from base_admin
+        <where>
+            <if test="paramCondition.adName != null and paramCondition.adName != ''">
+                ad_name like '%'||#{paramCondition.adName,jdbcType=VARCHAR}||'%'
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="customPageList" resultType="cn.hnsl.modular.base.model.result.BaseAdminResult"
+            parameterType="cn.hnsl.modular.base.model.params.BaseAdminParam">
+        select
+        <include refid="Base_Column_List"/>
+        from base_admin where (ad_code = #{paramCondition.adCode} or up_ad_code = #{paramCondition.adCode} )
+        <if test="paramCondition.adName != null and paramCondition.adName != ''">
+            and ad_name like '%'||#{paramCondition.adName,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.hnsl.modular.base.model.params.BaseAdminParam">
+        select
+        <include refid="Base_Column_List"/>
+        from base_admin where (ad_code = #{paramCondition.adCode} or up_ad_code = #{paramCondition.adCode} )
+        <if test="paramCondition.adName != null and paramCondition.adName != ''">
+            and ad_name like '%'||#{paramCondition.adName,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+
+    <select id="layuiTree" resultType="cn.hnsl.base.pojo.node.LayuiTreeNode">
+        select
+        ad_code AS "id",
+        up_ad_code as "pid",
+        ad_name as "title",
+        (
+        CASE
+        WHEN (up_ad_code = #{param.upAdCode} OR up_ad_code IS NULL) THEN
+        'true'
+        ELSE
+        'false'
+        END
+        ) as "spread" from base_admin
+
+        <where>
+            ad_code like '%'||#{param.adAbbrCode,jdbcType=VARCHAR}||'%'
+            <if test="param.hasUp==0">
+                and ad_grad <![CDATA[ <= ]]> (#{param.adGrad}+3)
+            </if>
+        </where>
+    </select>
+
+
+    <select id="tree" resultType="cn.hnsl.base.pojo.node.ZTreeNode">
+        select ad_code    AS id,
+               up_ad_code as "pId",
+               ad_name    as "name",
+               (
+                   CASE
+                       WHEN (up_ad_code = #{param.upAdCode} OR up_ad_code IS NULL) THEN
+                           'true'
+                       ELSE
+                           'false'
+                       END
+                   )      as "open"
+        from base_admin
+        where ad_code like '%' || #{param.adAbbrCode,jdbcType=VARCHAR} || '%'
+    </select>
+
+
+    <select id="getDirAdminByCode" resultType="cn.hnsl.modular.base.entity.BaseAdmin">
+        select
+        <include refid="Base_Column_List"/>
+        from base_admin where up_ad_code = #{adCode}
+    </select>
+
+
+    <select id="dirAdmin" resultType="java.util.Map">
+        select ad_code AS "adCode",
+               ad_name AS "name"
+        from base_admin
+        where up_ad_code = #{adCode}
+    </select>
+
+
+    <select id="generateSeq" resultType="java.lang.String">
+        CALL create_order (#{name},#{type})
+    </select>
+
+
+    <select id="generateSeqByTime" resultType="java.lang.String">
+        SELECT order_seq(#{name}, #{type}, #{time})
+    </select>
+
+
+    <select id="layuiTreeOverGrade" resultType="cn.hnsl.base.pojo.node.LayuiTreeNode">
+        select ad_code    AS id,
+               up_ad_code as "pid",
+               ad_name    as title,
+               (
+                   CASE
+                       WHEN (up_ad_code = #{param.upAdCode} OR up_ad_code IS NULL) THEN
+                           'true'
+                       ELSE
+                           'false'
+                       END
+                   )      as "spread"
+        from base_admin
+        where ad_code like '%' || #{param.adAbbrCode,jdbcType=VARCHAR} || '%'
+          and ad_grad <![CDATA[ <= ]]> #{grade}
+    </select>
+
+    <select id="get_ad_name" resultType="java.lang.String">
+        select ad_name from base_admin where ad_code = #{param}
+    </select>
+
+
+    <select id="getAllCityNameList" resultType="java.lang.String">
+        SELECT ad_name FROM base_admin WHERE ad_grad = 2
+    </select>
+
+</mapper>

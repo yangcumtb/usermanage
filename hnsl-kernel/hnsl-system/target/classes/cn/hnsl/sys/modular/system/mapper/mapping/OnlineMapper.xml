@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.sys.modular.system.mapper.OnlineMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="cn.hnsl.sys.modular.system.entity.SysUserOnline">
+                    <id column="session_id" property="sessionId"/>
+                    <result column="login_name" property="loginName"/>
+                    <result column="dept_name" property="deptName"/>
+                    <result column="ipaddr" property="ipaddr"/>
+                    <result column="login_location" property="loginLocation"/>
+                    <result column="browser" property="browser"/>
+                    <result column="os" property="os"/>
+                    <result column="status" property="status"/>
+                    <result column="start_timestamp" property="startTimestamp"/>
+                    <result column="last_access_time" property="lastAccessTime"/>
+                    <result column="expire_time" property="expireTime"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+        session_Id AS "sessionId", login_name AS "loginName", dept_name AS "deptName", ipaddr AS "ipaddr", login_location AS "loginLocation", browser AS "browser", os AS "os", STATUS AS "status", start_timestamp AS "startTimestamp", last_access_time AS "lastAccessTime", expire_time AS "expireTime"
+    </sql>
+
+
+    <delete id="removeByAccount">
+        delete from sys_user_online where login_name = #{account}
+    </delete>
+
+
+    <select id="customList" resultType="cn.hnsl.sys.modular.system.model.result.SysUserOnlineResult"
+            parameterType="cn.hnsl.sys.modular.system.model.params.SysUserOnlineParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_online where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.hnsl.sys.modular.system.model.params.SysUserOnlineParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_online where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.hnsl.sys.modular.system.model.result.SysUserOnlineResult"
+            parameterType="cn.hnsl.sys.modular.system.model.params.SysUserOnlineParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_online where 1 = 1
+        <if test="paramCondition.loginName != null and paramCondition.loginName != ''">
+            and login_name like '%'||#{paramCondition.loginName,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.hnsl.sys.modular.system.model.params.SysUserOnlineParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_online where 1 = 1
+        <if test="paramCondition.loginName != null and paramCondition.loginName != ''">
+            and login_name like '%'||#{paramCondition.loginName,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+
+</mapper>

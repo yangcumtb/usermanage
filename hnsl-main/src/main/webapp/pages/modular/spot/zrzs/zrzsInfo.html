@@ -1,0 +1,289 @@
+@layout("/common/_container.html",{js:["/assets/modular/spot/zrzs/zrzsInfo.js"]}){
+
+<style>
+    html {
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">自然灾损信息表管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item" id="area">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">图斑编号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="id" class="layui-input" id="id"
+                                           placeholder="请输入图斑编号">
+                                </div>
+                            </div>
+                            <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                            <div class="layui-input-inline" style="display: none">
+                                <select name="province" class="province-selector" data-value="辽宁省"
+                                        style="display: none">
+                                    <option value="">--选择省--</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在市</label>
+                                <div class="layui-input-inline">
+                                    <select id="xzs" name="xzs" class="city-selector">
+                                        <option value="">--选择市--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在区/县</label>
+                                <div class="layui-input-inline">
+                                    <select id="xzx" name="xzx" class="county-selector">
+                                        <option value="">--选择区--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button lay-filter="btnSearch" class="layui-btn icon-btn"
+                                        style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">核查单位</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="hcdw" class="layui-input" id="hcdw"
+                                               placeholder="请输入核查单位">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">核查人员</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="hcry" id="hcry" placeholder="请输入核查人员姓名"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">验收时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="yssj" name="yssj" placeholder="请输入采矿权名称"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">复垦方向</label>
+                                    <div class="layui-input-inline">
+                                        <select id="fkfx" name="fkfx" class="layui-select" lay-filter="">
+                                            <option value="">请选择修复情况</option>
+                                            <option value="01">耕地</option>
+                                            <option value="02">园地</option>
+                                            <option value="03">林地</option>
+                                            <option value="04">草地</option>
+                                            <option value="05">商服用地</option>
+                                            <option value="06">工矿仓储用地</option>
+                                            <option value="07">住宅用地</option>
+                                            <option value="08">公共管理与公共服务用地</option>
+                                            <option value="09">特殊用地</option>
+                                            <option value="10">交通运输用地</option>
+                                            <option value="11">水域及水利设施用地</option>
+                                            <option value="12">其他用地</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">核定面积</label>
+                                    <div class="layui-input-inline">
+                                        <input id="hdmj" name="hdmj" class="layui-input" type="text"
+                                               placeholder="图斑核定面积，实地核查测量的土地损毁面积，整数16位，小数2位，单位：平方米"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">位置</label>
+                                    <div class="layui-input-inline">
+                                        <input id="wz" name="wz" class="layui-input" type="text"
+                                               placeholder="描述图斑所在位置，具体到乡镇村区名字"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">复垦义务人</label>
+                                    <div class="layui-input-inline">
+                                        <input id="fkywr" name="fkywr" class="layui-input" type="text"
+                                               placeholder="描述图斑所在位置，具体到乡镇村区名字"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">治理面积</label>
+                                    <div class="layui-input-inline">
+                                        <input id="zlmj" name="zlmj" class="layui-input" type="text"
+                                               placeholder="描述图斑所在位置，具体到乡镇村区名字"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">实施主体</label>
+                                    <div class="layui-input-inline">
+                                        <input id="sszt" name="sszt" class="layui-input" type="text"
+                                               placeholder="项目实施主体"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">组织验收单位</label>
+                                    <div class="layui-input-inline">
+                                        <input id="ysdw" name="ysdw" class="layui-input" type="text"
+                                               placeholder="组织验收单位"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">总体投资</label>
+                                    <div class="layui-input-inline">
+                                        <input id="zttz" name="zttz" class="layui-input" type="text"
+                                               placeholder="总体投资"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">损毁原因:</label>
+                                    <div class="layui-input-inline">
+                                        <select id="stwt" name="stwt" class="layui-select" lay-filter="select-stwt">
+                                            <option value="">请输入损毁原因</option>
+                                            <option value="TDSH">土地损毁（含挖损、压占、塌陷土地）</option>
+                                            <option value="DZHJWT">地质环境问题（地面塌陷、地裂缝、崩塌、滑坡体等）</option>
+                                            <option value="ZBPH">植被破坏</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">验收结论</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ysjl" name="ysjl" class="layui-select" lay-filter="select-ysjl">
+                                            <option value="">请选择验收结论</option>
+                                            <option value="TG">通过</option>
+                                            <option value="YTJTG">有条件通过</option>
+                                            <option value="WTG">未通过，整改</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">修复情况</label>
+                                    <div class="layui-input-inline">
+                                        <select id="zlqk" name="zlqk" class="layui-select" lay-filter="select-zlqk">
+                                            <option value="">请选择修复情况</option>
+                                            <option value="XFZ">治理中</option>
+                                            <option value="WXF">未治理</option>
+                                            <option value="XF">已治理</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                @if(shiro.hasPermission("zrzs:kParcel:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                                <button id="btnExp2" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>批量导入
+                                </button>
+                                <button id="btnExp3" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>图片批量导入
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="zrzsInfoTable"
+                           lay-filter="zrzsInfoTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("zrzs:kParcel:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div> @}
+    <a class="layui-action layui-action-primary" lay-event="uploadPic" style="color: #33549988">图片</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @if(shiro.hasPermission("zrzs:kParcel:edit")){
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">查看</a> @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @if(shiro.hasPermission("zrzs:kParcel:location")){
+    <a class="layui-action layui-action-primary" lay-event="location" style="color: #33549988">定位</a>@}
+    @if(shiro.hasPermission("zrzs:kParcel:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

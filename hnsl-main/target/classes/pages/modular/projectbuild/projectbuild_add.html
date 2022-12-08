@@ -1,0 +1,82 @@
+@layout("/common/_form.html",{js:["/assets/modular/projectbuild/projectbuild_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="projectbuildForm" lay-filter="projectbuildForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="xmmc" name="xmmc" placeholder="请输入项目名称" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">所在市<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="xzs" name="xzs" placeholder="请输入所在市" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">所在县<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="xzx" name="xzx" placeholder="请输入所在县" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">采矿权证：新申请、持有、变更<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="ckqz" lay-filter="ckqz">
+                                <option value="">下拉单选框</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">采矿权证号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="ckqzh" name="ckqzh" placeholder="请输入采矿权证号" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">图斑编号，多个以逗号隔开<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="spotId" name="spotId" placeholder="请输入图斑编号，多个以逗号隔开" type="text"
+                                   class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">文件关联id<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="associateid" name="associateid" placeholder="请输入文件关联id" type="text"
+                                   class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <button id="btnAdddoc" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加项目文档
+                        </button>
+                        <button id="btnAddpic" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加项目图
+                        </button>
+                        <button id="btnAddshp" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加项目矢量文件
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

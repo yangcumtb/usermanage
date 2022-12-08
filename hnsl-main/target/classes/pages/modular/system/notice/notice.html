@@ -1,0 +1,66 @@
+@layout("/common/_container.html",{plugins:["ztree"],js:["/assets/modular/system/notice/notice.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">通知管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="通知名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("system:notice:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="noticeTable" lay-filter="noticeTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("system:notice:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">
+        <i class="layui-icon layui-icon-edit" style="margin-right: 2px;font-size: 18px"></i>修改</a>
+    @}
+    @if(shiro.hasPermission("system:notice:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action " lay-event="delete" style="color: #ffa847">
+        <i class="layui-icon layui-icon-delete" style="margin-right: 2px;"></i>删除</a>
+    @}
+    @if(shiro.hasPermission("system:notice:push")){
+    <div class="layui-divider layui-divider-vertical" role="separator" style="color: #33549988"></div>
+    <a class="layui-action layui-action-default" lay-event="push">
+        <i class="layui-icon layui-icon-release" style="margin-right: 2px;"></i>推送</a>
+    @}
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.userId}}" lay-skin="switch" lay-text="正常|冻结" {{d.status=='ENABLE'?'checked':''}} />
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

@@ -1,0 +1,125 @@
+@layout("/common/_form.html",{js:["/assets/modular/spot/lsylproject/lsyl_Reconsideration.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-form-label {
+        width: 210rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+<form class="layui-form " action="" id="lsylInfoTable" lay-filter="lsylInfoTable"
+      style="position:absolute;left:5%;width: 900rem;margin-top: 10rem;height: 1000px">
+    <div class="layui-form-item" style="margin-top: -10rem;display: none" >
+        <div class="layui-inline" style="display: none">
+            <div class="layui-input-block" style="margin-left: 3rem">
+                <label class="layui-form-label">id</label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 67rem;width: 300rem">
+                <input type="text" id="id" name="associateId"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: -10rem">
+        <div class="layui-inline" style="display: none">
+            <div class="layui-input-block" style="margin-left: 3rem">
+                <label class="layui-form-label">复议节点</label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 67rem;width: 300rem">
+                <input type="text" id="fyjd" name="fyjd"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>复议文件</legend>
+    </fieldset>
+    <div class="layui-form-item" style="margin-top: -10rem">
+        <div class="layui-upload" style="margin-top:10rem;width: 100%">
+            <!--            <div class="layui-inline" style="margin-right: 30rem">-->
+            <!--                <label class="layui-form-label" style="width: 200rem;margin-top: 40rem;font-size: 20rem">项目文件</label>-->
+            <!--            </div>-->
+            <button type="button" class="layui-btn layui-btn-normal" id="selectFile"
+                    style="background-color: #33549988;">选择多文件
+            </button>
+            <button type="button" class="layui-btn layui-btn-danger" id="uploadAction">开始上传</button>
+            <div class="layui-upload-list">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>大小</th>
+                        <th>类型</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="FileList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" id="fytitle" style="display: none">
+        <legend>意见反馈</legend>
+    </fieldset>
+    <div class="layui-form-item" style="margin-top: -10rem;display: none" id="fybh">
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="margin-left: 0rem;width: 900rem">
+                <textarea id="fybhyj" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center" id="cityL" >
+        <button type="submit" class="layui-btn" lay-filter="submit" style="background-color: #33549988" lay-submit>
+            &emsp;申请&emsp;
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+    <div class="form-group-bottom text-center" id="provinceL" style="display: none">
+        <button type="submit" class="layui-btn" lay-filter="agree" style="background-color: #33549988" lay-submit>
+            &emsp;通过&emsp;
+        </button>
+        <button type="submit" class="layui-btn layui-btn-primary" lay-filter="refuse" lay-submit style="background-color: #FFFFFF;border-color: #e6e6e6;color: #595959">&emsp;驳回&emsp;</button>
+    </div>
+    <div class="form-group-bottom text-center" id="cityL2" style="display: none">
+        <button type="submit" class="layui-btn" lay-filter="submit" style="background-color: #33549988" lay-submit>
+            &emsp;提交&emsp;
+        </button>
+        <button type="submit" class="layui-btn layui-btn-primary" lay-filter="cityagree" lay-submit style="background-color: #FFFFFF;border-color: #e6e6e6;color: #595959">&emsp;取消复议&emsp;</button>
+    </div>
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

@@ -1,0 +1,244 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/proenterprise/mineEnterprise.js"]}){
+
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">矿权、矿山企业信息表</span>
+</div>
+
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <input type="text" name="id" class="layui-input" id="id"
+                               placeholder="id主键索引" style="display: none">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">企业名称</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="qymc" class="layui-input" id="qymc"
+                                           placeholder="请输入企业名称">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">法人代表</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="frdb" class="layui-input" id="frdb"
+                                           placeholder="请输入法人代表">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">企业性质</label>
+                                <div class="layui-input-inline">
+                                    <select id="qyxz" name="qyxz" class="layui-select" lay-filter="select-qyxz">
+                                        <option value="">请选择企业性质</option>
+                                        <option value="1">国有企业</option>
+                                        <option value="2">集体所有制</option>
+                                        <option value="3">私营企业</option>
+                                        <option value="4">股份制企业</option>
+                                        <option value="5">有限合伙企业</option>
+                                        <option value="6">联营企业</option>
+                                        <option value="7">外商投资企业</option>
+                                        <option value="8">个人独资企业</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">矿山名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="ksmc" class="layui-input" id="ksmc"
+                                               placeholder="请输入矿山名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">采矿许可</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ckxkz" name="ckxkz" class="layui-select" lay-filter="select-ckxkz">
+                                            <option value="">请选择采矿许可状态</option>
+                                            <option value="新申请">新申请</option>
+                                            <option value="持有">持有</option>
+                                            <option value="变更">变更</option>
+                                            <option value="过期">过期</option>
+                                            <option value="延续">延续</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">采矿证号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="ckzh" name="ckzh" placeholder="请输入采矿证号"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否签订三方监管协议</label>
+                                    <div class="layui-input-inline">
+                                        <select id="sfjgxy" name="sfjgxy" class="layui-select"
+                                                lay-filter="select-sfjgxy">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否属于全省菱镁采矿权整合方案</label>
+                                    <div class="layui-input-inline">
+                                        <select id="lmzh" name="lmzh" class="layui-select" lay-filter="select-lmzh">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-top: 35rem">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否属于38家原部发证现下放至省市矿权</label>
+                                    <div class="layui-input-inline">
+                                        <select id="bfz" name="bfz" class="layui-select" lay-filter="select-bfz">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否涉及历史遗留三类矿山矿权图斑</label>
+                                    <div class="layui-input-inline">
+                                        <select id="sjlsylsl" name="sjlsylsl" class="layui-select"
+                                                lay-filter="select-sjlsylsl">
+                                            <option value="">请选择</option>
+                                            <option value="1">是</option>
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                @if(shiro.hasPermission("mineEnterprise:mineEnterprise:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出所选数据
+                                </button>
+                                <button id="btnExp1" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出全部数据
+                                </button>
+                                <button id="btnExp2" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>批量导入
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="mineEnterpriseTable" lay-filter="mineEnterpriseTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("mineEnterprise:mineEnterprise:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    @if(shiro.hasPermission("mineEnterprise:mineEnterprise:uploadpdfreport")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <div class="layui-btn layui-btn-normal layui-btn-xs layui-upload-drag" id="pdfUpload" lay-event="uploadpdfreport"
+         style="background-color: #99CCCC">上传核查报告
+    </div>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="previewpdfreport" style="background-color: #66CCCC">预览核查报告</a>
+    @}
+    @if(shiro.hasPermission("mineEnterprise:mineEnterprise:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

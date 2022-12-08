@@ -1,0 +1,59 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/role/role.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">角色管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="roleName" class="layui-input" type="text" placeholder="角色名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("system:role:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="roleTable" lay-filter="roleTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("system:role:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988"><i class="layui-icon layui-icon-edit" style="margin-right: 2px;font-size: 18px"></i>修改</a>
+    @}
+    @if(shiro.hasPermission("system:role:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action " lay-event="delete" style="color: #ffa847"> <i class="layui-icon layui-icon-delete" style="margin-right: 2px;"></i>删除</a>
+    @}
+    @if(shiro.hasPermission("system:role:assign")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="roleAssign" style="color: #33549988"> <i class="layui-icon layui-icon-slider" style="margin-right: 2px;"></i>权限配置</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

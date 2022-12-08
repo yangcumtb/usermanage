@@ -1,0 +1,270 @@
+@layout("/common/_form.html",{js:["/assets/modular/prominemanger/recoveredspot/recoveredspot_edit.js"]}){
+<style>
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+<form class="layui-form" id="recoveredspotForm" lay-filter="recoveredspotForm"
+      style="position:absolute;left:8%;width: 900rem;margin-top: 10rem;height: 900px">
+    <div class="layui-inline">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">图斑编号<span style="color: red;">*</span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="id" name="id" placeholder="请输入图斑编号" type="text" class="layui-input"
+                   lay-verify="required" lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">图斑名称<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <textarea id="tbmc" name="tbmc" placeholder="请输入图斑所属矿权名称" type="text" class="layui-input"
+                      lay-verify="required" lay-verType="tips"></textarea>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 50rem">
+            <label class="layui-form-label">图斑所属矿权名称<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <textarea id="sukq" name="sukq" placeholder="请输入图斑所属矿权名称" type="text" class="layui-input"
+                      lay-verType="tips" style="width:300rem;height:60rem;word-break:break-all "></textarea>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 50rem">
+            <label class="layui-form-label">图斑所属矿权编号<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="kqbh" name="kqbh" placeholder="请输入图斑所属矿权编号" type="text" class="layui-input"
+                   lay-verify="required"
+                   lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-form-item" id="area-picker" style="margin-top: 0px;margin-bottom: -10px">
+        <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+        <div class="layui-input-inline" style="display: none">
+            <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                <option value="">--选择省--</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block" style="margin-left: 20rem">
+                <label class="layui-form-label">矿区所在市</label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                <select id="xzs" name="xzs" class="city-selector" lay-verify="" data-value=" ">
+                    <option value="">--选择市--</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block" style="margin-left: 20rem">
+                <label class="layui-form-label">矿区所在区/县</label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 70rem;width: 300rem">
+                <select id="xzx" name="xzx" class="county-selector" lay-filter="xzx" lay-verify="">
+                    <option value="">--选择区--</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">验收结论<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <select id="ysjl" name="ysjl" lay-filter="ysjl" lay-verify="">
+                <option value=""></option>
+                <option value="TG">通过</option>
+                <option value="YTJTG">有条件通过</option>
+                <option value="WTG">未通过，整改</option>
+                <option value="YZLDYS">已治理，待验收</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">图斑面积(m²)<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="tbmj" name="tbmj" placeholder="单位为m²，请保留整数" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips" />
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 45rem">
+            <label class="layui-form-label">图斑中心点经度<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="kfx" name="kfx" placeholder="请保留八位小数" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips" />
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 45rem">
+            <label class="layui-form-label">图斑中心点纬度<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="kfy" name="kfy" placeholder="请保留八位小数" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips" />
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 40rem">
+            <label class="layui-form-label">修复前损毁类型<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <select id="xfqshlx" name="xfqshlx" lay-filter="xfqshlx" lay-verify="">
+                <option value=""></option>
+                <option value="WS">挖损</option>
+                <option value="YZ">压占</option>
+                <option value="TX">塌陷</option>
+                <!--                <option value="JZZY">建筑占用</option>-->
+                <!--                <option value="LSZY">临时占用</option>-->
+                <!--                <option value="DZ">点状</option>-->
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 45rem">
+            <label class="layui-form-label">修复后二调地类<span style="color: red;"></span></label>
+        </div>
+
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <div id="sddl" style="width: 300rem"></div>
+        </div>
+    </div>
+    <!--    <div class="layui-inline ">-->
+    <!--        <div class="layui-input-block" style="margin-left: 40rem">-->
+    <!--            <label class="layui-form-label">有无用地手续<span style="color: red;"></span></label>-->
+    <!--        </div>-->
+    <!--        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">-->
+    <!--            <select id="ydsx" name="ydsx" lay-filter="ydsx" lay-verify="">-->
+    <!--                <option value=""></option>-->
+    <!--                <option value="0">无</option>-->
+    <!--                <option value="1">有</option>-->
+    <!--            </select>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">修复时间<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="fksj" name="fksj" placeholder="请输入修复时间" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips" required/>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">实施主体<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="sszt" name="sszt" placeholder="请输入实施主体，治理/复垦工程实施单位" type="text" class="layui-input"
+                   lay-verify="" lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">修复方式<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <div id="xffs" style="width: 300rem"></div>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">资金来源<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <select id="zjly" name="zjly" lay-filter="zjly" lay-verify="">
+                <option value=""></option>
+                <option value="企业自筹">企业自筹</option>
+                <option value="政府">政府</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">亩均投资(万元)<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="mjtz" name="mjtz" placeholder="请输入亩均投资(万元)" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 20rem">
+            <label class="layui-form-label">验收时间<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="yssj" name="yssj" placeholder="请输入验收时间" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <div class="layui-input-block" style="margin-left: 35rem">
+            <label class="layui-form-label">组织验收单位<span style="color: red;"></span></label>
+        </div>
+        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+            <input id="ysdw" name="ysdw" placeholder="请输入组织验收单位" type="text" class="layui-input" lay-verify=""
+                   lay-verType="tips"/>
+        </div>
+    </div>
+    <div class="layui-form-item" style="display: none">
+        <div class="layui-inline ">
+            <div class="layui-input-block" style="margin-left: 50rem">
+                <label class="layui-form-label">图斑修复之前<span style="color: red;">*</span></label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                <input id="geoJsonBeforeRepair" name="geoJsonBeforeRepair" placeholder="请输入图斑修复之前" type="text"
+                       class="layui-input" lay-verType="tips"/>
+            </div>
+        </div>
+        <div class="layui-inline ">
+            <div class="layui-input-block" style="margin-left: 50rem">
+                <label class="layui-form-label">图斑修复之后<span style="color: red;">*</span></label>
+            </div>
+            <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                <input id="geoJsonAfterRepair" name="geoJsonAfterRepair" placeholder="请输入图斑修复之后" type="text"
+                       class="layui-input" lay-verType="tips"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

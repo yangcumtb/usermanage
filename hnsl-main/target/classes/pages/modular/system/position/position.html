@@ -1,0 +1,53 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/position/position.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">职位表管理</span>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="condition" class="layui-input" type="text" placeholder="名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe654;</i>添加</button>
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="positionTable" lay-filter="positionTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988"><i class="layui-icon layui-icon-edit" style="margin-right: 2px;font-size: 18px"></i>修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action" lay-event="delete" style="color: #ffa847"><i class="layui-icon layui-icon-delete" style="margin-right: 2px;"></i>删除</a>
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.positionId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='ENABLE'?'checked':''}} />
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

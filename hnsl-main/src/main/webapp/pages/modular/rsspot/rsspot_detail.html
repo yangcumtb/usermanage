@@ -1,0 +1,179 @@
+@layout("/common/_container.html",{plugins:["leaflet"],js:["/assets/modular/map/js/mapConfig.js","/assets/modular/map/js/terraformer.js","/assets/modular/map/js/terraformer-wkt-parser.js","/assets/modular/rsspot/rsspot_detail.js"],css:["/assets/modular/map/css/common.css","/assets/modular/map/css/map.css"]}){
+<style>
+    html {
+        font-size: 1px;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .layui-form-item .layui-input-inline {
+        width: 210rem;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+    table
+    {
+        border-collapse: collapse;
+        margin: 0 auto;
+        text-align: center;
+    }
+    table td, table th
+    {
+        border: 1px solid #cad9ea;
+        color: #666;
+        height: 20px;
+    }
+    table thead th
+    {
+        background-color: #CCE8EB;
+
+    }
+    table tr:nth-child(odd)
+    {
+        background: #fff;
+    }
+    table tr:nth-child(even)
+    {
+        background: #F5FAFA;
+    }
+</style>
+<form class="layui-form" id="rsspotForm" lay-filter="rsspotForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item" id="area-picker" style="margin-top: 20rem">
+                    <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                    <div class="layui-input-inline" style="display: none">
+                        <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                            <option value="">--选择省--</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 17rem">
+                            <label class="layui-form-label">矿区所在市</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 130rem">
+                            <select id="xzs" name="xzs" class="city-selector" data-value=" " disabled>
+                                <option value="">--选择市--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: -27rem">
+                            <label class="layui-form-label">矿区所在区/县</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 25rem;width: 130rem">
+                            <select id="xzx" name="xzx" class="county-selector" disabled>
+                                <option value="">--选择区--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="display: none">
+                        <div class="layui-input-inline">
+                            <input id="base_admin" name="base_admin" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <!--    <div class="layui-form-item">-->
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">采矿证号</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="ckzh" name="ckzh"  type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 17rem">
+                            <label class="layui-form-label">中心点经度</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 130rem">
+                            <input type="text" name="kfx" id="kfx"  autocomplete="off"
+                                   class="layui-input"  disabled>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block"style="margin-left: -37rem" >
+                            <label class="layui-form-label">中心点纬度</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 25rem;width: 130rem" >
+                            <input type="text" name="kfy" id="kfy" autocomplete="off"
+                                   class="layui-input" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 30rem">
+                            <label class="layui-form-label">变化面积(㎡)</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="changearea" name="changearea" placeholder="请输入变化面积" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 10rem">
+                            <label class="layui-form-label">变化类型</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="changetype" name="changetype" placeholder="请输入变化类型" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline" >
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">矿山名称</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="minename" name="minename" placeholder="请输入矿山名称" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">备注</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="bz" name="bz" placeholder="请输入备注" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card" id="loaction">
+            <div class="layui-card-header">图斑定位</div>
+            <div class="layui-card-body">
+                <div id="mapDiv" style="width: 1000px;height: 535px"></div>
+                <div id="latlng">
+                    经度:[ <span style="font-size: 0.9em" id="lng">113.58964251</span> ],
+                    纬度:[ <span style="font-size: 0.9em" id="lat">41.23654897</span> ]
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

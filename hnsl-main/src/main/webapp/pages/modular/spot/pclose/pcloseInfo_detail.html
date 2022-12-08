@@ -1,0 +1,442 @@
+@layout("/common/_form.html",{js:["/assets/modular/spot/pclose/pcloseInfo_detail.js"]}){
+
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+    .layui-form-item .layui-input-inline {
+        width: 210rem;
+    }
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+
+<form class="layui-form " action="" lay-filter="pcloseInfoForm" style="position:absolute;left:5%;width: 900rem;margin-top: 10rem">
+    <input name="id" hidden/>
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-tab">
+            <ul class="layui-tab-title" style="position:fixed; top: 0rem; width: 100%;background-color: white;z-index: 9999">
+                <li class="layui-this">基本信息</li>
+                <li>其他信息</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form-item">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">图斑编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="id"  autocomplete="off" disabled
+                                       class="layui-input" lay-verify="required" readonly="true" style="background:#CCCCCC">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">图斑位置</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wz"  autocomplete="off" disabled
+                                       class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="area-picker" style="margin-top: -10rem">
+                        <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                        <div class="layui-input-inline" style="display: none">
+                            <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                                <option value="">--选择省--</option>
+                            </select>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">矿区所在市</label>
+                            <div class="layui-input-inline" >
+                                <select  name="xzs" class="city-selector" data-value=" " disabled>
+                                    <option value="">--选择市--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">矿区所在区/县</label>
+                            <div class="layui-input-inline" >
+                                <select name="xzx" class="county-selector" disabled>
+                                    <option value="">--选择区--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">*中心点经度</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kfx"  lay-verify="required|J" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">*中心点纬度</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kfy"  lay-verify="required|W" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">*图斑面积(㎡)</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="tbmj"  autocomplete="off" disabled
+                                       class="layui-input" lay-verify="required|P">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">图斑属性</label>
+                            <div class="layui-input-inline">
+                                <select id="tbsx" name="tbsx" class="layui-form-select" lay-filter="select-tbsx" lay-verify="required" disabled>
+                                    <option value="露天矿场">露天矿场</option>
+                                    <option value="堆煤场">堆煤场</option>
+                                    <option value="洗煤厂">洗煤厂</option>
+                                    <option value="煤矸石堆">煤矸石堆</option>
+                                    <option value="其他矿石堆场">其他矿石堆场</option>
+                                    <option value="选矿厂">选矿厂</option>
+                                    <option value="选矿池">选矿池</option>
+                                    <option value="表土堆场">表土堆场</option>
+                                    <option value="内排土场">内排土场</option>
+                                    <option value="外排土场">外排土场</option>
+                                    <option value="废石堆">废石堆</option>
+                                    <option value="尾矿库">尾矿库</option>
+                                    <option value="工业广场建筑">工业广场建筑</option>
+                                    <option value="塌陷坑">塌陷坑</option>
+                                    <option value="油气井场">油气井场</option>
+                                    <option value="油气场站">油气场站</option>
+                                    <option value="炸药库">炸药库</option>
+                                    <option value="矿山道路">矿山道路</option>
+                                    <option value="地裂缝">地裂缝</option>
+                                    <option value="崩塌">崩塌</option>
+                                    <option value="滑坡">滑坡</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">三调地类</label>
+                            <div class="layui-input-inline">
+                                <select id="sddl" name="sddl" class="layui-form-select" lay-filter="select-sddl" lay-verify="required" disabled>
+                                    <option value="耕地">耕地</option>
+                                    <option value="园地">园地</option>
+                                    <option value="林地">林地</option>
+                                    <option value="草地">草地</option>
+                                    <option value="商服用地">商服用地</option>
+                                    <option value="工矿仓储用地">工矿仓储用地</option>
+                                    <option value="住宅用地">住宅用地</option>
+                                    <option value="公共管理与公共服务用地">公共管理与公共服务用地</option>
+                                    <option value="特殊用地">特殊用地</option>
+                                    <option value="交通运输用地">交通运输用地</option>
+                                    <option value="水域及水利设施用地">水域及水利设施用地</option>
+                                    <option value="其他用地">其他用地</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">所有权权属</label>
+                            <div class="layui-input-inline">
+                                <select id="syq" name="syq" class="layui-select" lay-filter="select-syq" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="GYTDSYQ">国有土地所有权</option>
+                                    <option value="JTTDSYQ">集体土地所有权</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">使用权权属</label>
+                            <div class="layui-input-inline">
+                                <select id="shyq" name="shyq" class="layui-select" lay-filter="select-shyq" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="GYSYQ">国有土地使用权</option>
+                                    <option value="JTSYQ">集体土地使用权</option>
+                                    <option value="QTSYQ">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">有无合法用地手续</label>
+                            <div class="layui-input-inline">
+                                <select id="ydsx" name="ydsx" class="layui-select" lay-filter="select-ydsx" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="1">有</option>
+                                    <option value="0">无</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">采矿权证编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kqbh" placeholder="无" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">采矿权名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kqmc" placeholder="无" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">采矿权证有效期起</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="kqqxq" name="kqqxq"  lay-verify="required" disabled
+                                       autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">采矿权证有效期止</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="kqqxz" name="kqqxz"  lay-verify="required" disabled
+                                       autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">矿种</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kz"  autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">开采方式</label>
+                            <div class="layui-input-inline">
+                                <select id="kcfs" name="kcfs" class="layui-select" lay-filter="select-kcfs" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="地下开采">地下开采</option>
+                                    <option value="露天开采">露天开采</option>
+                                    <option value="露井联采">露井联采</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">责任主体</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="zrzt"  autocomplete="off" class="layui-input" disabled
+                                       lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">关闭时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="gbsj" name="gbsj"  autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">修复情况</label>
+                            <div class="layui-input-inline">
+                                <select id="zlqk" name="zlqk" class="layui-select" lay-filter="select-zlqk" lay-verify="required" disabled>
+                                    <option value="XFZ">治理中</option>
+                                    <option value="WXF">未治理</option>
+                                    <option value="XF">已治理</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">实地治理面积(㎡)</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="zlmj"  autocomplete="off" disabled
+                                       class="layui-input" lay-verify="required|O">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">拟修复时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="nxfsj" name="nxfsj"
+                                       autocomplete="off"
+                                       class="layui-input" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">现场照片:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="xczp"  autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">核查单位名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="hcdw"  lay-verify="required" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">核查人员姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="hcry"  lay-verify="required" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">核查具体日期</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="hcrq" name="hcrq"  lay-verify="required" disabled
+                                       autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">项目单位</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="xmdw" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item" style="margin-top: 1rem">
+                    <div class="layui-form-item">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">实施主体</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sszt"  autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">复垦/治理时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="fksj" name="fksj"  lay-verify="required" disabled
+                                       autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">验收时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="yssj" name="yssj"  lay-verify="required" disabled
+                                       autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">组织验收单位</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="ysdw" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item"  style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">治理/复垦后土地利用类型</label>
+                            <div class="layui-input-inline">
+                                <select id="fkfx" name="fkfx" class="layui-form-select" lay-filter="select-fkfx" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="01">耕地</option>
+                                    <option value="02">园地</option>
+                                    <option value="03">林地</option>
+                                    <option value="04">草地</option>
+                                    <option value="05">商服用地</option>
+                                    <option value="06">工矿仓储用地</option>
+                                    <option value="07">住宅用地</option>
+                                    <option value="08">公共管理与公共服务用地</option>
+                                    <option value="09">特殊用地</option>
+                                    <option value="10">交通运输用地</option>
+                                    <option value="11">水域及水利设施用地</option>
+                                    <option value="12">其他用地</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">损毁类型</label>
+                            <div class="layui-input-inline">
+                                <select id="shlx" name="shlx" class="layui-select" lay-filter="select-shlx" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="挖损">挖损</option>
+                                    <option value="压占">压占</option>
+                                    <option value="塌陷">塌陷</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">验收结论</label>
+                            <div class="layui-input-inline">
+                                <select id="ysjl" name="ysjl" class="layui-select" lay-filter="select-ysjl" lay-verify="required" disabled>
+                                    <option value=""></option>
+                                    <option value="通过">通过</option>
+                                    <option value="有条件通过">有条件通过</option>
+                                    <option value="未通过，整改">未通过，整改</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <label class="layui-form-label">总体投资（万元）</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="zttz" placeholder="无" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-top: -10rem">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">损毁时间</label>
+                            <div class="layui-input-inline" >
+                                <input type="text" name="damagetime" placeholder="无" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

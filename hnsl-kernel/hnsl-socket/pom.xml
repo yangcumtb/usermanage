@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.hnsl</groupId>
+        <artifactId>hnsl-kernel</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>hnsl-socket</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!--基础组件-->
+        <dependency>
+            <groupId>cn.hnsl</groupId>
+            <artifactId>hnsl-base-auth</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!--Spring boot WebSocket实现-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+
+        <!-- Getty核心包 -->
+        <dependency>
+            <groupId>com.gettyio</groupId>
+            <artifactId>getty-core</artifactId>
+            <version>${getty.version}</version>
+        </dependency>
+
+        <!-- 拓展包 -->
+        <dependency>
+            <groupId>com.gettyio</groupId>
+            <artifactId>getty-expansion</artifactId>
+            <version>${getty.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
+
+</project>

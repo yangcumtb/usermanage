@@ -1,0 +1,70 @@
+@layout("/common/_container.html",{js:["/assets/modular/projectbuild/projectbuild.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">项目立项表，用于存储历史遗留图斑的申请项目管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="xmmc" class="layui-input" type="text" placeholder="项目名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="xzs" class="layui-input" type="text" placeholder="所在市"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="xzx" class="layui-input" type="text" placeholder="所在县"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="ckqz" class="layui-input" type="text" placeholder="采矿权证"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="ckqzh" class="layui-input" type="text" placeholder="采矿权证号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="spotId" class="layui-input" type="text" placeholder="图斑编号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("project:projectbuild:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <button id="btnAddpro" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>项目导入
+                                </button>
+                                <button id="btnAddpic" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加项目图
+                                </button>
+                                <button id="btnAddshp" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加项目矢量文件
+                                </button>
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="projectbuildTable" lay-filter="projectbuildTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("project:projectbuild:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit">修改</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+
+    <a class="layui-action layui-action-primary" lay-event="edit">详情</a>
+
+    @if(shiro.hasPermission("project:projectbuild:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete">删除</a>
+    @}
+</script>
+@}

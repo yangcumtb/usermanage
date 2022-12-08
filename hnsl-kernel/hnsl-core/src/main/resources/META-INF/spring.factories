@@ -1,0 +1,10 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.hnsl.core.config.AopAutoConfiguration,\
+cn.hnsl.core.config.RedisAutoConfiguration,\
+cn.hnsl.core.config.FastjsonAutoConfiguration,\
+cn.hnsl.core.config.MybatisDataSourceAutoConfiguration,\
+cn.hnsl.core.config.PropertiesAutoConfiguration,\
+cn.hnsl.core.config.UtilAutoConfiguration,\
+cn.hnsl.core.config.DbInitializerAutoConfiguration,\
+cn.hnsl.core.config.MybatisPluginAutoConfiguration

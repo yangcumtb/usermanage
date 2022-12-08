@@ -1,0 +1,96 @@
+@layout("/common/_container.html",{js:["/assets/modular/project/projectAssess/projectAssess.js"]}){
+
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">方案评审管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                                <input type="text" id="xmmc" class="layui-input" autocomplete="off" placeholder="请输入项目名称">
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("project:projectAssess:add")){
+                                <!--                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>生产项目添加-->
+                                <!--                                </button>-->
+                                <!--                                <button id="btnAdd2" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>建设项目添加-->
+                                <!--                                </button>-->
+                                @}
+                                <button id="btnReset" class="layui-btn icon-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">全部项目</li>
+                            <li>生产项目</li>
+                            <li>建设项目</li>
+
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100%;">
+                            <div class="layui-tab-item layui-show">
+                                <table class="layui-table" id="admReclaimProjectTable"
+                                       lay-filter="admReclaimProjectTable"></table>
+                            </div>
+                            <div class="layui-tab-item">
+                                <table class="layui-table" id="ProjectTableScxm"
+                                       lay-filter="ProjectTableScxm"></table>
+                            </div>
+                            <div class="layui-tab-item">
+                                <table class="layui-table" id="ProjectTableJsxm"
+                                       lay-filter="ProjectTableJsxm"></table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("project:projectAssess:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">重新送审</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @}
+    @if(shiro.hasPermission("project:projectAssess:recheck")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">方案入库</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @}
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    @if(shiro.hasPermission("project:projectAssess:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

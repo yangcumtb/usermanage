@@ -1,0 +1,111 @@
+@layout("/common/_form.html",{js:["/assets/modular/prominemanger/recoverTask/recoverTask_detail.js"]}){
+<style>
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+    .layui-form-item .layui-input-inline {
+        width: 250rem;
+    }
+</style>
+<form class="layui-form" id="recoverTaskForm" lay-filter="recoverTaskForm">
+    <div class="layui-fluid" style="padding-bottom: 70px;">
+        <div class="layui-card">
+<!--            <div class="layui-card-header">详细信息</div>-->
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="" type="hidden"/>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">任务编号<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="id" name="id" placeholder="请输入任务编号，为主键id" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">矿权编号<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="kqbh" name="kqbh" placeholder="请输入矿权编号" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 35rem">
+                            <label class="layui-form-label">治理对象/区域<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="zldx" name="zldx" placeholder="请输入治理对象/区域,按照方案内容填写" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 35rem">
+                            <label class="layui-form-label">任务开始时间<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="kssj" name="kssj" placeholder="格式：年-月-日，例：2021-03-22" type="text" class="layui-input" lay-verify="" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 35rem">
+                            <label class="layui-form-label">任务结束时间<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="jssj" name="jssj" placeholder="格式：年-月-日，例：2021-03-22" type="text" class="layui-input" lay-verify="" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">主要工程<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <!--                            <input id="zygc" name="zygc" placeholder="请输入主要工程，参照《方案》，包括平整场地、削放坡、客土、种植乔（灌）木、播种草籽、截（排）水、网围栏、警示牌、挡土墙、其它" type="text" class="layui-input" lay-verify="required" lay-verType="tips" required/>-->
+<!--                            <div id="zygc" style="width: 300rem"disabled></div>-->
+                            <textarea id="zygc" name="zygc" style="width:250rem;height:60rem;word-break:break-all " disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">工程量<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="gcl" name="gcl" placeholder="请输入工程量" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">治理面积<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="zlmj" name="zlmj" placeholder="请输入治理面积" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline ">
+                        <div class="layui-input-block" style="margin-left: 65rem">
+                            <label class="layui-form-label">复垦面积，（平方米）<span style="color: red;">*</span></label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="fkmj" name="fkmj" placeholder="请输入复垦面积，（平方米）" type="text" class="layui-input" lay-verify="required" lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

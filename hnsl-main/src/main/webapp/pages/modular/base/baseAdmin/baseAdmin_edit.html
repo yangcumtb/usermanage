@@ -1,0 +1,64 @@
+@layout("/common/_form.html",{js:["/assets/modular/base/baseAdmin/baseAdmin_edit.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+</style>
+<form class="layui-form" id="baseAdminForm" lay-filter="baseAdminForm">
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row multi-line">
+                    <input name="adCode" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">政区名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="adName" name="adName" placeholder="请输入行政区划名称" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">政区简称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="adAbbrName" name="adAbbrName" placeholder="请输入行政区划简称" type="text"
+                                   class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">政区全称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="adFullName" name="adFullName" placeholder="请输入行政区全称" type="text"
+                                   class="layui-input" lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="note" name="note" placeholder="请输入备注" type="text" class="layui-input"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit style="background-color: #33549988">&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

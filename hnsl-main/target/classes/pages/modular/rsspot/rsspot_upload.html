@@ -1,0 +1,75 @@
+@layout("/common/_form.html",{js:["/assets/modular/rsspot/rsspot_upload.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<style>
+    html {
+        font-size: 1px;
+    }
+
+    .layui-form-label {
+        width: 210rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+<form class="layui-form "
+      style="position:absolute;left:5%;width: 900rem;margin-top: 10rem;height: 500px">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>文件上传</legend>
+    </fieldset>
+    <div class="layui-form-item" style="margin-top: -10rem">
+        <div class="layui-upload" style="margin-top:10rem;width: 100%">
+            <!--            <div class="layui-inline" style="margin-right: 30rem">-->
+            <!--                <label class="layui-form-label" style="width: 200rem;margin-top: 40rem;font-size: 20rem">项目文件</label>-->
+            <!--            </div>-->
+            <button type="button" class="layui-btn layui-btn-normal" id="selectFile"
+                    style="background-color: #33549988;">选择多文件
+            </button>
+            <button type="button" class="layui-btn layui-btn-danger" id="uploadAction" disabled="disabled">开始上传</button>
+            <div class="layui-upload-list">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>大小</th>
+                        <th>类型</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="FileList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

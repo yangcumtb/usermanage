@@ -1,0 +1,197 @@
+@layout("/common/_container.html",{js:["/assets/modular/verificationTask/verificationTask.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html{
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 100rem;
+    }
+
+    .layui-form-label {
+        padding: 5rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">核查任务下发信息表管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item" id="area">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">图斑类型</label>
+                                <div class="layui-input-inline">
+                                    <select id="tbtype" name="tbtype" class="layui-select" lay-filter="tbtype" lay-verify="required">
+                                        <option value="">请选择图斑类型</option>
+                                        <option value="1">历史遗留废弃矿山图斑</option>
+<!--                                        <option value="2">政策性关闭矿山图斑</option>-->
+                                        <option value="3">生产矿山图斑</option>
+<!--                                        <option value="4">建设项目图斑</option>-->
+<!--                                        <option value="5">自然灾损图斑</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                            <div class="layui-input-inline" style="display: none">
+                                <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                                    <option value="">--选择省--</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-inline">
+                                    <label class="layui-form-label">矿区所在市</label>
+                                <div class="layui-input-inline">
+                                    <select id="xzs" name="xzs" class="city-selector" >
+                                        <option value="">--选择市--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                    <label class="layui-form-label">矿区所在区/县</label>
+                                <div class="layui-input-inline" >
+                                    <select id="xzx" name="xzx" class="county-selector" >
+                                        <option value="">--选择区--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more" style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">图斑编号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="spottableId" class="layui-input" id="spottableId"
+                                               placeholder="请输入图斑编号">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">图斑所属矿权名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="sukq" class="layui-input" id="sukq"
+                                               placeholder="请输入图斑所属矿权名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline" >
+                                    <label class="layui-form-label">核查内容</label>
+                                    <div class="layui-input-inline">
+                                        <select class="layui-form-select" id="hcnr" name="hcnr" lay-filter="">
+                                            <option value="">请选择核查内容</option>
+                                            <option value="1">损毁图斑的损毁情况</option>
+                                            <option value="2">复垦图斑的复垦状况</option>
+                                            <option value="4">遥感图斑的实际情况</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-top: 15rem">
+                                <div class="layui-inline" style="display: none" id="a">
+                                    <label class="layui-form-label">生产单位</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="scdw" class="layui-input" id="scdw"
+                                               placeholder="请输入生产单位">
+                                    </div>
+                                </div>
+                                <div class="layui-inline" style="display: none" id="b">
+                                    <label class="layui-form-label">建设单位</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="jsdw" class="layui-input" id="jsdw"
+                                               placeholder="请输入建设单位">
+                                    </div>
+                                </div>
+                                <div class="layui-inline" style="display: none" id="c">
+                                    <label class="layui-form-label">项目名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="xmmc" class="layui-input" id="xmmc"
+                                               placeholder="请输入项目名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline" style="display: none" id="d">
+                                    <label class="layui-form-label">关闭年限</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="gbnx" class="layui-input" id="gbnx"
+                                               placeholder="请输入关闭年限">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">核查任务管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出</button>
+                                <button id="btnBatch" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>批量下发</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="verificationTaskTable" lay-filter="verificationTaskTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("verification:verificationTask:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">详情</a>
+    @}
+    @if(shiro.hasPermission("verification:verificationTask:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="distr" style="color: #ffa847">下发</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

@@ -1,0 +1,137 @@
+@layout("/common/_container.html",{js:["/assets/modular/project/donedoingInform/doneDoingInformation.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150px;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+
+                        <div class="layui-form-item" id="area-pic" style="margin-bottom: -20px;margin-top: 15px">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="content" class="layui-input" id="content"
+                                           placeholder="请输入项目名称">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">提交下级单位</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="xjdw" class="layui-input" id="xjdw"
+                                           placeholder="提交下级单位">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button class="layui-btn" lay-submit lay-filter="fsjl"><i
+                                        class="layui-icon layui-icon-search"></i>查询
+                                </button>
+                                <button type="reset" class="layui-btn layui-btn-primary"><i
+                                        class="layui-icon layui-icon-refresh"></i>重置
+                                </button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35px">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目类型</label>
+                                    <div class="layui-input-inline">
+                                        <input id="key-xmlx" name="key-xmlx" hidden/>
+                                        <select class="layui-select" lay-filter="select-xmlx">
+                                            <option value="">请选择项目类型</option>
+                                            <option value="1">生产项目</option>
+                                            <option value="2">建设项目</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">审核类型</label>
+                                    <div class="layui-input-inline">
+                                        <input id="key-shlx" name="key-shlx" hidden/>
+                                        <select class="layui-select" lay-filter="select-shlx">
+                                            <option value="">请选择审核类型</option>
+                                            <option value="1">初审</option>
+                                            <option value="2">终审</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+<!--                            <div class="layui-inline">-->
+<!--                                <input id="xmmc" class="layui-input" type="text" placeholder="项目名称"/>-->
+<!--                            </div>-->
+<!--                            <div class="layui-inline">-->
+<!--                                <input id="xjdw" class="layui-input" type="text" placeholder="提交下级单位"/>-->
+<!--                            </div>-->
+<!--                            <div class="layui-inline">-->
+<!--                                <input id="xmlx" class="layui-input" type="text" placeholder="项目类型：生产项目/建设项目"/>-->
+<!--                            </div>-->
+<!--                            <div class="layui-inline">-->
+<!--                                <input id="shlx" class="layui-input" type="text" placeholder="审核类型：初审/终审"/>-->
+<!--                            </div>-->
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="doneDoingInformationTable" lay-filter="doneDoingInformationTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-action layui-action-primary" lay-event="edit">查看消息详情</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete">删除</a>
+</script>
+@}

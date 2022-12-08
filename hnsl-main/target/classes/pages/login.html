@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>if (window !== top) top.location.replace(location.href);</script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href="${ctxPath}/assets/expand/images/favicon.ico" rel="icon">
+    <title>登录 - ${constants.getSystemName()}</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"
+          media="all"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/expand/css/style.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/css/login.css?v=${constants.getReleaseVersion()}"
+          media="all"/>
+    <link rel="stylesheet"
+          href="${ctxPath}/assets/common/libs/layui/css/modules/layui-icon-extend/iconfont.css?v=${constants.getReleaseVersion()}"/>
+    <style>
+        body {
+            background-position: center center;
+            background-size: 100% 65%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .input:-webkit-autofill {
+            -webkit-box-shadow: inset 0 0 0 1000px #fff;
+            background-color: transparent
+        }
+
+        .admin-login-background {
+            width: 350px;
+            height: 350px;
+            padding: 0px -250px;
+            margin-top: 5%;
+            margin-left: 40%;
+            background-color: floralwhite;
+            border-radius: 25px;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+            font-weight: bold;
+            font-size: 25px
+        }
+
+        .admin-input {
+            border-top-style: none;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            height: 50px;
+            width: 300px;
+            padding-bottom: 0px
+        }
+
+        .admin-input::-webkit-input-placeholder {
+            color: #011446
+        }
+
+        .layui-icon-username {
+            color: #011446 !important
+        }
+
+        .layui-icon-username:hover {
+            color: #9dadce !important
+        }
+
+        .layui-icon-password {
+            color: #011446 !important
+        }
+
+        .layui-icon-password:hover {
+            color: #9dadce !important
+        }
+
+        .admin-input-username {
+            border-top-style: solid;
+
+        }
+
+        .admin-input-verify {
+
+        }
+
+        .admin-button {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            width: 300px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #011446;
+            border: 1px whitesmoke
+        }
+
+        .admin-icon {
+            margin-left: 260px;
+            margin-top: 10px;
+            font-size: 30px
+        }
+
+        i {
+            position: absolute
+        }
+
+        .admin-captcha {
+            position: absolute;
+            margin-left: 205px;
+            margin-top: -45px
+        }
+
+        .login-title {
+            font-family: Microsoft YaHei;
+            text-align: center;
+            color: #011446;
+            font-size: 30px;
+            font-weight: 900;
+            margin-top: 1%;
+            margin-bottom: 1%;
+        }
+
+        .login-title2 {
+            text-align: center;
+            color: #6d6d6d;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+
+        .login-title3 {
+            text-align: center;
+            color: #6d6d6d;
+            font-size: 9px;
+            font-weight: lighter;
+        }
+
+        .login-title4 {
+            text-align: center;
+            color: #6d6d6d;
+            font-size: 9px;
+            font-weight: lighter;
+        }
+
+        .login-form {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        .layui-icon-close {
+            margin-left: 240px;
+            font-size: 20px;
+            margin-top: 23px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="layui-row login-title">${constants.getSystemName()}</div>
+    <div class="layui-col-sm12 layui-col-md12">
+        <div class="layui-carousel zyl_login_height" id="zyllogin" lay-filter="zyllogin" lay-anim="fade"
+             lay-indicator="none" lay-arrow="hover" style="height: 100% !important; width: 100%;">
+            <img src="${ctxPath}/assets/common/images/photo2.jpg" height="100%" width="100%">
+
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-sm12 layui-col-md12 zyl_center zyl_mar_01">
+            <!--            <p class="login-title2"> © 2021辽宁省自然资源厅版权所有</p>-->
+            <!--            <p class="login-title3">技术支持：中国矿业大学（北京）</p>-->
+            <p class="login-title4">建议使用<a href="https://support.dmeng.net/upgrade-your-browser.html">谷歌浏览器</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="zyl_lofo_main">
+        <div class="layui-row">
+            <div class="admin-login-background">
+                <div class="layui-form login-form">
+                    <div class="admin-header">
+                        <span>欢迎登陆</span>
+                    </div>
+                    <form class="layui-form" action="">
+                        <div>
+                            <i class="layui-icon layui-icon-username admin-icon"></i>
+                            <i class="layui-icon layui-icon-close" id="cancel"></i>
+                            <input id="username" name="username" placeholder="请输入用户名" autocomplete="off"
+                                   class="layui-input admin-input admin-input-username" value=" " lay-verType="tips"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                        <div>
+                            <i class="layui-icon layui-icon-password admin-icon"></i>
+                            <input type="password" id="password" name="password" placeholder="请输入密码" value=" "
+                                   autocomplete="off"
+                                   class="layui-input admin-input" lay-verType="tips"
+                                   lay-verify="required" lay-verType="tips" required/>
+                        </div>
+                        <div>
+                            <input type="text" name="kaptcha" id="kaptcha" placeholder="请输入验证码" autocomplete="off"
+                                   class="layui-input admin-input admin-input-verify">
+                            <img class="admin-captcha" width="90" height="40" src="${ctxPath}/kaptcha" alt=""/>
+                            <!--                        <img onClick="this.src=this.src+'?'+Math.random();" id="img" class="admin-captcha" width="90"-->
+                            <!--                             height="40" src="../sys/getVerify">-->
+                        </div>
+                        <div style="margin-top: 20px">
+                            <input type="checkbox" id="remember" name="remember" title="记住密码" lay-skin="primary">
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn admin-button" id="submit"
+                                    style="margin-top: 20px;background-color: #33549988">登录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @/* 加入contextPath属性和session超时的配置 */
+    <script type="text/javascript">
+        var Feng = {
+            ctxPath: "${ctxPath}",
+            version: '${constants.getReleaseVersion()}',
+            kaptchaOpen: '${constants.getKaptchaOpen()}'
+        };
+    </script>
+
+    <!-- js部分 -->
+    <script type="text/javascript"
+            src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+    <script type="text/javascript"
+            src="${ctxPath}/assets/common/js/common.js?v=${constants.getReleaseVersion()}"></script>
+    <script>
+        layui.use(['layer', 'form', 'index', 'HttpRequest', 'notice'], function () {
+            var $ = layui.jquery;
+            var HttpRequest = layui.HttpRequest;
+            var index = layui.index;
+            var notice = layui.notice;
+            var form = layui.form;
+
+            /* 图形验证码 */
+            $('img.login-captcha').click(function () {
+                this.src = this.src + '?t=' + (new Date).getTime();
+            });
+
+            var errorMsg = "${tips!}";
+            if (errorMsg) {
+                notice.error({
+                    title: "登陆失败",
+                    message: errorMsg
+                })
+            }
+            var cookies = getCookie("loginInfo");
+            console.log(cookies)
+            if (cookies == " ") {
+                $("#cancel").css("display", "none");
+            } else {
+                $("#cancel").css("display", "");
+            };
+
+            $(document).ready(function () {
+                //记住密码功能
+                var str = getCookie("loginInfo");//从cookie中获取账号、密码信息
+                str = str.substring(0, str.length);
+                var username = str.split("#")[0];
+                var password = str.split("#")[1];
+                //自动填充用户名和密码
+                $("#username").val(username);
+                $("#password").val(password);
+            });
+
+            //获取cookie
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+                }
+                return "";
+            };
+
+            //checkbox选中事件
+            var remFlag = "";
+            form.on('checkbox',function () {
+                remFlag = $("input[type='checkbox']").is(':checked');
+                if (remFlag == true) { //如果选中设置remFlag为1
+                    //cookie存用户名和密码,存在安全隐患
+                        remFlag = "1";
+                } else { //如果没选中设置remFlag为""
+                    remFlag = "";
+                }
+            });
+
+            var Cancel = "";
+            $('.layui-icon-close').on('click', function () {
+                Cancel = 1;
+                $("#cancel").css("display", "none");
+                $("#username").val("");
+                $("#password").val("");
+                document.cookie="loginInfo=;path=/";
+
+            });
+
+            // 登录操作
+            $('#submit').click(function () {
+                var ajax = new HttpRequest(Feng.ctxPath + "/login", 'post', function (data) {
+                    Feng.success("登录成功!");
+                    index.clearTabCache();
+                    window.location.href = Feng.ctxPath + "/";
+                }, function (data) {
+                    notice.error({
+                        title: "登陆失败",
+                        message: data.message
+                    })
+                });
+                ajax.set("username", $("#username").val());
+                ajax.set("password", $("#password").val());
+                ajax.set("remFlag", remFlag);
+                if (Feng.kaptchaOpen == 'true') {
+                    ajax.set("kaptcha", $("#kaptcha").val());
+                }
+                ajax.start();
+                return false;
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+/*表单页面*/
+.layui-form-item {
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.layui-form-item .layui-inline {
+    margin-bottom: 25px;
+    margin-right: 0;
+}
+
+.form-group-bottom {
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFF;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 3px #e0e0e0;
+}
+
+.layui-card-body {
+    padding-right: 55px;
+}
+
+.errorInvalidClass {
+    background: rgba(255, 0, 0, 0.25) !important;
+}
+
+.large-header{
+    padding: 5px 0;
+    font-size: 16px;
+    padding-left: 30px;
+}
+
+.download-url{
+    color: #00a0e9;
+    text-decoration: underline;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+a.info {
+    color: #5a8dff;
+    cursor: pointer;
+}
+
+.padding-left-xs{
+    padding-right: 5px !important;
+}
+
+.padding-left-sm{
+    padding-right: 10px !important;
+}
+
+.padding-left-lg{
+    padding-right: 20px !important;
+}

@@ -1,0 +1,148 @@
+@font-face {
+    font-family: "iconfont"; /* Project id 2821398 */
+    src: url('iconfont.woff2?t=1631927370898') format('woff2'),
+    url('iconfont.woff?t=1631927370898') format('woff'),
+    url('iconfont.ttf?t=1631927370898') format('truetype');
+}
+
+@font-face {
+    font-family: "iconfont"; /* Project id 2931085 */
+    src: url('iconfont2.woff2?t=1636618360513') format('woff2'),
+    url('iconfont2.woff?t=1636618360513') format('woff'),
+    url('iconfont2.ttf?t=1636618360513') format('truetype');
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont3.woff2?t=1653812925869') format('woff2'),
+    url('iconfont3.woff?t=1653812925869') format('woff'),
+    url('iconfont3.ttf?t=1653812925869') format('truetype');
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont.woff2?t=1657539023297') format('woff2'),
+    url('iconfont.woff?t=1657539023297') format('woff'),
+    url('iconfont.ttf?t=1657539023297') format('truetype');
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont4.woff2?t=1653814901638') format('woff2'),
+    url('iconfont4.woff?t=1653814901638') format('woff'),
+    url('iconfont4.ttf?t=1653814901638') format('truetype');
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont1.woff2?t=1663244619201') format('woff2'),
+    url('iconfont1.woff?t=1663244619201') format('woff'),
+    url('iconfont1.ttf?t=1663244619201') format('truetype');
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont6.woff2?t=1663252264252') format('woff2'),
+    url('iconfont6.woff?t=1663252264252') format('woff'),
+    url('iconfont6.ttf?t=1663252264252') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-yigouxuan:before {
+    content: "\e63d";
+}
+
+.icon-component:before {
+    content: "\e6f2";
+}
+
+.layui-extend-remote:before {
+    content: "\ead2";
+}
+
+.layui-extend-landdetect:before {
+    content: "\edaa";
+}
+
+.layui-extend-logo:before {
+    content: "\e617";
+}
+
+.layui-extend-map1:before {
+    content: "\e696";
+}
+
+.layui-extend-map:before {
+    content: "\e611";
+}
+
+.layui-extend-ground:before {
+    /*content: "\e600";*/
+    content:"\e7fc";
+}
+
+.layui-extend-file:before {
+    content: "\e61a";
+}
+
+.layui-extend-farm:before {
+    content: "\e63d";
+    /*content: "\e64b";*/
+}
+
+.layui-extend-soil:before {
+    content: "\e6f2";
+}
+
+.layui-extend-sand:before {
+    content: "\e607";
+}
+.layui-extend-system:before {
+    content: "\e632";
+}
+
+.layui-extend-statis:before {
+    content: "\e639";
+}
+
+.layui-extend-product:before {
+    content: "\e628";
+}
+
+.layui-extend-project:before {
+    content: "\e639";
+}
+
+.icon-result:before {
+    content: "\e606";
+}
+
+.icon-event:before {
+    content: "\e61d";
+}
+
+.icon-map:before {
+    content: "\e609";
+}
+
+.icon-analysis:before {
+    content: "\e99e";
+}
+
+.icon-home:before {
+    content: "\e7ac";
+}
+
+.icon-nodate {
+    content: "\e601";
+}
+
+.icon-star:before {
+    content: "\e602";
+}

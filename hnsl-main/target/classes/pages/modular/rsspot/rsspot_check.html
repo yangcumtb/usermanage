@@ -1,0 +1,393 @@
+@layout("/common/_form.html",{js:["/assets/modular/rsspot/rsspot_check.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+
+
+    .layui-input-block {
+        margin-left: 200px;
+    }
+</style>
+<form class="layui-form" id="rsspotInfoForm" lay-filter="rsspotInfoForm"
+      style="width: 1000rem;margin-top: 10rem;height: 500px">
+    <div class="layui-fluid" style="padding-bottom: 30rem;">
+        <div class="layui-card" style="margin-top: 10px;display: none" id="comments">
+            <div class="layui-card-header">驳回意见</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md12">
+                        <div class="layui-input-block">
+                            <textarea  name="rejectcomment" type="text" class="layui-input"lay-verType="tips" disabled style="height: 100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">图斑基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item" id="area-picker" style="margin-top: 20rem">
+                    <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                    <div class="layui-input-inline" style="display: none">
+                        <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                            <option value="">--选择省--</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 17rem">
+                            <label class="layui-form-label">矿区所在市</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 130rem">
+                            <select id="xzs" name="xzs" class="city-selector" data-value=" " disabled>
+                                <option value="">--选择市--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: -27rem">
+                            <label class="layui-form-label">矿区所在区/县</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 25rem;width: 130rem">
+                            <select id="xzx" name="xzx" class="county-selector" disabled>
+                                <option value="">--选择区--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="display: none">
+                        <div class="layui-input-inline">
+                            <input id="base_admin" name="base_admin" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <!--    <div class="layui-form-item">-->
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">采矿证号</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="ckzh" name="ckzh"  type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 17rem">
+                            <label class="layui-form-label">中心点经度</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 130rem">
+                            <input type="text" name="kfx" id="kfx"  autocomplete="off"
+                                   class="layui-input"  disabled>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block"style="margin-left: -37rem" >
+                            <label class="layui-form-label">中心点纬度</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 25rem;width: 130rem" >
+                            <input type="text" name="kfy" id="kfy" autocomplete="off"
+                                   class="layui-input" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 30rem">
+                            <label class="layui-form-label">变化面积(㎡)</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="changearea" name="changearea" placeholder="请输入变化面积" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 10rem">
+                            <label class="layui-form-label">变化类型</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="changetype" name="changetype" placeholder="请输入变化类型" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline" >
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">矿山名称</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="minename" name="minename" placeholder="请输入矿山名称" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">备注</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input id="bz" name="bz" placeholder="请输入备注" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form" id="rsspotCheckInfoForm" lay-filter="rsspotCheckInfoForm"
+      style="width: 1000rem;margin-top: 10rem;height: 1000px">
+    <div class="layui-fluid" style="padding-bottom: 30rem;">
+        <div class="layui-card">
+            <div class="layui-card-header">图斑核查信息</div>
+            <div class="layui-card-body">
+                <input name="id" type="hidden"/>
+                <div class="layui-form-item" style="margin-top: 20rem">
+                    <!--    <div class="layui-form-item">-->
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">图斑编号</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="id" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">核查面积(m²)</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input  name="checkarea"  type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">核查人员</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="checkman" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">核查时间</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="checktime"  type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline" >
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">是否认可</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <select name="confirm" class="layui-select" disabled>
+                                <option value=""></option>
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">创建时间</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="createTime" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">创建人员</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="createUser" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">破坏地类</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="damagelandtype" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">破坏方式</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="damagemode" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">矿区变化</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <select name="minechangetype" class="layui-select" disabled>
+                                <option value=""></option>
+                                <option value="1">修复</option>
+                                <option value="0">破坏</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">拐点坐标</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="pointcoordinate" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">治理措施</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="reclaimmode" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">恢复地类</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="recoverlandtype" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 25rem">
+                            <label class="layui-form-label">遥感解译面积</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="rsarea" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 20rem">
+                            <label class="layui-form-label">是否使用rtk</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <select name="rtk" class="layui-select" disabled>
+                                <option value=""></option>
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">修改时间</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="updateTime" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">修改人员</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="updateUser" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-block" style="margin-left: 12rem">
+                            <label class="layui-form-label">备注</label>
+                        </div>
+                        <div class="layui-input-inline" style="margin-left: 80rem;width: 300rem">
+                            <input name="memark" type="text" class="layui-input"  lay-verType="tips" disabled/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form" id="rsspotCheckForm" lay-filter="rsspotCheckForm"
+      style="width: 1000rem;margin-top: 10rem;height: 500px">
+    <div class="layui-fluid" style="padding-bottom: 30px;">
+        <div class="layui-card">
+            <div class="layui-card-header">佐证材料</div>
+            <div class="layui-card-body">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend>文件查看</legend>
+                </fieldset>
+                <div class="layui-form-item" style="margin-top: -10rem">
+                    <div class="layui-upload" style="margin-top:10rem;width: 100%">
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>类型</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="FileList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid" style="padding-bottom: 100px;">
+        <div class="layui-card">
+            <div class="layui-card-header">图斑审核</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">审核结果<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select name="checkpoint" lay-filter="select-checkpoint" id="checkpoint" class="layui-select">
+                                <option value=""></option>
+                                <option value="1">通过</option>
+                                <option value="2">驳回</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text" id="a6" style="display: none">
+                    <label class="layui-form-label">驳回意见</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea" id="rejectcomment" name="rejectcomment"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-right">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit style="background-color: #33549988;">
+            &emsp;提交&emsp;
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

@@ -1,0 +1,3 @@
+<% for(sysMenu in sysMenus!){ %>
+INSERT INTO `sys_menu`(`MENU_ID`, `CODE`, `PCODE`, `PCODES`, `NAME`, `ICON`, `URL`, `SORT`, `LEVELS`, `MENU_FLAG`, `DESCRIPTION`, `STATUS`, `NEW_PAGE_FLAG`, `OPEN_FLAG`, `SYSTEM_TYPE`, `CREATE_TIME`, `UPDATE_TIME`, `CREATE_USER`, `UPDATE_USER`) VALUES (${sysMenu.menuId}, '${sysMenu.code}', '${sysMenu.pcode}', '${sysMenu.pcodes}', '${sysMenu.name}', '${sysMenu.icon}', '${sysMenu.url}', ${sysMenu.sort}, ${sysMenu.levels}, '${sysMenu.menuFlag}', '${sysMenu.description}', '${sysMenu.status}', '${sysMenu.newPageFlag}', '${sysMenu.openFlag}', '${sysMenu.systemType}', '${sysMenu.createTime}', '${sysMenu.updateTime}', ${sysMenu.createUser}, ${sysMenu.updateUser});
+<% } %>

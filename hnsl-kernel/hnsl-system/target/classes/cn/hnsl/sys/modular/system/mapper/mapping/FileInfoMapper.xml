@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.sys.modular.system.mapper.FileInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.hnsl.sys.modular.system.entity.FileInfo">
+        <id column="file_id" property="fileId" />
+        <result column="file_bucket" property="fileBucket" />
+        <result column="file_name" property="fileName" />
+        <result column="file_suffix" property="fileSuffix" />
+        <result column="file_size_kb" property="fileSizeKb" />
+        <result column="final_name" property="finalName" />
+        <result column="file_path" property="filePath" />
+        <result column="file_year" property="fileYear" />
+        <result column="file_business_type" property="fileBusinessType" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+        <result column="associate_id" property="associateId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        file_id AS "fileId", file_bucket AS "fileBucket", file_name AS "fileName", file_suffix AS "fileSuffix", file_size_kb AS "fileSizeKb", final_name AS "finalName", file_path AS "filePath", file_year AS "fileYear", file_buness_type AS "fileBunessType", create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser", associate_id AS "associateId"
+    </sql>
+
+    <sql id="Base_Column_List_T">
+        t.file_id AS "fileId", t.file_bucket AS "fileBucket", t.file_name AS "fileName", t.file_suffix AS "fileSuffix", t.file_size_kb AS "fileSizeKb", t.final_name AS "finalName", t.file_path AS "filePath", t.file_year AS "fileYear", t.file_buness_type AS "fileBunessType", t.create_time AS "createTime", t.update_time AS "updateTime", t.create_user AS "createUser", t.update_user AS "updateUser", t.associate_id AS "associateId"
+    </sql>
+
+</mapper>

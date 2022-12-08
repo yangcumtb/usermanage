@@ -1,0 +1,103 @@
+@layout("/common/_container.html",{js:["/assets/modular/project/projectExamineOperation/examineOperationScxm.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html{
+        font-size: 1px;
+    }
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" style="margin-top: 20rem">
+                            <div class="layui-inline">
+                                <input type="text" id="xmmc" class="layui-input" autocomplete="off"
+                                       placeholder="请输入项目名称">
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="layui-fluid" style="margin-top: 5rem">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="examineOperationTable" lay-filter="examineOperationTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("examine:scxm:exam")){
+    <a class="layui-action layui-action-primary" lay-event="exam" style="color: #33549988">提交上级验收</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @}
+    @if(shiro.hasPermission("examine:scxm:finish")){
+    <a class="layui-action layui-action-primary" lay-event="exam" style="color: #33549988">通过验收</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @}
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">查看</a>
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

@@ -1,0 +1,143 @@
+@layout("/common/_container.html",{js:["/assets/modular/shanshuiSupervisor/shanshuiProgress/shanshuiProgress.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+
+    .layui-nav {
+        background-color: white !important;
+        z-index: 999;
+    }
+
+    .layui-row {
+        width: 1800rem;
+        margin-left: -100rem;
+    }
+</style>
+<div class="layui-container" style="margin-top: 50px;width:1700rem">
+    <div class="layui-row">
+        <div class="layui-col-sm6 layui-col-md6 layui-col-lg6">
+            <div class="layui-fluid">
+                <div class="layui-card">
+                    <div class="layui-card-header"><span id="projectName">test</span>历史进度</div>
+                    <div class="layui-card-body">
+                        <table class="layui-table" id="shanshuiProgressTable"
+                               lay-filter="shanshuiProgressTable"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-sm6 layui-col-md6 layui-col-lg6">
+            <div class="layui-fluid">
+                <div class="layui-card">
+                    <div class="layui-card-header">进度填报</div>
+                    <div class="layui-card-body" style="text-align: center">
+                        <form class="layui-form" id="shanshuiProgressForm" lay-filter="shanshuiProgressForm">
+                            <div class="layui-form-item" style="margin-top: 0rem;">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目进度<span style="color: red;">*</span>：</label>
+                                    <div class="layui-input-inline">
+                                        <input id="percent" name="percent" placeholder="填报项目百分比" type="text"
+                                               class="layui-input"
+                                               lay-verify="required|numberH" lay-verType="tips" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-top: 0rem;">
+                                <div class="layui-inline" style="margin-top: 20px">
+                                    <div class="layui-upload-drag" id="imgUpload" style=" width: 300rem;
+                                         margin-left: 60rem;
+                                           height: 200px;">
+                                        <p>点击上传，或将图片拖拽到此处</p>
+                                        <div class="layui-hide" id="uploadDemoView">
+                                            <hr>
+                                            <img src="" alt="上传成功后渲染" style="height:100px;max-width: 250rem">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-upload" style="margin-top:10rem;width: 100%">
+                                <div class="layui-inline" style="margin-right: 30rem">
+                                    <label class="layui-form-label" style="width: 200rem
+">监理日志或施工日志、市技术支撑单位说明(pdf、jpg、jpeg、png)</label>
+                                </div>
+                                <button type="button" class="layui-btn layui-btn-normal" id="selectFile"
+                                        style="background-color: #33549988;">选择一个文件
+                                </button>
+                                <button type="button" class="layui-btn layui-btn-danger" id="uploadAction">开始上传</button>
+                                <div class="layui-upload-list">
+                                    <table class="layui-table">
+                                        <colgroup>
+                                            <col>
+                                            <col>
+                                            <col>
+                                            <col>
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th>文件名</th>
+                                            <th>大小</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="FileList"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group-bottom text-center">
+                                <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;填报&emsp;</button>
+                            </div>
+                        </form>
+                        <span id="Finish" style="display: none">今日已上传进度！
+                            <button id="Recall" class="layui-btn" lay-filter="btnRecall" lay-submit>&emsp;撤回今日提交&emsp;</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

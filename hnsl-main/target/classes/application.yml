@@ -1,0 +1,59 @@
+server:
+  port: 8082
+  max-http-header-size: 10240
+  servlet:
+    context-path: /spotmanage
+
+beetl:
+  resource-auto-check: true         #热加载beetl模板，开发时候用
+
+spring:
+  application:
+    name:
+  profiles:
+    active: pg
+#    active: produce
+  mvc:
+    view:
+      prefix: /pages
+  servlet:
+    multipart:
+      max-request-size: 1000MB
+      max-file-size: 1000MB
+  spring:
+    jackson:
+      time-zone: GMT+8
+      date-format: yyyy-MM-dd HH:mm:ss.SSS
+
+mybatis-plus:
+  mapper-locations: classpath*:cn/hnsl/**/mapping/*.xml, classpath:/META-INF/modeler-mybatis-mappings/*.xml
+  # 流程设计器mapper修复 https://blog.csdn.net/xljx_1/article/details/105320252
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    #关闭日志 log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    #开启日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: assign_id
+      table-underline: true
+
+#每小时一次
+#https://qqe2.com/cron
+cronConfig:
+  asynDataTest: 0 0 0/1 * * ?
+
+log:
+  path: ./_app_logs
+
+file:
+  path: /usr/spt/file
+

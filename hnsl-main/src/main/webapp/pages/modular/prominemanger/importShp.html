@@ -1,0 +1,76 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/batchImportShp.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<style>
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">图斑空间数据批量导入</span>
+</div>
+
+<div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <div class="layui-inline" style="margin-right: 30px">
+                            <label class="layui-form-label" style="width: 100px">文件类型</label>
+                            <div class="layui-input-inline">
+                                <select class="layui-select" lay-filter="shptype" lay-verify="required">
+                                    <option value="TBBJ" selected>图斑边界矢量</option>
+                                    <option value="KQBJ">矿权边界矢量</option>
+                                    <option value="GHXFBJ">规划修复图斑矢量边界</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="layui-btn layui-btn-normal" id="testList" style="background-color: #33549988">选择多文件</button>
+                        <div class="layui-upload-list" style="width: 100%">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="fileList"></tbody>
+                            </table>
+                        </div>
+                        <div style="text-align:center">
+                            <button type="button" class="layui-btn" id="startUpload" style="background-color: #33549988">开始上传</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-action layui-action-primary" lay-event="edit" style="background-color: #ffa847">删除</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="edit">开始</a>
+</script>
+@}

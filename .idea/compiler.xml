@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hnsl-base" />
+        <module name="hnsl-core" />
+        <module name="hnsl-main" />
+        <module name="hnsl-system" />
+        <module name="hnsl-socket" />
+        <module name="hnsl-validator" />
+        <module name="hnsl-generator" />
+        <module name="hnsl-model" />
+        <module name="hnsl-base-auth" />
+        <module name="hnsl-oauth2" />
+        <module name="hnsl-dbctn" />
+        <module name="hnsl-excel" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hnsl-base" target="1.8" />
+      <module name="hnsl-base-auth" target="1.8" />
+      <module name="hnsl-core" target="1.8" />
+      <module name="hnsl-dbctn" target="1.8" />
+      <module name="hnsl-excel" target="1.8" />
+      <module name="hnsl-generator" target="1.8" />
+      <module name="hnsl-kernel" target="1.8" />
+      <module name="hnsl-main" target="1.8" />
+      <module name="hnsl-model" target="1.8" />
+      <module name="hnsl-oauth2" target="1.8" />
+      <module name="hnsl-socket" target="1.8" />
+      <module name="hnsl-system" target="1.8" />
+      <module name="hnsl-validator" target="1.8" />
+      <module name="usermanage" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hnsl-base" options="-parameters" />
+      <module name="hnsl-base-auth" options="-parameters" />
+      <module name="hnsl-core" options="-parameters" />
+      <module name="hnsl-dbctn" options="-parameters" />
+      <module name="hnsl-excel" options="-parameters" />
+      <module name="hnsl-generator" options="-parameters" />
+      <module name="hnsl-main" options="-parameters" />
+      <module name="hnsl-model" options="-parameters" />
+      <module name="hnsl-oauth2" options="-parameters" />
+      <module name="hnsl-socket" options="-parameters" />
+      <module name="hnsl-system" options="-parameters" />
+      <module name="hnsl-validator" options="-parameters" />
+    </option>
+  </component>
+</project>

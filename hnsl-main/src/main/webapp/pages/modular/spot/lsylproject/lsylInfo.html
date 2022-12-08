@@ -1,0 +1,197 @@
+@layout("/common/_container.html",{js:["/assets/modular/spot/lsylproject/lsylInfo.js"]}){
+
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 1.50rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title"> </span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item" id="area">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">图斑编号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name=" " class="layui-input" id="id"
+                                           placeholder="请输入图斑编号">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="xmmc" class="layui-input" id="xmmc"
+                                           placeholder="请输入项目名称">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">地区</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="dq " class="layui-input" id="dq"
+                                           placeholder="请输入地区">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn "><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">治理年度</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="zlnd " class="layui-input" id="zlnd"
+                                               placeholder="请输入治理年度">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">*修复类型</label>
+                                    <div class="layui-input-inline">
+                                        <select id="xflx" name="xflx" class="layui-select" data-value=" "
+                                                lay-filter="xflx">
+                                            <option value=""></option>
+                                            <option value="生态修复">生态修复</option>
+                                            <option value="辅助再生">辅助再生</option>
+                                            <option value="转型利用">转型利用</option>
+                                            <option value="自然恢复">自然恢复</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目状态</label>
+                                    <div class="layui-input-inline">
+                                        <select id="xmzt" name="xmzt" class="layui-select" data-value=" "
+                                                lay-filter="xmzt">
+                                            <option value=""></option>
+                                            <option value=1>驳回</option>
+                                            <option value=2>入库</option>
+                                            <option value=3>申请复议</option>
+                                            <option value=4>待处理</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                @if(shiro.hasPermission("lsyl:kParcel:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出
+                                </button>
+                                <button id="btnExp2" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>批量导入
+                                </button>
+                                @if(shiro.hasPermission("lsyl:spottableHistoricalmineProject:data")){
+                                <button id="btnFile" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>材料清单
+                                </button>
+                                @}
+                            </div>
+                            <span>项目状态项目状态：</span>
+                            <span class="layui-badge"
+                                  style="background-color: rgba(227,152,152,0.5)">驳回</span>
+                            <span class="layui-badge"
+                                  style="background-color: rgba(198,224,180,0.5);color: #9ea7b4">入库</span>
+                            <span class="layui-badge-rim" style="background-color: rgba(255,165,0,0.4)">申请复议</span>
+                            <span class="layui-badge-rim">待处理</span>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="lsylInfoTable"
+                           lay-filter="lsylInfoTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tool">
+    @if(shiro.hasPermission("lsyl:spottableHistoricalmineProject:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988" id="edit">修改</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <!--    <a class="layui-action layui-action-primary" lay-event="uploadPic" style="color: #33549988">图片</a>-->
+    <!--    <div class="layui-divider layui-divider-vertical" role="separator"></div>-->
+    @if(shiro.hasPermission("lsyl:spottableHistoricalmineProject:check")){
+    <a class="layui-action layui-action-primary" lay-event="check" style="color: #33549988">审批</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">查看</a>
+    <!--    <div class="layui-divider layui-divider-vertical" role="separator"></div> -->
+    <!--    <a class="layui-action layui-action-primary" lay-event="location" style="color: #33549988">定位</a>-->
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    @if(shiro.hasPermission("lsyl:spottableHistoricalmineProject:remove")){
+    <a class="layui-btn layui-btn-normal layui-btn-xs" style="background-color: #ffa847" lay-event="delete">删除</a>
+    @}
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

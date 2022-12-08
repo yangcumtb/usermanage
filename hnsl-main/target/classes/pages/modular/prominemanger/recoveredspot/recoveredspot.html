@@ -1,0 +1,214 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/recoveredspot/recoveredspot.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">已修复图斑信息表管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" id="area-picker" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">图斑编号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="id" class="layui-input" id="id"
+                                           placeholder="请输入图斑编号">
+                                </div>
+                            </div>
+                            <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+                            <div class="layui-input-inline" style="display: none">
+                                <select name="province" class="province-selector" data-value="辽宁省"
+                                        style="display: none">
+                                    <option value="">--选择省--</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在市</label>
+                                <div class="layui-input-inline">
+                                    <select id="xzs" name="xzs" class="city-selector">
+                                        <option value="">--选择市--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">矿区所在区/县</label>
+                                <div class="layui-input-inline">
+                                    <select id="xzx" name="xzx" class="county-selector">
+                                        <option value="">--选择区--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container" style="display: none">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">图斑所属矿权名称</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="sukq" class="layui-input" id="sukq"
+                                               placeholder="请输入矿权名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">图斑所属矿权编号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="kqbh" class="layui-input" id="kqbh"
+                                               placeholder="请输入矿权编号">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">二调地类</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="sddl" id="sddl" placeholder="请输入二调地类"
+                                               autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">有无用地手续</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ydsx" name="ydsx" class="layui-select" lay-filter="select-ydsx">
+                                            <option value="">有无用地手续</option>
+                                            <option value="1">有</option>
+                                            <option value="0">无</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">修复方式</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="xffs" class="layui-input" id="xffs"
+                                               placeholder="请输入修复方式">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                @if(shiro.hasPermission("prominemanger:recoveredspot:add")){
+                                <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <button id="btnExp" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出选中数据
+                                </button>
+                                <button id="btnExp1" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>导出全部数据
+                                </button>
+                                <button id="btnExp2" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>批量导入
+                                </button>
+                                <button id="btnExp3" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>图片批量导入
+                                </button>
+                                <button id="btnChangeSpot" class="layui-btn icon-btn"
+                                        style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe67d;</i>转换损毁图斑
+                                </button>
+                                @if(shiro.hasPermission("prominemanger:recoveredspot:sql")){
+                                <button id="btnSql" class="layui-btn icon-btn" style="background-color: #33549988">
+                                    <i
+                                            class="layui-icon">&#xe67d;</i>导出全省shp数据
+                                </button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="recoveredspotTable" lay-filter="recoveredspotTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("prominemanger:recoveredspot:edit")){
+    <a class="layui-action layui-action-primary" lay-event="edit" style="color: #33549988">修改</a>
+    @}
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="detail" style="color: #33549988">详情</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="uploadPic" style="color: #33549988">图片</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="location" style="color: #33549988">定位</a>
+    @if(shiro.hasPermission("prominemanger:recoveredspot:remove")){
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="delete" style="background-color: #ffa847">删除</a>
+    @}
+
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px' +
+            '';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

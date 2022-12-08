@@ -1,0 +1,292 @@
+@layout("/common/_form.html",{js:["/assets/modular/project/projectCheck/finaljsxmCheck/finalCheckJsxm_recheck.js"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+
+    .layui-input-block {
+        margin-left: 200rem;
+    }
+    .layui-form-item .layui-input-inline {
+        width: 180rem;
+    }
+</style>
+<form class="layui-form" id="finalCheckJsxmCopy1Form" lay-filter="finalCheckJsxmCopy1Form"
+      style="width: 1000rem;height: 1800px;margin-top: 10rem">
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-card">
+            <div class="layui-card-header">项目信息</div>
+            <div class="layui-card-body">
+                <input name="id" type="hidden"/>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="a" style="margin-top: 10rem;">
+                        <label class="layui-form-label">建设项目名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="xmmc" name="xmmc" placeholder="请输入该建设项目名称" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="b" style="margin-top: 10rem;">
+                        <label class="layui-form-label">建设单位名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="jsdw" name="jsdw" placeholder="请输入该建设单位名称" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="c" style="margin-top: 10rem;">
+                        <label class="layui-form-label">建设单位地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="dwdz" name="dwdz" placeholder="请输入建设单位地址" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="f" style="margin-top: 10rem;">
+                        <label class="layui-form-label">具体位置描述<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="wz" name="wz" placeholder="请输入具体位置描述" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline"  style="margin-top: 10rem; ">
+                        <label class="layui-form-label">填报类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select id="tjlx" name="tjlx" class="layui-select" data-value="1"
+                                    lay-filter="tjlx" >
+                                <option value="0">初审</option>
+                                <option value="1">终审</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item" id="area-picker">
+                    <div class="layui-form-label" style="display: none">所在省/隐藏项<span style="color: red;display: none">*</span></div>
+                    <div class="layui-input-inline" style="width: 200rem;display: none ">
+                        <select name="province" class="province-selector" data-value="辽宁省"
+                                style="display:none" >
+                            <option value="">请选择省</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline" id="ad" style="margin-top: 10rem;">
+                        <label class="layui-form-label">项目所在市<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select name="shi" class="city-selector" data-value=" "  >
+                                <option value="">请选择市</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="ae" style="margin-top: 10rem;">
+                        <label class="layui-form-label">项目所在县<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select name="xian" class="county-selector" data-value=" "  >
+                                <option value="">请选择县/区</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="g" style="margin-top: 10rem;">
+                        <label class="layui-form-label">项目涉及面积<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="xmmj" name="xmmj" placeholder="整数16位，小数2位" type="text"
+                                   class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="h" style="margin-top: 10rem;">
+                        <label class="layui-form-label">中心点经度<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="kfx" name="kfx" placeholder="保留六位小数" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="j" style="margin-top: 10rem;">
+                        <label class="layui-form-label">中心点纬度<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="kfy" name="kfy" placeholder="保留6位小数" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="k" style="margin-top: 10rem;">
+                        <label class="layui-form-label">复垦义务人<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="ywr" name="ywr" placeholder="请输入该项目复垦义务人" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="m" style="margin-top: 10rem;">
+                        <label class="layui-form-label">编制单位地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="bzdwdz" name="bzdwdz" placeholder="请输入编制单位地址" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="l" style="margin-top: 10rem;">
+                        <label class="layui-form-label">方案编制单位<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="bzdw" name="bzdw" placeholder="请输入方案编制单位" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="o" style="margin-top: 10rem;">
+                        <label class="layui-form-label">预估复垦经费<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="fkjf" name="fkjf" placeholder="请输入预估复垦经费" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="n" style="margin-top: 10rem;">
+                        <label class="layui-form-label">法人代表<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="frdb" name="frdb" placeholder="请输入法人代表" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="q" style="margin-top: 10rem;">
+                        <label class="layui-form-label">方案到期时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="dqsj" name="dqsj" placeholder="请输入方案到期时间" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="p" style="margin-top: 10rem;">
+                        <label class="layui-form-label">方案生效时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="sxsj" name="sxsj" placeholder="请输入方案生效时间" type="text" class="layui-input"
+                                    />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="y" style="margin-top: 10rem;">
+                        <label class="layui-form-label">主管部门<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select name="zgbm" id="zgbm" lay-filter="zgbm" >
+                                <option value="">填省管、市管</option>
+                                <option value="省管">省管</option>
+                                <option value="市管">市管</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="x" style="margin-top: 10rem;">
+                        <label class="layui-form-label">方案服务年限<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="fwnx" name="fwnx" placeholder="请输入方案服务年限" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="z" style="margin-top: 10rem;">
+                        <label class="layui-form-label">项目评审节点<span
+                                style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="psjd" name="psjd" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="a1" style="margin-top: 10rem;">
+                        <label class="layui-form-label">项目驳回节点<span
+                                style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="psbhjd" name="psbhjd" type="text" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id="a3" style="margin-top: 10rem;">
+                        <label class="layui-form-label">县级终审时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pssjXf" name="pssjXf" placeholder="请输入县级终审时间" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="a2" style="margin-top: 10rem;">
+                        <label class="layui-form-label">县级初审时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pssjXs" name="pssjXs" placeholder="请输入县级初审时间" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+
+                    <div class="layui-inline" id="a4" style="margin-top: 10rem;">
+                        <label class="layui-form-label">市级评审时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pssjC" name="pssjC" placeholder="请输入市级评审时间" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                    <div class="layui-inline" id="a5" style="margin-top: 10rem;">
+                        <label class="layui-form-label">省级评审时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="pssjS" name="pssjS" placeholder="请输入省级评审时间" type="text" class="layui-input"
+                                   />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid" style="padding-bottom: 70rem;height: 200px">
+        <div class="layui-card">
+            <div class="layui-card-header">项目资料</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">资料上传<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <button type="button" id="projectPDFBtn" class="layui-btn" lay-filter="projectPDFBtn" style="background-color: #33549988;">
+                                方案上传
+                            </button>
+                            <button type="button" id="firstAdPDFBtn" class="layui-btn" lay-filter="firstAdPDFBtn" style="background-color: #33549988;">
+                                初审意见提交
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

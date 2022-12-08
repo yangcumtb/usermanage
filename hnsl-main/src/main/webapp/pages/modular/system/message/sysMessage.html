@@ -1,0 +1,45 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/message/sysMessage.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">系统消息管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label w-auto">标题:</label>
+                                <div class="layui-input-inline">
+                                    <input id="title" class="layui-input" type="text" placeholder="请输入标题"/>
+                                </div>
+
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label w-auto">发布人:</label>
+                                <div class="layui-input-inline">
+                                    <input id="sender" class="layui-input" type="text" placeholder="请输入发布人"/>
+                                </div>
+
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>全部标注已读</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="sysMessageTable" lay-filter="sysMessageTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+@}

@@ -1,0 +1,32 @@
+@layout("/common/_container.html",{js:["/assets/modular/statistic/statistic_pclose.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <button id="btnExpExcel" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出Excel报表
+                                </button>
+                                <button id="btnExpWord" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>导出Word报表
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="statisticTable" lay-filter="statisticTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+
+</script>
+@}

@@ -1,0 +1,40 @@
+@layout("/common/_container.html",{plugins:["leaflet"],js:["/assets/modular/map/js/mapConfig.js","/assets/modular/map/js/terraformer.js","/assets/modular/map/js/terraformer-wkt-parser.js","/assets/modular/prominemanger/damagespot/damagespot_location.js"],css:["/assets/modular/map/css/common.css","/assets/modular/map/css/map.css"]}){
+<style>
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    table td, table th {
+        border: 1px solid #cad9ea;
+        color: #666;
+        height: 20px;
+    }
+
+    table thead th {
+        background-color: #CCE8EB;
+
+    }
+
+    table tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    table tr:nth-child(even) {
+        background: #F5FAFA;
+    }
+    div.map {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<div class="map-content">
+    <div id="mapDiv" class="map" ></div>
+    <div id="latlng">
+        经度:[ <span style="font-size: 0.9em" id="lng">113.58964251</span> ],
+        纬度:[ <span style="font-size: 0.9em" id="lat">41.23654897</span> ]
+    </div>
+</div>
+@}

@@ -1,0 +1,265 @@
+<link href="${ctxPath}/assets/expand/plugins/leaflet/leaflet.css" rel="stylesheet" type="text/css"/>
+<style>
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    #tool {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        z-index: 999;
+        background: #fff;
+        padding: 10px;
+    }
+
+    .note {
+        text-align: center;
+        background: #ececec;
+        line-height: 30px;
+        color: #F44336;
+        font-weight: 500;
+        letter-spacing: 4px;
+    }
+
+    #tool .layui-form-item .layui-inline {
+        margin-right: 0px;
+    }
+
+</style>
+<div class="layui-form layui-form-pane" id="tool">
+    <div class="layui-form-item layui-row layui-col-space6" style="margin: 0">
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">经度(度)</label>
+            <div class="layui-input-block">
+                <input id="lngD" name="rvCode" placeholder="请输入经度(度)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">经度(分)</label>
+            <div class="layui-input-block">
+                <input id="lngF" name="rvCode" placeholder="请输入经度(分)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">经度(秒)</label>
+            <div class="layui-input-block">
+                <input id="lngM" name="rvCode" placeholder="请输入经度(秒)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <button class="layui-btn" id="WGS_Btn">&emsp;直接定位&emsp;</button>
+            <button class="layui-btn" id="GCJ_Btn">&emsp;转换后定位&emsp;</button>
+        </div>
+    </div>
+    <div class="layui-form-item layui-row layui-col-space6" style="margin: 0">
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">纬度(度)</label>
+            <div class="layui-input-block">
+                <input id="latD" name="rvCode" placeholder="请输入纬度(度)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">纬度(分)</label>
+            <div class="layui-input-block">
+                <input id="latF" name="rvCode" placeholder="请输入纬度(分)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+            <label class="layui-form-label">纬度(秒)</label>
+            <div class="layui-input-block">
+                <input id="latM" name="rvCode" placeholder="请输入纬度(秒)" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md3" style="margin-bottom: 5px">
+
+            <button class="layui-btn layui-btn-disabled" id="save_Btn" disabled>&emsp;关闭定位窗口 ， 保存定位结果&emsp;</button>
+        </div>
+    </div>
+    <div class="layui-form-item layui-row layui-col-space6 note" style="margin: 0">
+        转换说明：[转换后定位] 适用于GCJ-02坐标系,[直接定位] 适用于WGS84,CGCS2000坐标系
+    </div>
+</div>
+
+<div id="map"></div>
+
+<!-- js部分 -->
+<script src="${ctxPath}/assets/expand/plugins/leaflet/leaflet.js"></script>
+<script src="${ctxPath}/assets/expand/plugins/leaflet/esri-leaflet.js"></script>
+<script src="${ctxPath}/assets/expand/plugins/leaflet/leaflet.ChineseTmsProviders.js"></script>
+<script src="${ctxPath}/assets/expand/plugins/leaflet/project.js"></script>
+<script>
+    layui.use(['layer', 'admin'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var admin = layui.admin;
+        var obj = {_latlng: {}};
+        Object.defineProperty(obj, 'latlng', {
+            configurable: true,
+            set: function (value) {
+                this._latlng = value;
+
+                watchLatlng(value);
+            },
+            get: function () {
+                return this._latlng;
+            }
+        })
+
+        var oldLatlng = null;
+
+        var center = [33.925378968036775, 113.60880374908449];
+        var zoom = 7;
+
+        if (admin.getLayerData('#map') != undefined && admin.getLayerData('#map').latlng != undefined) {
+            oldLatlng = admin.getLayerData('#map').latlng;
+            center = oldLatlng;
+            zoom = 14;
+        }
+
+        var map = L.map("map", {
+            zoomControl: false,
+            attributionControl: false
+        }).setView(center, zoom);
+
+
+        L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }).addTo(map);
+
+        L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+            maxZoom: 18,
+            minZoom: 5
+        }).addTo(map);
+
+        var tmpMarker = null;
+        var marker = null;
+        var icon = L.icon({
+            iconUrl: Feng.ctxPath + '/assets/expand/images/map/location.png',
+            iconSize: [48, 48], // size of the icon
+            iconAnchor: [24, 48]
+        });
+
+        map.on("mousemove", function (e) {
+            if (marker == null) {
+                if (tmpMarker != null) {
+                    tmpMarker.remove();
+                }
+
+                obj.latlng = e.latlng;
+
+                tmpMarker = L.marker(e.latlng, {icon: icon}).addTo(map).bindTooltip("双击鼠标放置", {
+                    permanent: true,
+                    offset: [0, -48],
+                    direction: "top",
+                    className: "result-tooltip"
+                }).openTooltip();
+            }
+
+        });
+
+
+        map.on("dblclick", function (e) {
+            if (marker == null) {
+                tmpMarker.remove();
+                marker = createMarker(e.latlng, icon, map);
+            }
+
+        })
+
+        if (Feng.isNotEmpty(oldLatlng)) {
+            obj.latlng = oldLatlng;
+            marker = createMarker(oldLatlng, icon, map);
+        }
+
+        function createMarker(latlng, icon, map) {
+            var pMarker = L.marker(latlng, {
+                icon: icon,
+                draggable: true
+            }).addTo(map).bindTooltip("地图位置", {
+                permanent: true,
+                offset: [0, -48],
+                direction: "top",
+                interactive: true,
+                className: "result-tooltip"
+            }).openTooltip();
+
+            $('#save_Btn').removeClass("layui-btn-disabled").removeAttr("disabled");
+
+            pMarker.on("dragend", function (e) {
+                obj.latlng = e.target.getLatLng();
+            })
+
+            return pMarker;
+        }
+
+        $("#WGS_Btn").click(function () {
+            goto(1);
+        })
+
+        $("#GCJ_Btn").click(function () {
+            goto(2);
+        })
+
+        $("#save_Btn").click(function () {
+            admin.putLayerData('latlng', obj.latlng, '#map');
+            admin.putLayerData('formOk', true, '#map');
+            //关掉对话框
+            admin.closeDialog('#map');  // 关闭页面层弹窗
+        })
+
+
+        function goto(type) {
+            var lat = parseFloat($("#latD").val()) + parseFloat($("#latF").val()) / 60 + parseFloat($("#latM").val()) / 3600;
+            var lng = parseFloat($("#lngD").val()) + parseFloat($("#lngF").val()) / 60 + parseFloat($("#lngM").val()) / 3600;
+
+            if (type == 2) {
+                var latlng = gcj02towgs84(lng, lat);
+                lat = latlng[1];
+                lng = latlng[0];
+            }
+
+            map.setView([lat, lng], 17);
+            var latlng = {
+                lat: lat,
+                lng: lng
+            };
+            obj.latlng = latlng;
+
+            if (marker != null) {
+                marker.setLatLng(latlng);
+            } else {
+                tmpMarker.remove();
+                marker = createMarker(latlng, icon, map);
+            }
+        }
+
+        function watchLatlng(value) {
+            var lat = value.lat;
+            var lng = value.lng;
+            lat = Math.abs(lat);
+            var d = Math.floor(lat);//度
+            var f = Math.floor((lat - d) * 60);//分
+            var m = Math.round((lat - d) * 3600 % 60);//秒
+            $("#latD").val(d);
+            $("#latF").val(f);
+            $("#latM").val(m);
+            lng = Math.abs(lng);
+            var d = Math.floor(lng);//度
+            var f = Math.floor((lng - d) * 60);//分
+            var m = Math.round((lng - d) * 3600 % 60);//秒
+            $("#lngD").val(d);
+            $("#lngF").val(f);
+            $("#lngM").val(m);
+        }
+
+
+    });
+</script>

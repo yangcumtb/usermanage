@@ -1,0 +1,52 @@
+@layout("/common/_tree_container.html",{plugins:["ztree"],js:["/assets/modular/system/user/user_sel.js"]}){
+
+<style>
+    .layui-table-header .layui-form-checkbox {
+        display: none !important;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">用户选择</span>
+</div>
+
+<div id="myContiner" style="height: 100%">
+    <div class="ui-layout-west">
+        <div class="box box-main">
+            <div class="ui-layout-content">
+                <div id="deptTree"></div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-layout-center">
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-form toolbar">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <input id="name" class="layui-input" type="text" placeholder="用户姓名"/>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon" style="background-color: #33549988">&#xe615;</i>搜索
+                                        </button>
+                                        <button id="btnDone" class="layui-btn icon-btn layui-btn-disabled more-check" disabled style="background-color: #33549988">
+                                            <i class="layui-icon">&#xe654;</i>完成选择
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="layui-table" id="userTable" lay-filter="userTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@}

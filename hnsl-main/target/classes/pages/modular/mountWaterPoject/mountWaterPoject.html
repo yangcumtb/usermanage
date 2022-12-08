@@ -1,0 +1,241 @@
+@layout("/common/_container.html",{js:["/assets/modular/mountWaterPoject/mountWaterPoject.js"]}){
+<style xmlns:shiro="http://www.w3.org/1999/xhtml">
+    html {
+        font-size: 1px;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .more-container {
+        display: none;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+
+    .clear-input {
+        position: absolute;
+        left: 143rem;
+        bottom: 10rem;
+        z-index: 99999;
+    }
+    .layui-nav{
+        background-color: white !important;
+        z-index: 999;
+    }
+</style>
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+<div class="table_div">
+    <div id="searchParam">
+        <form class="layui-form " action="" lay-filter="info">
+            <div class="layui-form-item">
+                <div class="layui-fluid">
+                    <div class="layui-row">
+                        <div class="layui-form-item" style="margin-bottom: -20rem;margin-top: 15rem">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">子项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input id="zXmmc" name="zXmmc" placeholder="请输入子项目名称" type="text"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">工程项目名称</label>
+                                <div class="layui-input-inline">
+                                    <input id="gcXmmc" name="gcXmmc" placeholder="请输入工程项目名称" type="text"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">项目时间</label>
+                                <div class="layui-input-inline">
+                                    <select id="xmsj" name="xmsj" class="layui-select" lay-filter="select-xmsj" lay-verify="required">
+                                        <option value="">请选择项目年份</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="xmsjMonth" name="xmsjMonth" class="layui-select" lay-filter="xmsjMonth" lay-verify="required">
+                                    <option value="">请选择项目月份</option>
+                                    <option value="1">1月</option>
+                                    <option value="2">2月</option>
+                                    <option value="3">3月</option>
+                                    <option value="4">4月</option>
+                                    <option value="5">5月</option>
+                                    <option value="6">6月</option>
+                                    <option value="7">7月</option>
+                                    <option value="8">8月</option>
+                                    <option value="9">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn" style="background-color: #33549988"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                <button id="btnReset" class="layui-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                <button class="layui-btn layui-btn-normal more-btn" lay-filter="more"
+                                        style="background-color: #339997"><i
+                                        class="layui-icon layui-icon-addition"></i>展开
+                                </button>
+                            </div>
+                        </div>
+                        <div class="more-container" style="display: none">
+                            <div class="layui-form-item" style="margin-top: 35rem">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">绩效目标</label>
+                                    <div class="layui-input-inline">
+                                        <input id="jxmb" name="jxmb" placeholder="请输入绩效目标" type="text" class="layui-input"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目建设周期</label>
+                                    <div class="layui-input-inline">
+                                        <select id="xmjszq" name="xmjszq" class="layui-select" lay-filter="xmjszq" lay-verify="required">
+                                            <option value="">请选择建设周期</option>
+                                            <option value="2021年">2021年</option>
+                                            <option value="2022年">2022年</option>
+                                        </select>
+                                    </div>
+                                </div>
+<!--                                <div class="layui-inline">-->
+<!--                                    <label class="layui-form-label">项目建设周期</label>-->
+<!--                                    <div class="layui-input-inline">-->
+<!--                                        <select id="xmjszq" name="xmjszq" class="layui-select" lay-filter="xmjszq" lay-verify="required">-->
+<!--                                            <option value="">请选择建设周期</option>-->
+<!--                                            <option value="2021年">2021年</option>-->
+<!--                                            <option value="2022年">2022年</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">主要工作内容</label>
+                                    <div class="layui-input-inline">
+                                        <input id="zygznr" name="zygznr" placeholder="请输入主要工作内容" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目地点</label>
+                                    <div class="layui-input-inline">
+                                        <input id="xmdd" name="xmdd" placeholder="请输入项目地点" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">项目责任单位</label>
+                                    <div class="layui-input-inline">
+                                        <input id="xmzrdw" name="xmzrdw" placeholder="请输入项目责任单位" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">责任人姓名</label>
+                                    <div class="layui-input-inline">
+                                        <input id="zrrxm" name="zrrxm" placeholder="请输入责任人姓名" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">部门职务</label>
+                                    <div class="layui-input-inline">
+                                        <input id="bmzw" name="bmzw" placeholder="请输入部门职务" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">联系电话</label>
+                                    <div class="layui-input-inline">
+                                        <input id="lxdh" name="lxdh" placeholder="请输入联系电话" type="text"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <ul class="layui-nav  layui-bg-blue">
+                                    <button id="btnAdd" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe654;</i>添加
+                                    </button>
+                                    <!--                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出-->
+                                    <!--                                </button>-->
+                                    <button id="btnExcel" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>excel导入
+                                    </button>
+                                    <button id="btnGeo" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>空间数据导入
+                                    </button>
+                                    <button id="btnDelete" class="layui-btn icon-btn" style="background-color: #33549988"><i class="layui-icon">&#xe67d;</i>批量删除
+                                    </button>
+                                    <li class="layui-nav-item">
+                                        <a style="color: #33549988"><i class="layui-icon" style="color: #33549988">&#xe67d;</i>批量导出</a>
+                                        <dl class="layui-nav-child">
+                                            <dd><a id="factOut">实际情况表excel导出</a></dd>
+                                            <dd><a id="excelOut">进展excel导出</a></dd>
+                                            <dd><a id="pdfOut">进展pdf导出</a></dd>
+                                        </dl>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="mountWaterPojectTable" lay-filter="mountWaterPojectTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+
+    <a class="layui-action layui-action-primary" lay-event="edit">修改</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-danger" lay-event="delete">删除</a>
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

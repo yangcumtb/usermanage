@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图</title>
+    <link href="${ctxPath}/assets/modular/map/css/common-new.css" rel="stylesheet"/>
+    <link href="${ctxPath}/assets/modular/map/css/plus.css" rel="stylesheet"/>
+    <link href="${ctxPath}/assets/modular/map/fonts/iconfont.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://172.16.16.100:8080/arcgis_js_api/library/4.18/esri/themes/light/main.css">
+    <link href="${ctxPath}/assets/modular/map/css/mui.loading.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="${ctxPath}/assets/modular/map/js/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+    <script src="http://172.16.16.100:8080/arcgis_js_api/library/4.18/init.js"></script>
+
+    <script src="${ctxPath}/assets/modular/map/js/mui.js"></script>
+    <script src="${ctxPath}/assets/modular/map/js/mui.loading.js"></script>
+</head>
+<body>
+<!-- 加载动画，移除位置在common.js中 -->
+<div class="page-loading">
+    <!-- 魔方样式 -->
+    <div class="page-loading">
+        <div class="rubik-loader"></div>
+    </div>
+</div>
+<div class="map-content">
+    <div id="map"></div>
+
+    <div id="leftmenus" class="leftmenuarea">
+        <div class="leftmenu2">
+            <ul class="tabhead">
+                <li class="cell Rp1">
+                    < a href=" " class="btn">
+                    <i class="icon mdi-cube-outline bcg-jc"></i>
+                    <span class="txt">土壤环境</span>
+                </a>
+                </li>
+                <li class="cell Rp1">
+                    < a href="javascript:void(0)" class="btn">
+                    <i class="icon if-qudao bcg-gc"></i>
+                    <span class="txt">地下水环境</span>
+                </a>
+                </li>
+                <li class="cell Rp1">
+                    < a href="javascript:void(0)" class="btn">
+                    <i class="icon if-bengzhan bcg-yw"></i>
+                    <span class="txt">农业农村</span>
+                </a>
+                </li>
+
+                <li class="cell Rp1">
+                    < a href="javascript:void(0)" class="btn">
+                    <i class="icon if-shuiwenzhan bcg-ss"></i>
+                    <span class="txt">实时监测</span>
+                </a>
+                </li>
+
+                <li class="cell Rp1">
+                    < a href="javascript:void(0)" class="btn">
+                    <i class="icon if-bengzhan bcg-zt"></i>
+                    <span class="txt">专题地图</span>
+                </a>
+                </li>
+
+            </ul>
+            <div class="tabcnt service-content" style="min-height: 493px; max-height: 937px; display: block;">
+                <div class="cntcell Rp2 panel-group sel" id="industry-data">
+                    <div class="viewtitle">建设用地管理</div>
+                    <div class="searchtype" data-id="1170" name="行政区划">
+                        <a class="btn service-item sel" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">重点行业企业</span>
+                        </a>
+                        <a class="btn service-item" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">土壤污染重点监管单位</span>
+                        </a>
+                        <a class="btn service-item" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">重点园区</span>
+                        </a>
+                    </div>
+
+                    <div class="viewtitle">建设用地管理</div>
+                    <div class="searchtype" data-id="1170" name="行政区划">
+                        <a class="btn service-item" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">重点行业企业</span>
+                        </a>
+                        <a class="btn service-item" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">土壤污染重点监管单位</span>
+                        </a>
+                        <a class="btn service-item" data-item_id="c72bf90be6424dcd92a92296cd15edf4" data-type="动态">
+                            <span class="txt">重点园区</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainwidgetarea" class="mainwidgetarea">
+        <div id="search" class="mainsearch">
+            <div class="searchresult" style="display: none;">
+                <div class="inputbg"></div>
+                <button class="strigger" data-toggle="tooltip" data-placement="right" title=""
+                        data-original-title="收起侧边面板">
+                    <i class="icon fa-caret-left"></i>
+                </button>
+                <div class="resultarea">
+                    <div class="searchloc">当前搜索范围：河南省</div>
+                    <div id="treewrapper" class="treewrapper">
+                        <div class="ztree"></div>
+                    </div>
+                    <div class="listwrapper">
+                        <div class="resultlist"><span class="no-data">暂无数据</span></div>
+                        <div class="pager"></div>
+                    </div>
+                </div>
+                <button class="closebtn" title="">
+                    <i class="icon iconfont icon-guanbi"></i>
+                </button>
+            </div>
+            <div class="searchinput">
+                <div class="searchbox">
+                    <input class="ipt" type="text" autocomplete="off" placeholder="搜索地图"/>
+                    <div class="toright">
+                        <button class="searchbtn" data-toggle="tooltip" data-placement="bottom" title=""
+                                data-original-title="搜索">
+                            <i class="icon iconfont icon-sousuo"></i>
+                        </button>
+                        <div id="locselector" class="locselector">
+                            <a href="javascript:void(0)" class="locationsel">
+                            <span class="current">
+                                        <span class="cell">河南省</span>
+                                    </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rightmenus" class="rightmenuarea">
+
+    <div class="toolbox" id="toolbox">
+        <div class="boxtitle">
+            <button class="item" data-toggle="tooltip" data-placement="left" title="" style="border:none;"
+                    data-original-title="工具箱">
+                <i class="icon iconfont icon-gongjuxiang1"></i>
+                <span class="txt">工具箱</span>
+            </button>
+            <div class="itemwrapper" style="overflow: hidden;">
+
+                <button id="distanceButton" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="测量距离">
+                    <i class="fa mdi-ruler"></i>
+                    <span class="txt">测量距离</span>
+                </button>
+                <button id="areaButton" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="测量面积">
+                    <i class="fa mdi-texture-box"></i>
+                    <span class="txt">测量面积</span>
+                </button>
+                <button id="coordinate-location" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="坐标定位">
+                    <i class="icon mdi-crosshairs-gps"></i>
+                    <span class="txt">坐标定位2</span>
+                </button>
+                <!--<button class="item" data-toggle="tooltip" data-placement="left" title="放大镜"><i class="icon fa-search-plus"></i><span class="txt">放大镜</span></button>-->
+                <button id="bookmark" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="书签">
+                    <i class="icon mdi-bookmark-plus"></i>
+                    <span class="txt">书签</span>
+                </button>
+                <button id="mapNotes" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="地图注释">
+                    <i class="icon mdi-map-marker"></i>
+                    <span class="txt">地图注释</span>
+                </button>
+                <button id="slice-button" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="剖面分析">
+                    <i class="icon mdi-square-off-outline"></i>
+                    <span class="txt">剖面分析</span>
+                </button>
+                <!-- <button id="elevation-button" class="item" data-toggle="tooltip" data-placement="left"
+                    title="地形分析">
+                    <i class="icon mdi-square-off-outline"></i>
+                    <span class="txt">地形分析</span>
+                </button> -->
+                <button id="buffer-button" class="item" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="空间查询">
+                    <i class="icon mdi-feature-search-outline"></i>
+                    <span class="txt">空间查询</span>
+                </button>
+                <div data-toggle="modal" data-target="#myModal4">
+                    <button class="item" data-toggle="tooltip" data-placement="left" title=""
+                            data-original-title="综合查询">
+                        <i class="icon mdi-table-search"></i>
+                        <span class="txt">综合查询</span>
+                    </button>
+                </div>
+                <!--<button class="item" data-toggle="tooltip" data-placement="left" title="我的收藏"><i class="icon fa-folder-open"></i><span class="txt">我的收藏</span></button>-->
+            </div>
+        </div>
+    </div>
+
+    <div id="tipsbox" class="tipsbox" style="display: none;">
+        <button type="button" class="item" style="border:none;">
+            <i class="glyphicon glyphicon-info-sign" style="font-size: 18px;"></i>
+        </button>
+    </div>
+
+    <div class="rightmenu">
+        <ul class="tabhead">
+            <li class="cell">
+                <button id="layer-control" class="btn" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="图层管理">
+                    <i class="icon iconfont icon-tuceng"></i>
+                    <span class="txt">图层管理</span>
+                </button>
+            </li>
+            <li class="cell" id="basemapBtnWrapper">
+                <button id="btn-basemap" class="btn" data-toggle="tooltip" data-placement="left" title=""
+                        data-original-title="底图管理">
+                    <i class="icon iconfont icon-tuceng"></i>
+                    <span class="txt">底图管理</span>
+                </button>
+            </li>
+        </ul>
+        <div class="tabcnt" style="display:none;">
+            <div class="cntcell" id="layerControl-container">
+                <div class="layerclr">
+                    <div class="clrtitle">图层管理
+                        <div style="display: inline-flex; float: right;">
+                            <button class="ant-btn ant-btn-sm">移除所有图层</button>
+                        </div>
+                    </div>
+                    <div id="layers-content">
+                        <ul class="layerlist" id="layerList"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cntcell" id="basemap-container">
+                <div class="basemapclr">
+                    <div class="clrtitle">底图管理</div>
+                    <div id="basemaps-content">
+                        <div class="basemap-control">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="legendarea">
+        <dl class="maplegend" id="legendContent">
+        </dl>
+        <button class="trigger" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="图例"><i
+                class="icon iconfont icon-tuli"></i></button>
+    </div>
+
+    <div>
+        <a id="map-level" class="esri-component esri-widget--button esri-widget esri-interactive">17</ a>
+    </div>
+
+
+    <div class="basemap-control-quick ford" style="display: block;">
+        <div class="basemap active" data-map="Streets" style="z-index: 1;"><img
+                src="${ctxPath}/assets/modular/map/img/map/map1.png">
+            <div class="basemapText">矢量图</div>
+        </div>
+
+        <div class="basemap" data-map="Images"><img
+                src="${ctxPath}/assets/modular/map/img/map/map2.png">
+            <div class="basemapText">影像图</div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script type="text/javascript" src="${ctxPath}/assets/modular/map/js/mapConfig.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/modular/map/js/oneMap.js"></script>
+
+
+</body>
+</html>

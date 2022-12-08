@@ -1,0 +1,101 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/log/log.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">操作日志</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="title" class="layui-input" type="text" placeholder="请输入系统模块"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="operName" class="layui-input" type="text" placeholder="请输入操作人员"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="beginTime" class="layui-input" type="text" placeholder="开始时间"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="endTime" class="layui-input" type="text" placeholder="结束时间"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="businessType">
+                                    <option value="">操作类型</option>
+                                    <option value="1">新增</option>
+                                    <option value="2">修改</option>
+                                    <option value="3">删除</option>
+                                    <option value="4">授权</option>
+                                    <option value="5">导出</option>
+                                    <option value="8">查询</option>
+                                    <option value="6">其他</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="status">
+                                    <option value="">操作状态</option>
+                                    <option value="0">成功</option>
+                                    <option value="1">失败</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("system:log:remove")){
+                                <button id="btnClean" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67d;</i>清空日志
+                                </button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="logTable" lay-filter="logTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
+</script>
+
+<script type="text/html" id="typeTpl">
+
+    {{#  if(d.businessType === 1){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-blue">新增</span>
+    {{#  } }}
+    {{#  if(d.businessType === 2){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-gold">修改</span>
+    {{#  } }}
+    {{#  if(d.businessType === 3){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-red">删除</span>
+    {{#  } }}
+    {{#  if(d.businessType === 4){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-blue">授权</span>
+    {{#  } }}
+    {{#  if(d.businessType === 5){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-green">导出</span>
+    {{#  } }}
+    {{#  if(d.businessType === 6){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-green">其他</span>
+    {{#  } }}
+    {{#  if(d.businessType === 8){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-green">查询</span>
+    {{#  } }}
+</script>
+
+
+<script type="text/html" id="statusTpl">
+
+    {{#  if(d.status === 0){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-green">成功</span>
+    {{#  } }}
+    {{#  if(d.status === 1){ }}
+    <span class="layui-badge layui-badge_lg layui-badge-red">失败</span>
+    {{#  } }}
+</script>
+
+@}

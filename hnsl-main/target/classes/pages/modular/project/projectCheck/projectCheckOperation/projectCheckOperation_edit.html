@@ -1,0 +1,159 @@
+@layout("/common/_form.html",{js:["/assets/modular/project/projectCheck/projectCheckOperation/projectCheckOperation_edit.js"]}){
+
+<style>
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+
+
+    .layui-input-block {
+        margin-left: 150px;
+    }
+</style>
+
+<form class="layui-form" id="projectCheckOperationForm" lay-filter="projectCheckOperationForm"
+      style="width: 1000px;margin-top: 10px">
+    <input name="czbh" type="hidden"/>
+    <div class="layui-form-item" id="area-picker">
+        <div class="layui-form-label" style="display: none">所在省/隐藏项<span style="color: red;">*</span></div>
+        <div class="layui-input-inline" style="width: 200px; display: none">
+            <select name="province" class="province-selector" data-value="辽宁省" lay-filter="province-1"
+                    style="display:none">
+                <option value="">请选择省</option>
+            </select>
+        </div>
+        <div class="layui-inline" style="margin-top: 10px">
+            <label class="layui-form-label">提交单位所在市<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="shi" class="xZS-selector" data-value=" " lay-filter="xZS-1">
+                    <option value="">请选择市</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-top: 10px">
+            <label class="layui-form-label">提交单位所在县<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="xian" class="xZX-selector" data-value=" " lay-filter="xZX-1">
+                    <option value="">请选择县/区</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline ">
+            <label class="layui-form-label">该项目名称<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <input id="xmmc" name="xmmc" placeholder="请输入该项目名称" type="text" class="layui-input"
+                       lay-verify="required" lay-verType="tips" required/>
+            </div>
+        </div>
+        <div class="layui-inline ">
+            <label class="layui-form-label">项目类型<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="xmlx" lay-filter="aihao" id="xmlx" lay-verify="required" lay-verType="tips">
+                    <option value="">请输入项目类型</option>
+                    <option value="生产项目">生产项目</option>
+                    <option value="建设项目">建设项目</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline ">
+            <label class="layui-form-label">审核类型<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="shlx" lay-filter="aihao" id="shlx" lay-verify="required" lay-verType="tips">
+                    <option value="">请输入审核类型</option>
+                    <option value="初审">初审</option>
+                    <option value="终审">终审</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline ">
+            <label class="layui-form-label">上传项目书的存储路径<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <input id="falj" name="falj" placeholder="请输入上传项目书的存储路径" type="text" class="layui-input"
+                       lay-verify="required" lay-verType="tips" required/>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline ">
+            <label class="layui-form-label">上传初审意见书的存储路径<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <input id="yjlj" name="yjlj" placeholder="请输入上传初审意见书的存储路径" type="text"
+                       class="layui-input"
+                       lay-verify="required" lay-verType="tips" required/>
+            </div>
+        </div>
+        <div class="layui-inline ">
+            <label class="layui-form-label">县级提交<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="tj" lay-filter="aihao" id="tj" lay-verify="required" lay-verType="tips">
+                    <option value="">请选择县级是否提交</option>
+                    <option value="是">是</option>
+                    <option value="否">否</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline ">
+            <label class="layui-form-label">市级审核<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="csh" lay-filter="aihao" id="csh" lay-verify="required" lay-verType="tips">
+                    <option value="">请选择市级是否提交</option>
+                    <option value="待审核">待审核</option>
+                    <option value="已通过">已通过</option>
+                    <option value="未通过">未通过</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline ">
+            <label class="layui-form-label">省级审核<span style="color: red;">*</span></label>
+            <div class="layui-input-inline">
+                <select name="psh" lay-filter="aihao" id="psh" lay-verify="required" lay-verType="tips">
+                    <option value="">请选择省级是否提交</option>
+                    <option value="待审核">待审核</option>
+                    <option value="已通过">已通过</option>
+                    <option value="未通过">未通过</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-inline ">
+        <label class="layui-form-label">驳回意见<span style="color: red;">*</span></label>
+        <div class="layui-input-inline">
+            <input id="bhyj" name="bhyj" placeholder="请输入驳回意见" type="text" class="layui-input"
+                   lay-verify="required" lay-verType="tips" required/>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}
+<script>
+    layui.use(['layarea'], function () {
+        var layarea = layui.layarea
+
+        layarea.render({
+            elem: '#area-picker',
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });})
+</script>

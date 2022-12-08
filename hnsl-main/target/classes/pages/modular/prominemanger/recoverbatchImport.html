@@ -1,0 +1,131 @@
+@layout("/common/_container.html",{js:["/assets/modular/prominemanger/recoverbatchImport.js"]}){
+
+<style>
+    /*样式2*/
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #33549988;
+        border: 0px solid #33549988;
+        border-radius: 3px;
+        padding: 9px 12px;
+        overflow: hidden;
+        color: #FFFFFF;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .file:hover {
+        background: #33549988;
+        border-color: #33549988;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .layui-table-cell {
+        text-align: center;
+    }
+
+    .layui-form-label {
+        width: 180px;
+    }
+
+    .layui-form-label {
+        padding: 9px 0px;
+        text-align: center;
+    }
+
+    .layui-btn {
+        padding: 0 10px;
+    }
+</style>
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">图斑数据批量导入</span>
+</div>
+
+<div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-upload">
+                        <!--                        <div class="layui-inline" style="margin-right: 20px">-->
+                        <!--                            <a href="javascript:;" class="file">选择文件-->
+                        <!--                                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="testList" multiple="multiple">-->
+                        <!--                            </a>-->
+                        <!--                        </div>-->
+                        <button type="button" class="layui-btn layui-btn-normal" id="testList"
+                                style="background-color: #33549988">选择多文件
+                        </button>
+                        <div class="layui-inline" id="area-picker" style="width: 600px">
+                            <!--                                <label class="layui-form-label layui-btn-normal" hidden>选择重复文件处理方法</label>-->
+                            <div class="layui-input-inline">
+                                <select id="repeat" name="repeat" class="layui-select" lay-filter="repeatAction">
+                                    <option value="">请选择重复文件处理方法</option>
+                                    <option value="GX">更新</option>
+                                    <option value="TG">跳过</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="display: none">
+                                <select name="province" class="province-selector" data-value="辽宁省" style="display: none">
+                                    <option value="">--选择省--</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select id="xzs" name="xzs" class="city-selector" lay-verify="required">
+                                    <option value="">--选择市--</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select id="xzx" name="xzx" class="county-selector" lay-verify="required">
+                                    <option value="">--选择区--</option>
+                                </select>
+                            </div>
+                            <div class="layui-form-label" style="display: none">所在省/隐藏项</div>
+
+                        </div>
+                        <div class="layui-upload-list" style="width: 100%">
+                            <table class="layui-table">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="demoList"></tbody>
+                            </table>
+                        </div>
+                        <div style="text-align:center">
+                            <button type="button" class="layui-btn" id="testListAction" lay-submit=""
+                                    style="background-color: #33549988">开始上传
+                            </button>
+                            <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBar">
+    <a class="layui-action layui-action-primary" lay-event="edit" style="background-color: #ffa847">删除</a>
+    <div class="layui-divider layui-divider-vertical" role="separator"></div>
+    <a class="layui-action layui-action-primary" lay-event="edit">开始</a>
+</script>
+@}

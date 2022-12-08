@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnsl.sys.modular.message.mapper.SysMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.hnsl.sys.modular.message.entity.SysMessage">
+        <id column="message_id" property="messageId" />
+        <result column="send_user_id" property="sendUserId" />
+        <result column="message_title" property="messageTitle" />
+        <result column="message_content" property="messageContent" />
+        <result column="message_type" property="messageType" />
+        <result column="priority_level" property="priorityLevel" />
+        <result column="message_send_time" property="messageSendTime" />
+        <result column="business_id" property="businessId" />
+        <result column="business_type" property="businessType" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        message_id AS "messageId", send_user_id AS "sendUserId", message_title AS "messageTitle", message_content AS "messageContent", message_type AS "messageType", priority_level AS "priorityLevel", message_send_time AS "messageSendTime", business_id AS "businessId", business_type AS "businessType", create_user AS "createUser", create_time AS "createTime", update_user AS "updateUser", update_time AS "updateTime"
+    </sql>
+
+    <sql id="Base_Column_List_T">
+        t.message_id AS "messageId", t.send_user_id AS "sendUserId", t.message_title AS "messageTitle", t.message_content AS "messageContent", t.message_type AS "messageType", t.priority_level AS "priorityLevel", t.message_send_time AS "messageSendTime", t.business_id AS "businessId", t.business_type AS "businessType", t.create_user AS "createUser", t.create_time AS "createTime", t.update_user AS "updateUser", t.update_time AS "updateTime"
+    </sql>
+
+
+    <select id="customList" resultType="cn.hnsl.sys.modular.message.model.result.SysMessageResult" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.hnsl.sys.modular.message.model.result.SysMessageResult" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.hnsl.sys.modular.message.model.params.SysMessageParam">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_message where 1 = 1
+    </select>
+
+</mapper>

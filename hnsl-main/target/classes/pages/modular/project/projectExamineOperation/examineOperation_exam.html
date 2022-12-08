@@ -1,0 +1,212 @@
+@layout("/common/_form.html",{js:["/assets/modular/project/projectExamineOperation/examineOperation_exam.js"]}){
+
+<style>
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+    .layui-input-block {
+        margin-left: 150rem;
+    }
+    .layui-form-item .layui-input-inline {
+        width: 180rem;
+    }
+</style>
+
+<form class="layui-form" id="examineOperationForm" lay-filter="examineOperationForm"
+      style="width: 1000rem;margin-top: 10rem">
+    <div class="layui-fluid" style="padding-bottom: 70rem;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <input name="id" hidden/>
+                <input name="xmlx" hidden/>
+                <input name="xmmc" type="hidden"/>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">提交验收</label>
+                        <div class="layui-input-inline">
+                            <select id="xtj" name="xtj" class="layui-select" lay-filter="select-xtj" disabled>
+                                <option value="">请选择是否提交验收</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">市是否验收</label>
+                        <div class="layui-input-inline">
+                            <select id="sys" name="sys" class="layui-select" lay-filter="select-sys" disabled>
+                                <option value="">请选择市是否提交验收</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">省级是否验收</label>
+                        <div class="layui-input-inline">
+                            <select id="sjys" name="sjys" class="layui-select" lay-filter="select-sjys" disabled>
+                                <option value="">请选择是否提交验收</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否上传验收申请odf</label>
+                        <div class="layui-input-inline">
+                            <select id="pdfsc" name="pdfsc" class="layui-select" lay-filter="select-tjys" disabled>
+                                <option value="">请选择是否上传验收申请</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--                <div class="layui-form-item">-->
+                <!--                    <div class="layui-inline ">-->
+                <!--                        <label class="layui-form-label">上传失败原因<span style="color: red;">*</span></label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            <input id="sbyy" name="sbyy" placeholder="请输入上传失败原因" type="text" class="layui-input"-->
+                <!--                            />-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="layui-inline ">-->
+                <!--                        <label class="layui-form-label">专家意见生成<span style="color: red;">*</span></label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            <input id="zjyjsc" name="zjyjsc" hidden/>-->
+                <!--                            <select class="layui-select" lay-filter="select-tjys">-->
+                <!--                                <option value="">请选择专家意见是否生成</option>-->
+                <!--                                <option value="1">是</option>-->
+                <!--                                <option value="0">否</option>-->
+                <!--                            </select>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="layui-form-item">-->
+                <!--                    <div class="layui-inline ">-->
+                <!--                        <label class="layui-form-label">意见生成失败原因<span style="color: red;">*</span></label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            <input id="yjsbyy" name="yjsbyy" placeholder="请输入意见生成失败原因" type="text"-->
+                <!--                                   class="layui-input"/>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="layui-inline ">-->
+                <!--                        <label class="layui-form-label">驳回意见<span style="color: red;">*</span></label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            <input id="bhyj" name="bhyj" placeholder="请输入驳回意见" type="text" class="layui-input"-->
+                <!--                            />-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验收合格证是否入库</label>
+                        <div class="layui-input-inline">
+                            <!--                                <input id="key-yshgz" name="key-yshgz" hidden/>-->
+                            <select id="yshgz" name="yshgz" class="layui-select" lay-filter="select-yshgz" disabled>
+                                <option value="">请选择验收合格证是否入库</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">专家意见上传是否入库</label>
+                        <div class="layui-input-inline">
+                            <!--                                <input id="key-zjyjup" name="key-zjyjup" hidden/>-->
+                            <select id="zjyjup" name="zjyjup" class="layui-select" lay-filter="select-zjyjup" disabled>
+                                <option value="">请选择专家意见上传是否入库</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--                    <div class="layui-inline ">-->
+                    <!--                        <label class="layui-form-label">合格证上传失败原因<span style="color: red;">*</span></label>-->
+                    <!--                        <div class="layui-input-inline">-->
+                    <!--                            <input id="hgzsbyy" name="hgzsbyy" placeholder="请输入合格证上传失败原因" type="text"-->
+                    <!--                                   class="layui-input"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </div>
+                <!--                <div class="layui-form-item">-->
+                <!--                    <div class="layui-inline">-->
+                <!--                        <label class="layui-form-label">专家意见上传是否入库</label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            &lt;!&ndash;                                <input id="key-zjyjup" name="key-zjyjup" hidden/>&ndash;&gt;-->
+                <!--                            <select id="zjyjup" name="zjyjup" class="layui-select" lay-filter="select-zjyjup">-->
+                <!--                                <option value="">请选择专家意见上传是否入库</option>-->
+                <!--                                <option value="1">是</option>-->
+                <!--                                <option value="0">否</option>-->
+                <!--                            </select>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="layui-inline ">-->
+                <!--                        <label class="layui-form-label">专家意见上传失败原因<span style="color: red;">*</span></label>-->
+                <!--                        <div class="layui-input-inline">-->
+                <!--                            <input id="zjyjsbyy" name="zjyjsbyy" placeholder="请输入专家意见上传失败原因" type="text"-->
+                <!--                                   class="layui-input"/>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-fluid" style="padding-bottom: 30rem;height: 200px">
+        <div class="layui-card">
+            <div class="layui-card-header">项目资料</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">资料上传<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <button type="button" id="projectPDFBtn" class="layui-btn" lay-filter="projectPDFBtn"
+                                    style="background-color: #33549988;">
+                                验收申请odf提交
+                            </button>
+                            <button type="button" id="firstAdPDFBtn" class="layui-btn" lay-filter="firstAdPDFBtn"
+                                    style="background-color: #33549988;">
+                                验收合格证提交
+                            </button>
+                            <button type="button" id="secondPDFBtn" class="layui-btn" lay-filter="firstAdPDFBtn"
+                                    style="background-color: #33549988;">
+                                专家意见提交
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit style="background-color: #33549988">&emsp;提交&emsp;
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+</form>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

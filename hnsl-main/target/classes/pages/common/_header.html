@@ -1,0 +1,57 @@
+@/* 框架顶部 */
+<div class="layui-header">
+    <div class="layui-logo">
+        <!--<img src="${ctxPath}/assets/common/images/logo.png"/>-->
+<!--        <i class="iconfont layui-extend-logo"></i>-->
+        <span class="logoFont">&nbsp;${constants.getSystemName()}&emsp;</span>
+    </div>
+    <ul class="layui-nav layui-layout-right header-menu" >
+
+        @for(item in menus){
+        @if(tool.isEmpty(item.children)){
+        <li class="layui-nav-item layui-hide-xs menu" lay-unselect ew-event="hideSide"><a nav-bind="${item.appCode}" ew-href="${ctxPath}${item.url}"><i
+                class="iconfont layui-extend-${item.icon}"></i>${item.menuName}</a></li>
+        @}else{
+        <li class="layui-nav-item layui-hide-xs menu" lay-unselect  ew-event="showSide"><a nav-bind="${item.appCode}"><i
+                class="iconfont layui-extend-${item.icon}"></i>${item.menuName}</a></li>
+        @}
+        @}
+
+
+
+    </ul>
+
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item" lay-unselect="">
+            <a ew-event="message" title="消息" data-url="${ctxPath}/system/message">
+                <i class="layui-icon layui-icon-notice"></i>
+                <!-- 未读消息气泡提示 -->
+                <span id="messageDot" style="display: block" class="layui-badge-dot"></span>
+            </a>
+        </li>
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+            <a ew-event="fullScreen" title="全屏"><i class="layui-icon layui-icon-screen-full"></i></a>
+        </li>
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+            <a ew-event="lockScreen" title="锁屏" data-url="${ctxPath}/system/lock"><i class="layui-icon layui-icon-password"></i></a>
+        </li>
+        <li class="layui-nav-item" lay-unselect style="width: auto;min-width: 120px">
+            <a>
+                <img src="${avatar!}" class="layui-nav-img">
+                <cite>${name!"用户"}</cite>
+            </a>
+            <dl class="layui-nav-child setting">
+                <dd lay-unselect>
+                    <a ew-href="${ctxPath}/system/user_info">个人中心</a>
+                </dd>
+                <dd lay-unselect>
+                    <a id="setPsw">修改密码</a>
+                </dd>
+                <hr>
+                <dd lay-unselect>
+                    <a id="btnLogout">退出</a>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+</div>

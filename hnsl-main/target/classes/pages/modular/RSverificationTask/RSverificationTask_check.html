@@ -1,0 +1,280 @@
+@layout("/common/_form.html",{js:["/assets/modular/RSverificationTask/RSverificationTask_check.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+<style>
+    html{
+        font-size: 1px;
+    }
+    .layui-form-label {
+        width: 180rem;
+    }
+
+    .layui-form-label {
+        padding: 9rem 0rem;
+        text-align: center;
+        font-size: 14rem;
+    }
+
+    .layui-btn {
+        padding: 0 10rem;
+    }
+
+
+    .layui-input-block {
+        margin-left: 200rem;
+    }
+    .layui-form-item .layui-input-inline {
+        width: 180rem;
+    }
+</style>
+<div class="layui-fluid" style="padding-bottom: 70rem;">
+    <div class="layui-tab">
+        <ul class="layui-tab-title" style="position:fixed; top: 0rem; width: 100%;background-color: white;z-index: 9999">
+            <li class="layui-this">核查信息</li>
+            <li>图斑信息</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div style="width: 250rem;height: 300px;margin-top: 200rem;margin-left: 350rem;display: none" id="alarm">
+                    <div class="layui-panel">
+                        <img src="${ctxPath}/assets/expand/images/nodate.png" height="100%" width="100%">
+                        <div style="margin-top: 15px;font-size: 20px;width: 400px;margin-left: 40rem;">暂无核查信息！</div>
+                    </div>
+                </div>
+                <!--核查-->
+                <div class="layui-tab-item">
+                    <form class="layui-form " id="RSverificationTaskCheckForm" lay-filter="RSverificationTaskCheckForm"
+                          style="width: 1000rem;margin-top: 10rem;display: none">
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">遥感解译图斑id</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="id" lay-verify="required|J" autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">矿区的变化类型</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="minechangetype" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">遥感解译面积（m²）</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="rsarea" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">核查面积（m²）</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="checkarea" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">是否认可</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="confirm" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">是否使用RTK测量</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="rtk" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">破坏方式</label>
+                                <div class="layui-input-inline">
+                                    <textarea  name="damagemode" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">治理措施</label>
+                                <div class="layui-input-inline">
+                                    <textarea  name="reclaimmode" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">破坏地类</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="damagelandtype" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">恢复地类</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="recoverlandtype" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem;">
+                                <label class="layui-form-label">拐点坐标</label>
+                                <div class="layui-input-inline">
+                                    <input id="pointcoordinate" name="pointcoordinate"  type="text"
+                                           class="layui-input" lay-verType="tips" disabled/>
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">备注</label>
+                                <div class="layui-input-inline">
+                                    <textarea  name="memark" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">核查人员</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="checkman" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="margin-top: 10rem">
+                                <label class="layui-form-label">核查日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="checktime" lay-verify="required|J" autocomplete="off" disabled
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-card" id="photo" style="margin-top: 20rem;display: none">
+                    <div class="layui-card-header">图片查看</div>
+                    <div class="layui-card-body" style="height: 550rem">
+                        <div class="layui-carousel" id="card">
+                            <div carousel-item id="a">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--图斑信息-->
+            <div class="layui-tab-item">
+                <form class="layui-form " id="RSverificationTaskForm" lay-filter="RSverificationTaskForm"
+                      style="width: 1000rem;margin-top: 10rem;display: none">
+                    <!--                    <input name="id" hidden/>-->
+                    <!--                    <input name="spottableId" hidden/>-->
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">所在市</label>
+                            <div class="layui-input-inline">
+                                <!--                                <select id="xzs" name="xzs" class="city-selector"-->
+                                <!--                                        disabled>-->
+                                <!--                                    <option value="">请选择市</option>-->
+                                <!--                                </select>-->
+                                <input type="text" name="xzs" lay-verify="required|J" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">所在县</label>
+                            <div class="layui-input-inline">
+                                <!--                                <select name="xzx"  id="xzx" class="county-selector" data-value=" "-->
+                                <!--                                        disabled>-->
+                                <!--                                    <option value="">请选择县/区</option>-->
+                                <!--                                </select>-->
+                                <input type="text" name="xzx" lay-verify="required|J" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">遥感图斑编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="id" lay-verify="required|J" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">采矿证号</label>
+                            <div class="layui-input-inline">
+                                <textarea  name="ckzh" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">中心点经度</label>
+                            <div class="layui-input-inline">
+                                <input name="kfx" placeholder="" type="text"
+                                       class="layui-input"
+                                       lay-verType="tips" disabled/>
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">中心点纬度</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kfy" lay-verify="required|W" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">变化面积</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="changearea" lay-verify="required|W" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">变化类型</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="changetype" lay-verify="required|W" autocomplete="off" disabled
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">矿山名称</label>
+                            <div class="layui-input-inline">
+                                <textarea  name="minename" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="margin-top: 10rem">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-inline">
+                                <textarea  name="bz" style="width:180rem;height:60rem;word-break:break-all " disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button type="submit" class="layui-btn" lay-filter="submit" style="background-color: #33549988" id="submit">
+            &emsp;通过&emsp;
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog" id="reset">&emsp;未通过&emsp;</button>
+    </div>
+</div>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1000 * htmlWidth + 'px' +
+            '';
+    }
+    handleResize();
+    window.onresize = handleResize;
+</script>
+@}

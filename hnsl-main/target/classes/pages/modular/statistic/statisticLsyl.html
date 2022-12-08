@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>${constants.getSystemName()}</title>
+    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+    <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}"/>
+    <link href="${ctxPath}/assets/expand/css/style.css?v=${constants.getReleaseVersion()}" media="all"
+          rel="stylesheet"/>
+    <link href="${ctxPath}/assets/common/libs/layui/css/modules/layui-icon-extend/iconfont.css?v=${constants.getReleaseVersion()}"
+          rel="stylesheet"/>
+    <link href="${ctxPath}/assets/modular/home/css/index.css?v=${constants.getReleaseVersion()}" rel="stylesheet"/>
+</head>
+<style>
+    /*通用样式ͨ*/
+    body,ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd {
+        margin:0;
+        padding:0;
+    }
+    ul, li{
+        list-style: none;
+    }
+    a:link,
+    a:visited,
+    a:active {
+        text-decoration: none;
+    }
+
+    .layui-card-body {
+        padding: 0;
+    }
+
+    .border-container {
+        position: relative;
+        margin-top: 15px;
+        padding: 10px;
+        /*margin: 1px;*/
+        border: 1px solid #0f4075;
+    }
+
+    .border-container span.border-span {
+        display: block;
+        position: absolute;
+        width:35px;
+        height: 35px;
+    }
+
+    .border-container span.top-left {
+        top: -12px;
+        left:-13px;
+        border-top: 3px solid #0f4075;
+        border-left: 3px solid #0f4075;
+    }
+
+    .border-container span.top-right {
+        top:-12px;
+        right:-13px;
+        border-top: 3px solid #0f4075;
+        border-right: 3px solid #0f4075;
+    }
+
+    .border-container span.bottom-left {
+        bottom: -12px;
+        left: -13px;
+        border-bottom: 3px solid #0f4075;
+        border-left: 3px solid #0f4075;
+    }
+
+    .border-container span.bottom-right {
+        bottom: -12px;
+        right: -13px;
+        border-bottom: 3px solid #0f4075;
+        border-right: 3px solid #0f4075;
+    }
+
+    #zystwt {
+        height: 260px;
+        border-bottom: 1px solid #0f4075;
+    }
+
+    #nxfsjd{
+        height: 243px;
+    }
+
+    #tbdltj {
+        height: 225px;
+        border-bottom: 1px solid #0f4075;
+    }
+    #tbxltj{
+        height: 225px;
+    }
+
+    .table-kingdargen{
+        /*margin-top: 3px;*/
+        text-align: center;
+        margin-bottom: 0;
+    }
+    .table-kingdargen>thead>tr>th{
+        border-bottom: 1px solid #0f4075;
+        padding: 1px 5px;
+        text-align: center;
+        vertical-align: middle;
+        color: #419aff;
+        font-size: 12px;
+        font-weight: normal;
+        border-top: 1px solid #0f4075!important;
+    }
+    .table-kingdargen tbody tr td{
+        padding: 1px 5px;
+        font-size: 12px;
+        vertical-align: middle;
+        border: none;
+        color: #0f4075;
+    }
+    .table-kingdargen tbody tr:nth-child(2n-1){
+        background: #f2f7f8;
+    }
+    .table-kingdargen tbody tr:nth-child(2n){
+        background: #c3c3c3;
+    }
+    .table-kingdargen tbody tr:hover{
+        background: #1d2a42;
+    }
+    .table-kingdargen tbody tr td:nth-child(2){
+        color: #e9aa00;
+    }
+    .table-kingdargen tbody tr td:nth-child(3){
+        color: #53bf18;
+    }
+    .table-kingdargen tbody tr td:nth-child(4){
+        color: #f9504a;
+    }
+    .table-kingdargen tbody tr td:nth-child(5){
+        color: #47AEEE;
+    }
+    #hfzlqk{
+        height: 500px;
+    }
+    #nxffs{
+        height: 278px;
+    }
+
+    .button {
+        position: absolute;
+        padding: 0.5px 1.5px;
+        top: 0px;
+        left:10px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        outline: none;
+        font-size: 14px;
+        margin: 1em 0.8em;
+    }
+    .button.type1 {
+        color: #0B4EB6;
+    }
+    .button.type1.type1::after, .button.type1.type1::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10%;
+        height: 10%;
+        border: 2px solid;
+        transition: all 0.6s ease;
+        border-radius: 2px;
+    }
+    .button.type1.type1::after {
+        bottom: 0;
+        right: 0;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: #566473;
+        border-right-color: #566473;
+    }
+    .button.type1.type1::before {
+        top: 0;
+        left: 0;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-top-color: #566473;
+        border-left-color: #566473;
+    }
+    .button.type1.type1:hover:after, .button.type1.type1:hover:before {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+<!--头部-->
+<div class="layui-body-header">
+    历史遗留矿山统计分析
+</div>
+ <!--加载动画，移除位置在common.js中-->
+<div class="page-loading">
+    <!-- 魔方样式 -->
+    <div class="page-loading">
+        <div class="rubik-loader"></div>
+    </div>
+</div>
+
+<!--主体-->
+<div class="layui-fluid layui-form ew-console-wrapper" style="padding: 5px;">
+    <div class="layui-row layui-col-space15 layui-form">
+        <div class="layui-col-md3">
+            <div class="layui-card border-container">
+                <div class="layui-card-body">
+                    <div id="regionMap" class="layui-card-body" style="height: 280px">
+
+                    </div>
+                    <button class="button type1">辽宁省</button>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-card border-container" >
+                <div class="layui-card-body">
+                    <table class="table table-kingdargen layui-card-body" style="height: 280px">
+                        <thead>
+                        <tr>
+                            <th>区/县名称</th>
+                            <th>治理数</th>
+                            <th>未治理数</th>
+                            <th>实地治理面积(㎡)</th>
+                            <th>图斑核定面积(㎡)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md5" style="height: 322px;">
+            <div class="layui-card border-container">
+                <div class="layui-card-body">
+                    <div id="tbxltj" style="height: 280px"></div>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15 layui-form">
+        <div class="layui-col-md3">
+            <div class="layui-card border-container">
+                <div class="layui-card-body">
+                    <div id="zystwt"></div>
+                    <div id="nxfsjd"></div>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card border-container">
+                <div class="layui-card-body">
+                    <div id="tbdltj"></div>
+                    <div id="nxffs"></div>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-card border-container">
+                <div class="layui-card-body" style="height: 503px">
+                    <div id="hfzlqk"></div>
+                    <span class="top-left border-span"></span>
+                    <span class="top-right border-span"></span>
+                    <span class="bottom-left border-span"></span>
+                    <span class="bottom-right border-span"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js部分 -->
+@/* 加入contextPath属性和session超时的配置 */
+<script type="text/javascript">
+    var Feng = {
+        ctxPath: "${ctxPath}",
+        version: '${constants.getReleaseVersion()}'
+    };
+
+</script>
+<script>
+    function handleResize() {
+        var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let htmlDom = document.getElementsByTagName('html')[0]
+        htmlDom.style.fontSize = 1 / 1920 * htmlWidth + 'px';
+    }
+
+    handleResize();
+    window.onresize = handleResize;
+
+</script>
+<!--<script src="assets/js/map/shandong.js"></script>-->
+<script src="${ctxPath}/assets/common/libs/echarts/echarts.min.js?v=${constants.getReleaseVersion()}"></script>
+<script src="${ctxPath}/assets/common/libs/echarts/echartsTheme.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript"
+        src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/common.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript" src="${ctxPath}/assets/modular/statistic/statisticLsyl.js"></script>
+<!--新闻模板-->
+<script id="newsTpl" type="text/html">
+    {{#  layui.each(d, function(index, item){ }}
+    <div class="news-element">
+        <a class="pull-left"><img alt="image" height="44" src="/system/thumbImage/{{item.newsThumb}}" width="44"></a>
+        <div class="media-body"><a class="news-title" href="/system/preview/file/{{item.mainFileId}}"
+                                   target="_blank">{{ item.newsTitle }}</a><br><small
+                class="text-muted">{{ item.newsTypeName }} 发布时间： {{ item.createTime }}</small></div>
+    </div>
+    {{#  }); }}
+</script>
+
+
+</body>
+</html>
+

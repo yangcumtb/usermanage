@@ -1,0 +1,64 @@
+@/* 侧边栏 */
+<div class="layui-side home">
+    <div class="layui-side-scroll">
+
+        @for(item in menus){
+        @if(tool.isEmpty(item.children)){
+        <ul class="layui-nav layui-nav-tree arrow2" nav-id="${item.appCode}" lay-shrink="all"
+            lay-filter="admin-side-nav" style="margin-top: 3px;" lay-event="hideSide">
+            <li style="padding: 15px 0px 10px 20px;font-size: 13px;color: #99a2a7">${item.menuName}</li>
+            <li class="layui-nav-item">
+                <a lay-href="${ctxPath}${item.url}"><i class="layui-icon ${item.icon}"></i>&emsp;<cite>${item.menuName}</cite></a>
+            </li>
+        </ul>
+        @}else{
+        <ul class="layui-nav layui-nav-tree arrow2" nav-id="${item.appCode}" lay-shrink="all"
+            lay-filter="admin-side-nav" style="margin-top: 3px;" lay-event="showSide">
+            <li style="padding: 15px 0px 10px 20px;font-size: 13px;color: #99a2a7;height: 22px">
+                <span class="modular-title">${item.menuName}</span>
+                <a ew-event="flexible" title="侧边伸缩" class="flexible">
+                    <i class="layui-icon layui-icon-shrink-right"></i>
+                    <i class="layui-icon layui-icon-spread-left"></i>
+                </a>
+            </li>
+            @for(menus in item.children) {
+            <li class="layui-nav-item">
+                <a lay-href="${menus.url}"><i class="layui-icon ${menus.icon}"></i>&emsp;<cite>${menus.menuName}</cite></a>
+                @if(tool.isNotEmpty(menus.children)){
+                <dl class="layui-nav-child">
+                    @for(subMenu in menus.children){
+                    @if(tool.isEmpty(subMenu.children)){
+                    <dd><a lay-href="${subMenu.url}"><i class="layui-icon ${subMenu.icon}"></i>&emsp;<cite>${subMenu.menuName}</cite></a></dd>
+                    @}else{
+                    <dd>
+                        <a><i class="layui-icon ${subMenu.icon}"></i>&emsp;<cite>${subMenu.menuName}</cite></a>
+                        <dl class="layui-nav-child">
+                            @for(subSubMenu in subMenu.children){
+                            @if(tool.isEmpty(subSubMenu.children)){
+                            <dd><a lay-href="${subSubMenu.url}"><i class="layui-icon ${subSubMenu.icon}"></i>&emsp;<cite>${subSubMenu.menuName}</cite></a></dd>
+                            @}else{
+                            <dd>
+                                <a><i class="layui-icon ${subSubMenu.icon}"></i>&emsp;<cite>${subSubMenu.menuName}</cite></a>
+                                <dl class="layui-nav-child">
+                                    @for(subSubSubMenu in subSubMenu.children){
+                                    <dd><a lay-href="${subSubSubMenu.url}"><i class="layui-icon ${subSubSubMenu.icon}"></i>&emsp;<cite>${subSubSubMenu.menuName}</cite></a></dd>
+                                    @}
+                                </dl>
+                            </dd>
+                            @}
+                            @}
+                        </dl>
+                    </dd>
+                    @}
+                    @}
+                </dl>
+                @}
+            </li>
+            @}
+
+        </ul>
+        @}
+        @}
+
+    </div>
+</div>
